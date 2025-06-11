@@ -21,7 +21,7 @@
       <li class="mb-4">
         <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
           <span class="w-full sm:w-64 font-semibold">Web Development & Systems</span>
-          <span>Vue.js, Tailwind, Lambda function, embedding, Windows, RAG (retrieval-augmented generation), vectorization</span>
+          <span>Vue.js, Nest, Typescript, Tailwind, Lambda function, embedding, Windows, RAG, vectorization</span>
         </div>
       </li>
 

@@ -22,12 +22,15 @@
             </div>
             <div class="text-lg">
               <p class="text-gray-500 dark:text-gray-300">CHAN CHEW HONG</p>
-              <p class="text-gray-500 dark:text-gray-300">Junior Gen AI Engineer</p>
-              <p class="text-gray-500 dark:text-gray-300">
+              <p class="text-gray-500 dark:text-gray-300">Junior Gen AI Research Engineer</p>
+              <!-- <p class="text-gray-500 dark:text-gray-300">
                 <a href="tel:+33754185986" class="hover:underline">+33 7 54 18 59 86</a>
-              </p>
+              </p> -->
               <p class="text-gray-500 dark:text-gray-300">
                 <a href="mailto:cchongyohann@gmail.com" class="hover:underline">cchongyohann@gmail.com</a>
+              </p>
+              <p class="text-gray-500 dark:text-gray-300">
+              Paris, France
               </p>
             </div>
           </div>
@@ -36,11 +39,12 @@
           <Section title="About Me">
             <div class="mb-8">
               <p class="text-gray-600 dark:text-gray-300 mt-2">
-                I am a Junior Production Software Engineer specializing in Front-End Generative AI Applications based in
-                Paris.
+                I am a Junior Research Engineer specializing in Front-End Generative AI Applications based in
+                Paris, France.
                 Currently studying Data Science, my interests span across IoT, AI, web development, esports, NTIC, web
                 design,
-                PC assembly, music, photography and videography. As a French Malagasy and Chinese individual,
+                PC assembly, gravel biking, music, photography and videography. As a French Malagasy and Chinese
+                individual,
                 I am fluent in English, French, and Malagasy, with an understanding of Spanish and basic knowledge of
                 Mandarin.
               </p>
@@ -146,36 +150,48 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #000; /* Black background */
+  background-color: #000;
+  /* Black background */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 9999; /* Ensure it is above all other elements */
+  z-index: 9999;
+  /* Ensure it is above all other elements */
 }
 
 
 .loading-message {
   font-size: 1.2rem;
-  color: #ffffff; /* Light blue */
-  animation: fade 2s infinite; /* Fading effect */
+  color: #ffffff;
+  /* Light blue */
+  animation: fade 2s infinite;
+  /* Fading effect */
 }
 
 @keyframes spin {
   0% {
-    transform: rotate(0deg); /* Start position */
+    transform: rotate(0deg);
+    /* Start position */
   }
+
   100% {
-    transform: rotate(360deg); /* Complete spin */
+    transform: rotate(360deg);
+    /* Complete spin */
   }
 }
 
 @keyframes fade {
-  0%, 100% {
-    opacity: 0; /* Fully transparent */
+
+  0%,
+  100% {
+    opacity: 0;
+    /* Fully transparent */
   }
+
   50% {
-    opacity: 1; /* Fully visible */
+    opacity: 1;
+    /* Fully visible */
   }
 }
 
