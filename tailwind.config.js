@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  content: [
+    './index.html', 
+    './src/**/*.{vue,js,ts,jsx,tsx}',
+    "./node_modules/flowbite/**/*.js"
+  ],
   darkMode: 'class',
   theme: {
     extend: {
@@ -13,22 +17,25 @@ module.exports = {
         primary: 'var(--color-primary)',
         secondary: 'var(--color-secondary)',
         accent: 'var(--color-accent)',
-        background: 'v  ar(--color-background)',
+        background: 'var(--color-background)',
         foreground: 'var(--color-foreground)',
         border: 'var(--color-border)',
         muted: 'var(--color-muted)',
       },
       fontFamily: {
-        sans: ['Noto Sans SC', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        serif: ['Noto Serif SC', 'ui-serif', 'Georgia', 'serif'],
-        display: ['ZCOOL QingKe HuangYou', 'Noto Sans SC', 'sans-serif'],
-        mono: ['Fira Code', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        sans: ['Inter', 'Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: ['ui-serif', 'Georgia', 'serif'],
+        display: ['Poppins', 'Inter', 'sans-serif'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       borderRadius: {
-        'sm': '0.125rem',
-        DEFAULT: '0.25rem',
-        'md': '0.375rem',
-        'lg': '0.5rem',
+        'sm': '0.25rem',     /* 4px */
+        DEFAULT: '0.5rem',   /* 8px */
+        'md': '0.75rem',     /* 12px */
+        'lg': '1rem',        /* 16px */
+        'xl': '1.25rem',     /* 20px */
+        '2xl': '1.5rem',     /* 24px */
+        '3xl': '2rem',       /* 32px */
       },
       animation: {
         'float': 'floating 3s ease-in-out infinite',
@@ -51,8 +58,5 @@ module.exports = {
   },
   plugins: [
     require('flowbite/plugin')
-  ],
-  content: [
-    "./node_modules/flowbite/**/*.js"
   ]
 }
