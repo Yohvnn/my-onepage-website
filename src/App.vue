@@ -13,7 +13,7 @@
         <div class="relative w-32 h-32 flex items-center justify-center">
           <!-- Central AI Core -->
           <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center relative animate-pulse">
-            <span class="text-white font-bold text-xl">AI</span>
+            <span class="text-white font-bold text-xl">YC</span>
             <!-- Data points around the core -->
             <div class="absolute -top-2 -left-2 w-4 h-4 bg-accent rounded-full animate-ping"></div>
             <div class="absolute -top-2 -right-2 w-3 h-3 bg-accent rounded-full animate-ping" style="animation-delay: 0.5s;"></div>
@@ -126,7 +126,7 @@
               <label class="block text-sm font-medium text-foreground mb-2">Quick Colors</label>
               <div class="grid grid-cols-6 gap-2">
                 <button 
-                  v-for="color in colorPresets" 
+                  v-for="color in filteredColorPresets" 
                   :key="color"
                   @click="selectColor(color)"
                   class="w-8 h-8 rounded-md border border-border hover:scale-110 transition-transform duration-200"
@@ -149,6 +149,14 @@
                 Apply
               </button>
             </div>
+          </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div v-if="showToast" class="fixed top-4 right-4 z-50 animate-slide-in">
+          <div class="bg-red-500 text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>{{ toastMessage }}</span>
           </div>
         </div>
 
@@ -281,6 +289,8 @@ export default {
       currentTheme: 'default',
       hexColor: '#000000',
       colorPresets: ['#000000', '#ffffff', '#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899'],
+      showToast: false,
+      toastMessage: '',
       proficiencySkills: [
         { name: "Programming", level: 80 },
         { name: "Machine Learning & Data Science", level: 70 },
@@ -326,6 +336,15 @@ export default {
     },
     isValidHex() {
       return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(this.hexColor);
+    },
+    filteredColorPresets() {
+      if (this.isDarkMode) {
+        // In dark mode, hide black color (#000000)
+        return this.colorPresets.filter(color => color !== '#000000');
+      } else {
+        // In light mode, hide white color (#ffffff)
+        return this.colorPresets.filter(color => color !== '#ffffff');
+      }
     },
   },
   mounted() {
@@ -440,7 +459,7 @@ export default {
       }
       
       // Maintain custom primary color after theme switch
-      this.loadSavedColor();
+      this.loadSavedColor(true); // Pass silent=true to avoid toast during theme switch
       
       // Remove transition classes after animation completes
       setTimeout(() => {
@@ -534,10 +553,30 @@ export default {
       }
     },
     selectColor(color) {
+      // Check if the color is allowed in current theme
+      if (this.isDarkMode && color === '#000000') {
+        this.showToastMessage("You can't do that! Black color is not allowed in dark mode.");
+        return;
+      }
+      if (!this.isDarkMode && color === '#ffffff') {
+        this.showToastMessage("You can't do that! White color is not allowed in light mode.");
+        return;
+      }
+      
       this.hexColor = color;
     },
     applyColor() {
       if (this.isValidHex) {
+        // Additional validation for manual hex input
+        if (this.isDarkMode && this.hexColor.toLowerCase() === '#000000') {
+          this.showToastMessage("You can't do that! Black color is not allowed in dark mode.");
+          return;
+        }
+        if (!this.isDarkMode && this.hexColor.toLowerCase() === '#ffffff') {
+          this.showToastMessage("You can't do that! White color is not allowed in light mode.");
+          return;
+        }
+        
         this.setPrimaryColor(this.hexColor);
         
         // Store in localStorage for persistence
@@ -558,9 +597,27 @@ export default {
       
       this.closeColorPicker();
     },
-    loadSavedColor() {
+    loadSavedColor(silent = false) {
       const savedColor = localStorage.getItem('primaryColor');
       if (savedColor && this.isValidColorFormat(savedColor)) {
+        // Validate that the saved color is appropriate for current theme
+        if (this.isDarkMode && savedColor.toLowerCase() === '#000000') {
+          if (!silent) {
+            this.showToastMessage("You can't do that! Removing incompatible black color from dark mode.");
+          }
+          localStorage.removeItem('primaryColor');
+          this.removePrimaryColorOverride();
+          return;
+        }
+        if (!this.isDarkMode && savedColor.toLowerCase() === '#ffffff') {
+          if (!silent) {
+            this.showToastMessage("You can't do that! Removing incompatible white color from light mode.");
+          }
+          localStorage.removeItem('primaryColor');
+          this.removePrimaryColorOverride();
+          return;
+        }
+        
         this.setPrimaryColor(savedColor);
         this.hexColor = savedColor;
       } else {
@@ -598,6 +655,15 @@ export default {
       if (styleElement) {
         styleElement.remove();
       }
+    },
+    showToastMessage(message) {
+      this.toastMessage = message;
+      this.showToast = true;
+      
+      // Auto-hide toast after 3 seconds
+      setTimeout(() => {
+        this.showToast = false;
+      }, 3000);
     },
     isValidColorFormat(color) {
       // Validate hex color format
@@ -656,5 +722,21 @@ img {
 .slide-fade-leave-to {
   transform: translateY(20px);
   opacity: 0;
+}
+
+/* Toast slide-in animation */
+.animate-slide-in {
+  animation: slideInFromRight 0.3s ease-out;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 </style>
