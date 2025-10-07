@@ -1,195 +1,264 @@
 <template>
-  <div class="h-screen chinese-pattern bg-background text-foreground transition-colors duration-500 overflow-hidden flex flex-col">
+  <div class="h-screen bg-background text-foreground overflow-hidden flex flex-col transition-all duration-300 ease-in-out">
     <!-- Loading Screen -->
-    <div v-if="isLoading" class="fixed inset-0 bg-background z-50 flex flex-col items-center justify-center">
-      <div class="w-20 h-20 relative">
-        <!-- Chinese-inspired loading animation -->
-        <div class="absolute inset-0 border-2 border-t-transparent border-primary rounded-full animate-spin"></div>
-        <div class="absolute inset-1 border-2 border-l-transparent border-accent rounded-full animate-spin" style="animation-duration: 1.5s;"></div>
+    <div v-if="isLoading" class="fixed inset-0 bg-background z-50 flex flex-col items-center justify-center transition-all duration-300 ease-in-out">
+      <!-- Geeky AI Loading Animation -->
+      <div class="relative mb-8">
+        <!-- Matrix-style background -->
+        <div class="absolute inset-0 overflow-hidden opacity-10">
+          <div class="matrix-rain"></div>
+        </div>
+        
+        <!-- Neural Network Visualization -->
+        <div class="relative w-32 h-32 flex items-center justify-center">
+          <!-- Central AI Core -->
+          <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center relative animate-pulse">
+            <span class="text-white font-bold text-xl">AI</span>
+            <!-- Data points around the core -->
+            <div class="absolute -top-2 -left-2 w-4 h-4 bg-accent rounded-full animate-ping"></div>
+            <div class="absolute -top-2 -right-2 w-3 h-3 bg-accent rounded-full animate-ping" style="animation-delay: 0.5s;"></div>
+            <div class="absolute -bottom-2 -left-2 w-3 h-3 bg-accent rounded-full animate-ping" style="animation-delay: 1s;"></div>
+            <div class="absolute -bottom-2 -right-2 w-4 h-4 bg-accent rounded-full animate-ping" style="animation-delay: 1.5s;"></div>
+          </div>
+          
+          <!-- Orbiting Data Nodes -->
+          <div class="absolute inset-0 animate-spin" style="animation-duration: 3s;">
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full"></div>
+            <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-3 h-3 bg-primary rounded-full"></div>
+            <div class="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full"></div>
+            <div class="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full"></div>
+          </div>
+          
+          <!-- Counter-rotating ring -->
+          <div class="absolute inset-2 border-2 border-primary/30 rounded-full animate-spin" style="animation-duration: 2s; animation-direction: reverse;"></div>
+        </div>
       </div>
-      <div class="mt-6 text-xl font-display tracking-wider text-primary">
-        {{ currentMessage }}
+      
+      <!-- Geeky Loading Message -->
+      <div class="text-center w-96 max-w-sm mx-auto px-4">
+        <div class="text-xl font-bold text-primary mb-2 font-mono h-8 flex items-center justify-center">
+          {{ currentMessage }}
+        </div>
+        <div class="text-sm text-muted font-mono h-6 flex items-center justify-center">
+          {{ currentSubMessage }}
+        </div>
+        
+        <!-- Progress Bar - Fixed width -->
+        <div class="w-80 bg-border rounded-full h-2 mt-6 overflow-hidden mx-auto">
+          <div class="bg-primary h-2 rounded-full animate-pulse transition-all duration-300" :style="{ width: loadingProgress + '%' }"></div>
+        </div>
+        
+        <!-- Terminal-style output - Fixed size -->
+        <div class="mt-6 text-left bg-black/10 rounded-md p-4 font-mono text-xs text-muted border w-80 h-32 mx-auto overflow-hidden">
+          <div class="h-full flex flex-col justify-end">
+            <div v-for="(log, index) in terminalLogs.slice(-4)" :key="index" class="animate-fade-in leading-tight">
+              <span class="text-accent">></span> {{ log }}
+            </div>
+            <div class="flex items-center">
+              <span class="text-accent">></span>
+              <span class="animate-pulse ml-1">█</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div v-else class="container mx-auto p-3 relative flex-grow flex flex-col h-full overflow-auto">
+    <div v-else class="container mx-auto p-3 relative flex-grow flex flex-col h-full overflow-auto smooth-scroll scroll-container">
       <!-- Full screen vertical layout -->
       <div class="flex flex-col h-full">
         
-        <!-- Header with name and Chinese character -->
-        <header class="py-3 mb-12 border-b border-border">
-          <div class="mb-1 flex flex-col md:flex-row items-center md:justify-between">
-            <div class="flex items-center mb-4 md:mb-0">
-              <div class="w-16 h-16 md:w-20 md:h-20 bg-primary/5 rounded-full flex items-center justify-center mr-2">
-                <span class="text-3xl md:text-4xl font-display text-primary">陳</span>
-              </div>
+        <!-- Header with name -->
+        <header class="py-3">
+          <div class="flex flex-col md:flex-row items-center md:justify-between">
+            <div class="flex items-center  md:mb-0 mb-3">
               <div>
-                <h1 class="text-2xl md:text-3xl font-display tracking-wider text-primary">YOHANN CHAN CHEW HONG</h1>
+                <h1 class="text-2xl md:text-3xl font-bold tracking-wide text-foreground">YOHANN CHAN CHEW HONG</h1>
                 <p class="text-muted">Junior Gen AI Research Engineer</p>
               </div>
             </div>
-            <div class="flex space-x-3 items-center">
+            <div class="flex space-x-2 items-center">
               <!-- Dark Mode Toggle Button -->
               <button @click="toggleDarkMode"
-                class="rounded-md flex items-center justify-center
-                btn btn-outline text-sm flex items-center w-9 h-9">
-                <i :class="isDarkMode ? 'fas fa-sun' : 'fas fa-moon'" class="text-primary"></i>
+                class="rounded-md flex items-center justify-center p-2
+                btn text-sm flex items-center w-9 h-9 hover:bg-border transition-colors duration-200">
+                <i :class="isDarkMode ? 'fas fa-sun' : 'fas fa-moon'" class="text-muted transition-colors duration-200"></i>
               </button>
               
               <!-- Theme Button (triggers ColorPicker) -->
-              <!-- <button @click="toggleColorPicker"
-                class="card p-2 rounded-md flex items-center justify-center
-                transition duration-200 ease-in-out hover:shadow-md focus:outline-none w-9 h-9">
-                <i class="fas fa-palette text-primary"></i>
-              </button> -->
-              
-              <a href="mailto:cchongyohann@gmail.com" class="btn btn-outline text-sm flex items-center">
-                <i class="fas fa-envelope mr-2"></i> Contact Me
+              <button @click="toggleColorPicker"
+                class="rounded-md flex items-center justify-center p-2
+                btn text-sm flex items-center w-9 h-9 hover:bg-border transition-colors duration-200">
+                <i class="fas fa-palette text-muted transition-colors duration-200"></i>
+              </button>
+
+              <a href="mailto:cchongyohann@gmail.com" class="btn py-2 px-4 rounded-md btn-contact bg-accent dark:bg-accent text-sm flex items-center">
+                <i class="fas fa-envelope mr-2 "></i> Contact Me
               </a>
             </div>
           </div>
         </header>
 
-        <!-- Main Content - Three Column Layout -->
-        <main class="flex-grow grid grid-cols-1 lg:grid-cols-3 gap-6 overflow-auto">
-          
-          <!-- Column 1: Photos and About Me -->
-          <div class="space-y-6">
-            <!-- Profile Photo -->
-            <div class="card p-0 overflow-hidden">
-              <div class="relative flex justify-center">
-                <img src="@/assets/profile_pic.jpg" alt="Profile Photo" 
-                     class="mt-8 w-full max-w-xs h-auto rounded-full" 
-                     loading="eager" 
-                     width="320" 
-                     height="320"
-                     fetchpriority="high">
-                <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-30"></div>
-              </div>
-              <div class="p-4">
-                <div class="flex items-center justify-between">
-                  <div>
-                    <p class="text-muted text-sm">Paris, France</p>
-                  </div>
-                  <div class="flex space-x-3">
-                    <a href="https://www.linkedin.com/in/yohanncch/" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition-colors"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/Yohvnn/" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition-colors"><i class="fab fa-github"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- About Me -->
-            <div class="card p-5 animate-float-in opacity-0 delay-100">
-              <h2 class="chinese-heading text-xl font-medium border-l-2 border-primary pl-3 mb-4">关于我 <span class="text-base text-muted">(About Me)</span></h2>
-              <p class="text-foreground/90 leading-relaxed">
-                I am a Junior Research Engineer based in Paris, specializing in Front-End Generative AI Applications.
-                <br><br>
-               Currently pursuing a Master's in Data Science & AI, I work with Vue.js, TypeScript, and fullstack systems integrating LLMs and RAG. 
-               <br><br>
-               Passionate about both tech and creativity, I explore IoT, web development, UX/UI design, photography, videography, and gravel biking. Multicultural and multilingual, I am French Malagasy and Chinese, fluent in English, French, and Malagasy.
-              </p>
-            </div>
+        <!-- Color Picker Modal -->
+        <div v-if="isColorPickerVisible" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center" @click="closeColorPicker">
+          <div class="bg-background border border-border rounded-lg p-6 max-w-sm w-full mx-4" @click.stop>
+            <h3 class="text-lg font-semibold mb-4 text-foreground">Choose Primary Color</h3>
             
-            <!-- Add a decorative Chinese element -->
-            <!-- <div class="card p-4">
-              <div class="flex justify-center">
-                <div class="w-32 h-32 bg-primary/5 rounded-full flex items-center justify-center">
-                  <span class="text-6xl font-serif text-primary">智</span>
+            <!-- Hex Input -->
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-foreground mb-2">Hex Color Code</label>
+              <div class="flex gap-2">
+                <input 
+                  v-model="hexColor" 
+                  type="text" 
+                  placeholder="#000000"
+                  class="flex-1 px-3 py-2 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  @input="validateHex">
+                <div 
+                  class="w-10 h-10 rounded-md border border-border"
+                  :style="{ backgroundColor: isValidHex ? hexColor : '#000000' }">
                 </div>
               </div>
-            </div> -->
+              <p v-if="!isValidHex && hexColor" class="text-red-500 text-xs mt-1">Invalid hex color</p>
+            </div>
 
-            <!-- Additional Photo Gallery -->
-            <div class="grid grid-cols-4 gap-3 will-change-transform">
-              <div class="card p-0 overflow-hidden">
-                <img src="@/assets/DSC00305.jpg" alt="Gallery Photo" class="w-full h-20 object-cover"
-                     loading="lazy" width="160" height="80">
+            <!-- Quick Color Presets -->
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-foreground mb-2">Quick Colors</label>
+              <div class="grid grid-cols-6 gap-2">
+                <button 
+                  v-for="color in colorPresets" 
+                  :key="color"
+                  @click="selectColor(color)"
+                  class="w-8 h-8 rounded-md border border-border hover:scale-110 transition-transform duration-200"
+                  :style="{ backgroundColor: color }">
+                </button>
               </div>
-              <div class="card p-0 overflow-hidden">
-                <img src="@/assets/DSC00396.jpg" alt="Gallery Photo" class="w-full h-20 object-cover"
-                     loading="lazy" width="160" height="80">
-              </div>
-              <div class="card p-0 overflow-hidden">
-                <img src="@/assets/marseille_sea.jpg" alt="Gallery Photo" class="w-full h-20 object-cover"
-                     loading="lazy" width="160" height="80">
-              </div>
-              <div class="card p-0 overflow-hidden">
-                <img src="@/assets/sete_water.jpg" alt="Gallery Photo" class="w-full h-20 object-cover"
-                     loading="lazy" width="160" height="80">
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-2 justify-end">
+              <button 
+                @click="resetToDefault"
+                class="px-4 py-2 text-sm border border-border rounded-md hover:bg-border transition-colors duration-200">
+                Reset
+              </button>
+              <button 
+                @click="applyColor"
+                :disabled="!isValidHex"
+                class="px-4 py-2 text-sm bg-primary text-background rounded-md hover:opacity-80 transition-opacity duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                Apply
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content - Auto-fitting Grid Layout -->
+        <main class="flex-grow grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 overflow-auto smooth-scroll">
+          
+          <!-- Profile Photo Card -->
+          <div class="card p-4 col-span-1">
+            <div class="relative flex justify-center mb-2">
+              <img src="@/assets/profile_pic.jpg" alt="Profile Photo" 
+                   class="w-full max-w-xs h-auto rounded-full" 
+                   loading="eager" 
+                   width="320" 
+                   height="320"
+                   fetchpriority="high">
+            </div>
+            <div class="text-center">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-muted text-sm">Paris, France</p>
+                </div>
+                <div class="flex space-x-3">
+                  <a href="https://www.linkedin.com/in/yohanncch/" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition-colors"><i class="fab fa-linkedin"></i></a>
+                  <a href="https://github.com/Yohvnn/" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition-colors"><i class="fab fa-github"></i></a>
+                </div>
               </div>
             </div>
           </div>
-          
-          <!-- Column 2: Education and Work Experience -->
-          <div class="space-y-6">
-            <!-- Education Section -->
-            <section class="card p-5 animate-float-in opacity-0 delay-200">
-              <h2 class="chinese-heading text-xl font-medium border-l-2 border-primary pl-3 mb-4">教育 <span class="text-base text-muted">(Education)</span></h2>
-              <EducationList />
-            </section>
 
-            <!-- Work Section -->
-            <section class="card p-5 animate-float-in opacity-0 delay-300">
-              <h2 class="chinese-heading text-xl font-medium border-l-2 border-primary pl-3 mb-4">工作经验 <span class="text-base text-muted">(Work Experience)</span></h2>
-              <WorkList />
-            </section>
+          <!-- About Me Card -->
+          <div class="card p-5 animate-float-in opacity-0 delay-100 col-span-1">
+            <h2 class="text-xl font-medium border-l-2 border-primary pl-3 mb-2">About Me</h2>
+            <p class="text-foreground/90 leading-relaxed text-sm ">
+              I am a Junior Research Engineer based in Paris, specializing in Front-End Generative AI Applications.
+              <br><br>
+             Currently pursuing a Master's in Data Science & AI, I work with Vue.js, TypeScript, and fullstack systems integrating LLMs and RAG. 
+             <br><br>
+             Passionate about both tech and creativity, I explore IoT, web development, UX/UI design, photography, videography, and gravel biking.
+            </p>
+            
+            <!-- Photography Row -->
+            <div class="grid grid-cols-4 gap-2 mt-4">
+              <div class="overflow-hidden rounded-md border border-gray-200 dark:border-gray-800">
+                <img src="@/assets/DSC00305.jpg" alt="Gallery Photo 1" class="w-full h-16 object-cover"
+                     loading="lazy" width="80" height="64">
+              </div>
+              <div class="overflow-hidden rounded-md border border-gray-200 dark:border-gray-800">
+                <img src="@/assets/djigravel.jpg" alt="Gallery Photo 2" class="w-full h-16 object-cover"
+                     loading="lazy" width="80" height="64">
+              </div>
+              <div class="overflow-hidden rounded-md border border-gray-200 dark:border-gray-800">
+                <img src="@/assets/R0007022.jpg" alt="Gallery Photo 3" class="w-full h-16 object-cover"
+                     loading="lazy" width="80" height="64">
+              </div>
+              <div class="overflow-hidden rounded-md border border-gray-200 dark:border-gray-800">
+                <img src="@/assets/R0008751.jpg" alt="Gallery Photo 4" class="w-full h-16 object-cover"
+                     loading="lazy" width="80" height="64">
+              </div>
+            </div>
           </div>
+
+          <!-- Education Card -->
+          <section class="card p-5 animate-float-in opacity-0 delay-200 col-span-1">
+            <h2 class="text-xl font-medium border-l-2 border-primary pl-3 mb-2">Education</h2>
+            <EducationList />
+          </section>
+
+          <!-- Work Experience Card -->
+          <section class="card p-5 animate-float-in opacity-0 delay-300 col-span-1">
+            <h2 class="text-xl font-medium border-l-2 border-primary pl-3 mb-2">Work Experience</h2>
+            <WorkList />
+          </section>
+
+          <!-- Skills Card -->
+          <section class="card p-5 animate-float-in opacity-0 delay-400 col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-2 xl:col-span-2">
+            <h2 class="text-xl font-medium border-l-2 border-primary pl-3 mb-2">Skills</h2>
+            <SkillsList />
+          </section>
+
+          <!-- Proficiency Card -->
+          <section class="card p-5 animate-float-in opacity-0 delay-900 col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-2">
+            <h2 class="text-xl font-medium border-l-2 border-primary pl-3 mb-2">Proficiency</h2>
+            <div class="grid grid-cols-1 gap-y-4">
+              <div v-for="(skill, index) in proficiencySkills" :key="index" class="flex flex-col space-y-2">
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-foreground">{{ skill.name }}</span>
+                  <span class="text-xs text-muted">{{ skill.level }}%</span>
+                </div>
+                <div class="h-1.5 bg-border dark:bg-border/50 rounded-full overflow-hidden">
+                  <div :style="{ width: skill.level + '%' }"
+                    class="h-full bg-primary dark:bg-primary rounded-full transition-all duration-1000"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           
-          <!-- Column 3: Skills -->
-          <div class="space-y-6">
-            <!-- Skills Section -->
-            <section class="card p-5  animate-float-in opacity-0 delay-400">
-              <h2 class="chinese-heading text-xl font-medium border-l-2 border-primary pl-3 mb-4">技能 <span class="text-base text-muted">(Skills)</span></h2>
-              <SkillsList />
-            </section>
-          </div>
         </main>
 
         <!-- Footer -->
-        <footer class="py-4 border-t border-border">
-          <div class="mt-2 flex flex-col md:flex-row justify-between items-center">
+        <footer class="py-4">
+          <div class=" flex flex-col md:flex-row justify-between items-center">
             <p class="text-sm text-muted mb-2 md:mb-0">© {{ new Date().getFullYear() }} Yohann Chan Chew Hong</p>
             <div class="flex space-x-6">
-              <span class="text-xs text-muted">Built with ♥️ in Vue.js & Tailwind CSS ✨</span>
+                <span class="text-xs text-muted">Built with &lt;3 in Vue.js & Tailwind CSS</span>
             </div>
           </div>
         </footer>
       </div>
     </div>
-    
-    <!-- Color Theme Picker (now hidden by default and toggled) -->
-    <!-- <div v-if="isColorPickerVisible" class="fixed bottom-4 left- z-50">
-      <div class="card p-4 rounded-lg shadow-lg animate-float">
-        <h3 class="chinese-heading text-sm mb-3 text-primary dark:text-white">主题 (Theme)</h3>
-        
-        <div class="flex flex-wrap gap-2 mb-4">
-          <button @click="setTheme('theme-classic')" 
-            class="theme-button"
-            :class="{ 'ring-2 ring-offset-2 ring-accent': currentTheme === 'theme-classic' }">
-            <div class="w-full h-full rounded-full" style="background: linear-gradient(135deg, #c41e3a 0%, #1e3a8a 100%)"></div>
-          </button>
-          
-          <button @click="setTheme('theme-ink')" 
-            class="theme-button"
-            :class="{ 'ring-2 ring-offset-2 ring-accent': currentTheme === 'theme-ink' }">
-            <div class="w-full h-full rounded-full" style="background: linear-gradient(135deg, #111827 0%, #4b5563 100%)"></div>
-          </button>
-          
-          <button @click="setTheme('theme-jade')" 
-            class="theme-button"
-            :class="{ 'ring-2 ring-offset-2 ring-accent': currentTheme === 'theme-jade' }">
-            <div class="w-full h-full rounded-full" style="background: linear-gradient(135deg, #047857 0%, #064e3b 100%)"></div>
-          </button>
-          
-          <button @click="setTheme('theme-porcelain')" 
-            class="theme-button"
-            :class="{ 'ring-2 ring-offset-2 ring-accent': currentTheme === 'theme-porcelain' }">
-            <div class="w-full h-full rounded-full" style="background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%)"></div>
-          </button>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -208,10 +277,42 @@ export default {
     return {
       isDarkMode: localStorage.getItem('isDarkMode') === 'true',
       isLoading: true,
-      // isColorPickerVisible: false,
-      currentTheme: localStorage.getItem('theme') || 'theme-classic',
-      messages: ["加载中... (Loading...)", "请稍等... (Please wait...)", "即将完成... (Almost done...)"],
+      isColorPickerVisible: false,
+      currentTheme: 'default',
+      hexColor: '#000000',
+      colorPresets: ['#000000', '#ffffff', '#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899'],
+      proficiencySkills: [
+        { name: "Programming", level: 80 },
+        { name: "Machine Learning & Data Science", level: 70 },
+        { name: "Web Development", level: 65 },
+        { name: "Database Management", level: 75 },
+        { name: "Media & Design", level: 70 },
+        { name: "English (C1)", level: 90 },
+      ],
+      messages: [
+        "Training neural networks...",
+        "Optimizing algorithms...",
+        "Processing data tensors...",
+        "Calibrating AI models...",
+        "Initializing machine learning...",
+        "Compiling deep learning layers...",
+        "Loading feature vectors...",
+        "Synchronizing data pipelines..."
+      ],
+      subMessages: [
+        "Gradient descent in progress...",
+        "Backpropagation active...",
+        "Feature engineering complete",
+        "Model weights converging...",
+        "Data preprocessing finished",
+        "Hyperparameter tuning...",
+        "Cross-validation running...",
+        "Ensemble methods loading..."
+      ],
+      terminalLogs: [],
       currentMessageIndex: 0,
+      currentSubMessageIndex: 0,
+      loadingProgress: 0,
       imageObserver: null,
       imagesLoaded: 0,
     };
@@ -220,27 +321,86 @@ export default {
     currentMessage() {
       return this.messages[this.currentMessageIndex];
     },
+    currentSubMessage() {
+      return this.subMessages[this.currentSubMessageIndex];
+    },
+    isValidHex() {
+      return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(this.hexColor);
+    },
   },
   mounted() {
-    // Apply saved theme or default theme
-    document.body.classList.add(this.currentTheme);
+    // Load saved color first
+    this.loadSavedColor();
     
-    // Apply dark mode if needed
+    // Apply dark mode if needed with smooth transition
     if (this.isDarkMode) {
+      // Add transition class for initial load
+      const appElement = document.getElementById('app');
+      if (appElement) {
+        appElement.classList.add('dark-mode-transition');
+      }
+      document.documentElement.classList.add('dark-mode-transition');
+      document.body.classList.add('dark-mode-transition');
+      
+      document.documentElement.classList.add('dark');
       document.body.classList.add('dark');
+      
+      // Clean up transitions after initial load
+      setTimeout(() => {
+        if (appElement) {
+          appElement.classList.remove('dark-mode-transition');
+        }
+        document.documentElement.classList.remove('dark-mode-transition');
+        document.body.classList.remove('dark-mode-transition');
+      }, 300);
     }
     
     // Setup Intersection Observer for lazy loading
     this.setupImageLazyLoading();
     
-    // Show loading screen
+    // Enhanced geeky loading sequence
+    const loadingDuration = 3500; // 3.5 seconds
+    const logMessages = [
+      "Initializing neural pathways...",
+      "Loading training datasets...",
+      "Configuring transformer models...",
+      "Establishing data connections...",
+      "Optimizing inference speed...",
+      "Ready to rock!"
+    ];
+    
+    // Progress bar animation
+    const progressInterval = setInterval(() => {
+      this.loadingProgress += 2;
+      if (this.loadingProgress >= 100) {
+        clearInterval(progressInterval);
+      }
+    }, 80);
+    
+    // Terminal logs animation
+    let logIndex = 0;
+    const logInterval = setInterval(() => {
+      if (logIndex < logMessages.length) {
+        this.terminalLogs.push(logMessages[logIndex]);
+        logIndex++;
+      } else {
+        clearInterval(logInterval);
+      }
+    }, 600);
+    
+    // Main message rotation
+    const messageInterval = setInterval(() => {
+      this.currentMessageIndex = (this.currentMessageIndex + 1) % this.messages.length;
+      this.currentSubMessageIndex = (this.currentSubMessageIndex + 1) % this.subMessages.length;
+    }, 500);
+    
+    // Hide loading screen
     setTimeout(() => {
       this.isLoading = false;
-    }, 2000);
-
-    setInterval(() => {
-      this.currentMessageIndex = (this.currentMessageIndex + 1) % this.messages.length;
-    }, 1000);
+      clearInterval(messageInterval);
+      clearInterval(progressInterval);
+      clearInterval(logInterval);
+    }, loadingDuration);
     
     // Performance optimizations for scrolling
     this.optimizeScrollPerformance();
@@ -253,12 +413,43 @@ export default {
     
     // Remove event listeners
     window.removeEventListener('scroll', this.throttledScrollHandler);
+    
+    // Clean up custom color style element
+    this.removePrimaryColorOverride();
   },
   methods: {
     toggleDarkMode() {
+      // Add transition class for synchronized animation
+      const appElement = document.getElementById('app');
+      if (appElement) {
+        appElement.classList.add('dark-mode-transition');
+      }
+      document.documentElement.classList.add('dark-mode-transition');
+      document.body.classList.add('dark-mode-transition');
+      
       this.isDarkMode = !this.isDarkMode;
       localStorage.setItem('isDarkMode', this.isDarkMode);
-      document.body.classList.toggle('dark', this.isDarkMode);
+      
+      // Apply dark mode to both document and body synchronously
+      if (this.isDarkMode) {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.body.classList.remove('dark');
+      }
+      
+      // Maintain custom primary color after theme switch
+      this.loadSavedColor();
+      
+      // Remove transition classes after animation completes
+      setTimeout(() => {
+        if (appElement) {
+          appElement.classList.remove('dark-mode-transition');
+        }
+        document.documentElement.classList.remove('dark-mode-transition');
+        document.body.classList.remove('dark-mode-transition');
+      }, 300);
     },
     setupImageLazyLoading() {
       // Setup Intersection Observer for images
@@ -318,6 +509,99 @@ export default {
           }, limit);
         }
       };
+    },
+    // Color Picker Methods
+    toggleColorPicker() {
+      this.isColorPickerVisible = !this.isColorPickerVisible;
+      if (this.isColorPickerVisible) {
+        // Get current primary color from localStorage or use current computed color
+        const savedColor = localStorage.getItem('primaryColor');
+        if (savedColor) {
+          this.hexColor = savedColor;
+        } else {
+          const currentColor = getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim();
+          this.hexColor = currentColor || (this.isDarkMode ? '#ffffff' : '#000000');
+        }
+      }
+    },
+    closeColorPicker() {
+      this.isColorPickerVisible = false;
+    },
+    validateHex() {
+      // Auto-add # if not present
+      if (this.hexColor && !this.hexColor.startsWith('#')) {
+        this.hexColor = '#' + this.hexColor;
+      }
+    },
+    selectColor(color) {
+      this.hexColor = color;
+    },
+    applyColor() {
+      if (this.isValidHex) {
+        this.setPrimaryColor(this.hexColor);
+        
+        // Store in localStorage for persistence
+        localStorage.setItem('primaryColor', this.hexColor);
+        
+        // Close the picker
+        this.closeColorPicker();
+      }
+    },
+    resetToDefault() {
+      // Remove custom color
+      localStorage.removeItem('primaryColor');
+      this.removePrimaryColorOverride();
+      
+      // Set default color based on theme
+      const defaultColor = this.isDarkMode ? '#ffffff' : '#000000';
+      this.hexColor = defaultColor;
+      
+      this.closeColorPicker();
+    },
+    loadSavedColor() {
+      const savedColor = localStorage.getItem('primaryColor');
+      if (savedColor && this.isValidColorFormat(savedColor)) {
+        this.setPrimaryColor(savedColor);
+        this.hexColor = savedColor;
+      } else {
+        // Remove any custom color override to use theme defaults
+        this.removePrimaryColorOverride();
+      }
+    },
+    setPrimaryColor(color) {
+      // Create or update a style element to override CSS custom properties
+      let styleElement = document.getElementById('custom-primary-color');
+      if (!styleElement) {
+        styleElement = document.createElement('style');
+        styleElement.id = 'custom-primary-color';
+        document.head.appendChild(styleElement);
+      }
+      
+      // Use high specificity CSS to override both light and dark mode
+      styleElement.textContent = `
+        :root {
+          --color-primary: ${color} !important;
+        }
+        .dark {
+          --color-primary: ${color} !important;
+        }
+        html.dark {
+          --color-primary: ${color} !important;
+        }
+        body.dark {
+          --color-primary: ${color} !important;
+        }
+      `;
+    },
+    removePrimaryColorOverride() {
+      const styleElement = document.getElementById('custom-primary-color');
+      if (styleElement) {
+        styleElement.remove();
+      }
+    },
+    isValidColorFormat(color) {
+      // Validate hex color format
+      return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color);
     }
     // Other existing methods...
   }
@@ -327,7 +611,7 @@ export default {
 <style>
 html, body {
   scroll-behavior: smooth;
-  font-family: 'Noto Sans SC', 'Inter', 'ui-sans-serif', 'system-ui', sans-serif;
+  font-family: 'Inter', 'Poppins', 'ui-sans-serif', 'system-ui', sans-serif;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -338,13 +622,16 @@ html, body {
   height: 100%;
 }
 
-/* Performance optimizations */
+/* Performance optimizations for smooth scrolling */
 img {
   backface-visibility: hidden; /* Prevents flickering during animations */
+  transform: translateZ(0); /* Force GPU acceleration */
 }
 
 .overflow-auto {
   -webkit-overflow-scrolling: touch; /* Smoother scrolling on iOS */
+  scroll-behavior: smooth;
+  will-change: scroll-position;
 }
 
 /* Reduce paint operations during scrolling */
@@ -353,23 +640,10 @@ img {
   transform: translateZ(0); /* Force GPU acceleration */
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-background);
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--color-border);
-  border-radius: 6px;
-  border: 3px solid var(--color-background);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-muted);
+/* Enhanced scrolling performance */
+.container {
+  will-change: scroll-position;
+  transform: translateZ(0);
 }
 
 /* Animations */

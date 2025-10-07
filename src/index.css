@@ -1,108 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import url("https://use.typekit.net/moz7odu.css");
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Serif+JP:wght@200..900&family=Zen+Kaku+Gothic+New:wght@300..900&family=Zen+Old+Mincho:wght@400..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --color-primary: #1a202c;
-  --color-secondary: #4a5568;
-  --color-accent: #805ad5;
-}
-
-.theme-zen {
-  --color-primary: #2D3748;
-  --color-secondary: #718096;
-  --color-accent: #805AD5;
-}
-
-.theme-sakura {
-  --color-primary: #702459;
-  --color-secondary: #F687B3;
-  --color-accent: #D53F8C;
-}
-
-.theme-indigo {
-  --color-primary: #3C366B;
-  --color-secondary: #7F9CF5;
-  --color-accent: #667EEA;
-}
-
-.theme-matcha {
-  --color-primary: #22543D;
-  --color-secondary: #48BB78;
-  --color-accent: #38A169;
-}
-
-.theme-classic {
-  --color-primary: #c41e3a;      /* Chinese red */
-  --color-secondary: #1e3a8a;    /* Royal blue */
-  --color-accent: #f59e0b;       /* Amber/gold */
-  --color-background: #f8f9fa;   /* Light background */
-  --color-foreground: #1f2937;   /* Dark text */
-  --color-border: #e5e7eb;       /* Light border */
+  /* Pure Minimalist Color Palette - Only Black and White */
+  --color-primary: #1d3c5c;      /* Pure black */
+  --color-background: #ffffff;   /* Pure white */
+  --color-foreground: #000000;   /* Pure black */
+  --color-border: #d1d5db;       /* Lighter gray border for light mode */
   --color-muted: #6b7280;        /* Gray text */
+  --color-accent: #000000;       /* Pure black accent */
 }
 
-.theme-ink {
-  --color-primary: #111827;      /* Almost black */
-  --color-secondary: #4b5563;    /* Gray */
-  --color-accent: #c41e3a;       /* Chinese red as accent */
-  --color-background: #f3f4f6;   /* Light gray background */
-  --color-foreground: #111827;   /* Dark text */
-  --color-border: #d1d5db;       /* Light gray border */
-  --color-muted: #6b7280;        /* Gray text */
-}
-
-.theme-jade {
-  --color-primary: #047857;      /* Jade green */
-  --color-secondary: #064e3b;    /* Darker green */
-  --color-accent: #f59e0b;       /* Amber/gold */
-  --color-background: #ecfdf5;   /* Light green tint */
-  --color-foreground: #064e3b;   /* Dark green text */
-  --color-border: #a7f3d0;       /* Light green border */
-  --color-muted: #6b7280;        /* Gray text */
-}
-
-.theme-porcelain {
-  --color-primary: #2563eb;      /* Blue like porcelain */
-  --color-secondary: #1e40af;    /* Darker blue */
-  --color-accent: #f43f5e;       /* Rose accent */
-  --color-background: #eff6ff;   /* Very light blue */
-  --color-foreground: #1e3a8a;   /* Dark blue text */
-  --color-border: #bfdbfe;       /* Light blue border */
-  --color-muted: #6b7280;        /* Gray text */
-}
-
-.dark {
-  --color-background: #111827;   /* Dark background */
-  --color-foreground: #f9fafb;   /* Light text */
-  --color-border: #374151;       /* Dark border */
+.dark,
+.dark:root {
+  --color-primary: #6290be;      /* Pure white for dark mode */
+  --color-background: #000000;   /* Pure black background */
+  --color-foreground: #ffffff;   /* Pure white text */
+  --color-border: #2a2a2a;       /* Darker border for dark mode */
   --color-muted: #9ca3af;        /* Light gray text */
-}
-
-/* Ensure theme variables work correctly with dark mode */
-.dark.theme-classic,
-.dark.theme-jade,
-.dark.theme-porcelain {
-  --color-background: #111827;
-  --color-foreground: #f9fafb;
-  --color-border: #374151;
-  --color-muted: #9ca3af;
-}
-
-/* Special styling for dark mode with ink theme */
-.dark.theme-ink {
-  --color-background: #111827;
-  --color-foreground: #f9fafb;
-  --color-border: #374151;
-  --color-muted: #9ca3af;
-  --color-primary: #ffffff;      /* White primary color for ink theme in dark mode */
+  --color-accent: #ffffff;       /* Pure white accent */
 }
 
 @tailwind base;
@@ -110,42 +26,105 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+    transition: color-scheme 0.3s ease-in-out;
+  }
+  
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', 'Poppins', 'ui-sans-serif', 'system-ui', sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+  
+  * {
+    @apply border-border;
+    scroll-behavior: smooth;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
 }
 
 @layer components {
   .card {
-    @apply rounded-md border border-border bg-background p-4 shadow-sm transition-all;
+    @apply rounded-lg border border-border bg-background shadow-sm;
+    padding: 1.5rem; /* 24px */
+    transition: all 0.3s ease-in-out;
   }
 
   .card-hover {
-    @apply hover:border-border hover:shadow-md;
-  }
-  
-  .chinese-heading {
-    @apply font-display tracking-wider;
-  }
-  
-  .chinese-calligraphy {
-    @apply font-serif tracking-wide;
+    @apply hover:border-border hover:shadow-lg;
+    transition: all 0.3s ease-in-out;
   }
   
   .btn {
-    @apply rounded-md px-4 py-2 font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-border;
+    @apply rounded-lg font-medium focus:outline-none focus:ring-border;
+    transition: all 0.3s ease-in-out;
   }
   
   .btn-primary {
-    @apply bg-primary text-white hover:bg-primary;
+    background: var(--color-primary);
+    color: var(--color-background);
+    transition: all 0.3s ease-in-out;
   }
   
-  .btn-secondary {
-    @apply bg-secondary text-white hover:bg-secondary;
+  .btn-primary:hover {
+    /* background: #2a2a2a; */
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
   
   .btn-outline {
-    @apply border border-primary text-primary hover:bg-border;
+    @apply border border-primary text-primary hover:text-white;
+    background: transparent;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn-outline:hover {
+    background: var(--color-primary);
+    color: var(--color-background);
+  }
+
+  /* Simple Plain Contact Button */
+  .btn-contact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* padding: 0.5rem 1rem; py-2 px-4 */
+    font-size: 0.875rem; /* 14px */
+    font-weight: 500; /* font-medium */
+    border-radius: 0.5rem; /* rounded-lg */
+    /* background-color: var(--color-primary); */
+    color: var(--color-background);
+    border: none;
+    transition: opacity 0.2s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .btn-contact:hover {
+    opacity: 0.8; /* Dimmed on hover */
+  }
+  
+  /* .btn-contact:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  } */
+
+  /* Simplified Utility Classes */
+  .simple-card {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    /* border-radius: 1rem; 16px rounded corners - same as rounded-lg */
+    padding: 1.5rem; /* 24px padding */
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .simple-header {
+    background: var(--color-background);
+    border-radius: 1rem; /* 16px rounded corners - same as rounded-lg */
   }
 
   .scrollbar-hide::-webkit-scrollbar {
@@ -158,44 +137,51 @@
   }
 }
 
-.tilt-card {
-  transform-style: preserve-3d;
-  transform: perspective(1000px);
+/* Enhanced Custom scrollbar for smoother experience */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-.tilt-card-content {
-  transform: translateZ(50px);
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+  border-radius: 4px;
 }
 
-.glow {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  background-image: radial-gradient(circle at 50% -20%, #ffffff22, #0000000f);
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
 }
 
-/* Ink drip effect */
-.ink-drip {
-  position: absolute;
-  opacity: 0.8;
-  filter: blur(10px);
-  transform-origin: center;
-  animation: drip 15s ease-in-out infinite;
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-muted);
 }
 
-@keyframes drip {
-  0%, 100% {
-    transform: scale(1);
-    filter: blur(10px);
-  }
-  50% {
-    transform: scale(1.1);
-    filter: blur(15px);
-  }
+::-webkit-scrollbar-corner {
+  background: var(--color-background);
 }
 
+/* Smooth scrolling enhancements */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: y proximity;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) var(--color-background);
+}
+
+/* Performance optimizations for scrolling containers */
+.scroll-container {
+  will-change: scroll-position, transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-overflow-scrolling: touch;
+  contain: layout style paint;
+}
+
+/* Animations with enhanced smoothness */
 @keyframes floatIn {
   from {
     opacity: 0;
@@ -207,10 +193,92 @@
   }
 }
 
-.animate-float-in {
-  animation: floatIn 0.5s ease-out forwards;
+@keyframes matrixRain {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-float-in {
+  animation: floatIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  will-change: opacity, transform;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* Matrix rain effect */
+.matrix-rain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.matrix-rain::before {
+  content: "01001010011010001101001100101010110101010001110101010011101101001110110";
+  position: absolute;
+  top: -100%;
+  left: 10%;
+  color: var(--color-primary);
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: pre-wrap;
+  word-break: break-all;
+  animation: matrixRain 3s linear infinite;
+  opacity: 0.3;
+}
+
+.matrix-rain::after {
+  content: "11010011101101001011010110101011001011010011101001110110100111011001";
+  position: absolute;
+  top: -100%;
+  right: 10%;
+  color: var(--color-accent);
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: pre-wrap;
+  word-break: break-all;
+  animation: matrixRain 4s linear infinite;
+  animation-delay: 1s;
+  opacity: 0.2;
+}
+
+/* Staggered animation delays for smoother appearance */
 .delay-100 {
   animation-delay: 0.1s;
 }
@@ -231,20 +299,24 @@
   animation-delay: 0.5s;
 }
 
-/* Adding decorative Chinese-inspired elements */
-.chinese-border {
-  border: 1px solid var(--color-border);
-  box-shadow: 0 0 0 4px var(--color-background), 0 0 0 5px var(--color-border);
+/* Smooth transitions for specific elements */
+.card, .btn, .border, .bg-background, .text-foreground, .text-primary, .text-muted {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.chinese-pattern {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c41e3a' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  background-color: var(--color-background);
+/* Dark mode transition sync */
+.dark-mode-transition,
+.dark-mode-transition * {
+  transition: background-color 0.3s ease-in-out, 
+              color 0.3s ease-in-out, 
+              border-color 0.3s ease-in-out, 
+              box-shadow 0.3s ease-in-out,
+              fill 0.3s ease-in-out,
+              stroke 0.3s ease-in-out !important;
 }
 
-.dark .chinese-pattern {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  background-color: var(--color-background);
+/* Ensure consistent timing for theme colors */
+:root,
+.dark {
+  transition: all 0.3s ease-in-out;
 }
-
-/* ...existing code... */
