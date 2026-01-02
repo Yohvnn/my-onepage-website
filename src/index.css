@@ -3,22 +3,34 @@
 
 :root {
   /* Pure Minimalist Color Palette - Only Black and White */
-  --color-primary: #1d3c5c;      /* Pure black */
-  --color-background: #ffffff;   /* Pure white */
-  --color-foreground: #000000;   /* Pure black */
-  --color-border: #d1d5db;       /* Lighter gray border for light mode */
-  --color-muted: #6b7280;        /* Gray text */
-  --color-accent: #000000;       /* Pure black accent */
+  --color-primary: #1d3c5c;
+  /* Pure black */
+  --color-background: #ffffff;
+  /* Pure white */
+  --color-foreground: #000000;
+  /* Pure black */
+  --color-border: #d1d5db;
+  /* Lighter gray border for light mode */
+  --color-muted: #6b7280;
+  /* Gray text */
+  --color-accent: #000000;
+  /* Pure black accent */
 }
 
 .dark,
 .dark:root {
-  --color-primary: #6290be;      /* Pure white for dark mode */
-  --color-background: #000000;   /* Pure black background */
-  --color-foreground: #ffffff;   /* Pure white text */
-  --color-border: #2a2a2a;       /* Darker border for dark mode */
-  --color-muted: #9ca3af;        /* Light gray text */
-  --color-accent: #ffffff;       /* Pure white accent */
+  --color-primary: #6290be;
+  /* Pure white for dark mode */
+  --color-background: #000000;
+  /* Pure black background */
+  --color-foreground: #ffffff;
+  /* Pure white text */
+  --color-border: #2a2a2a;
+  /* Darker border for dark mode */
+  --color-muted: #9ca3af;
+  /* Light gray text */
+  --color-accent: #ffffff;
+  /* Pure white accent */
 }
 
 @tailwind base;
@@ -32,7 +44,7 @@
     scroll-padding-top: 2rem;
     transition: color-scheme 0.3s ease-in-out;
   }
-  
+
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', 'Poppins', 'ui-sans-serif', 'system-ui', sans-serif;
@@ -40,7 +52,7 @@
     scroll-behavior: smooth;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   }
-  
+
   * {
     @apply border-border;
     scroll-behavior: smooth;
@@ -51,7 +63,8 @@
 @layer components {
   .card {
     @apply rounded-lg border border-border bg-background shadow-sm;
-    padding: 1.5rem; /* 24px */
+    padding: 1.5rem;
+    /* 24px */
     transition: all 0.3s ease-in-out;
   }
 
@@ -59,30 +72,30 @@
     @apply hover:border-border hover:shadow-lg;
     transition: all 0.3s ease-in-out;
   }
-  
+
   .btn {
     @apply rounded-lg font-medium focus:outline-none focus:ring-border;
     transition: all 0.3s ease-in-out;
   }
-  
+
   .btn-primary {
     background: var(--color-primary);
     color: var(--color-background);
     transition: all 0.3s ease-in-out;
   }
-  
+
   .btn-primary:hover {
     /* background: #2a2a2a; */
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
-  
+
   .btn-outline {
     @apply border border-primary text-primary hover:text-white;
     background: transparent;
     transition: all 0.3s ease-in-out;
   }
-  
+
   .btn-outline:hover {
     background: var(--color-primary);
     color: var(--color-background);
@@ -94,20 +107,24 @@
     align-items: center;
     justify-content: center;
     /* padding: 0.5rem 1rem; py-2 px-4 */
-    font-size: 0.875rem; /* 14px */
-    font-weight: 500; /* font-medium */
-    border-radius: 0.5rem; /* rounded-lg */
+    font-size: 0.875rem;
+    /* 14px */
+    font-weight: 500;
+    /* font-medium */
+    border-radius: 0.5rem;
+    /* rounded-lg */
     /* background-color: var(--color-primary); */
     color: var(--color-background);
     border: none;
     transition: opacity 0.2s ease-in-out;
     cursor: pointer;
   }
-  
+
   .btn-contact:hover {
-    opacity: 0.8; /* Dimmed on hover */
+    opacity: 0.8;
+    /* Dimmed on hover */
   }
-  
+
   /* .btn-contact:focus {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
@@ -118,19 +135,21 @@
     background: var(--color-background);
     border: 1px solid var(--color-border);
     /* border-radius: 1rem; 16px rounded corners - same as rounded-lg */
-    padding: 1.5rem; /* 24px padding */
+    padding: 1.5rem;
+    /* 24px padding */
     transition: all 0.3s ease-in-out;
   }
-  
+
   .simple-header {
     background: var(--color-background);
-    border-radius: 1rem; /* 16px rounded corners - same as rounded-lg */
+    border-radius: 1rem;
+    /* 16px rounded corners - same as rounded-lg */
   }
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
-  
+
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -187,6 +206,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -198,12 +218,15 @@
     transform: translateY(-100%);
     opacity: 0;
   }
+
   10% {
     opacity: 1;
   }
+
   90% {
     opacity: 1;
   }
+
   100% {
     transform: translateY(100vh);
     opacity: 0;
@@ -214,17 +237,102 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+  font-family: 'Inter', 'Poppins', 'ui-sans-serif', 'system-ui', sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#app {
+  height: 100%;
+}
+
+/* Performance optimizations for smooth scrolling */
+img {
+  backface-visibility: hidden;
+  /* Prevents flickering during animations */
+  transform: translateZ(0);
+  /* Force GPU acceleration */
+}
+
+.overflow-auto {
+  -webkit-overflow-scrolling: touch;
+  /* Smoother scrolling on iOS */
+  scroll-behavior: smooth;
+  will-change: scroll-position;
+}
+
+/* Reduce paint operations during scrolling */
+.will-change-transform {
+  will-change: transform;
+  transform: translateZ(0);
+  /* Force GPU acceleration */
+}
+
+/* Enhanced scrolling performance */
+.container {
+  will-change: scroll-position;
+  transform: translateZ(0);
+}
+
+/* Animations */
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+/* Toast slide-in animation */
+.animate-slide-in {
+  animation: slideInFromRight 0.3s ease-out;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 
@@ -300,19 +408,25 @@
 }
 
 /* Smooth transitions for specific elements */
-.card, .btn, .border, .bg-background, .text-foreground, .text-primary, .text-muted {
+.card,
+.btn,
+.border,
+.bg-background,
+.text-foreground,
+.text-primary,
+.text-muted {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Dark mode transition sync */
 .dark-mode-transition,
 .dark-mode-transition * {
-  transition: background-color 0.3s ease-in-out, 
-              color 0.3s ease-in-out, 
-              border-color 0.3s ease-in-out, 
-              box-shadow 0.3s ease-in-out,
-              fill 0.3s ease-in-out,
-              stroke 0.3s ease-in-out !important;
+  transition: background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out,
+    fill 0.3s ease-in-out,
+    stroke 0.3s ease-in-out !important;
 }
 
 /* Ensure consistent timing for theme colors */
