@@ -120,7 +120,7 @@ const proficiencySkills = ref([
 
       <!-- Toolbox Card -->
       <section class="card p-5 animate-float-in opacity-0 delay-500 col-span-1 xl:col-span-4 lg:col-span-1 md:col-span-2 sm:col-span-2">
-        <h2 class="text-xl font-medium border-l-2 border-primary pl-3 mb-2">🧰 Tools</h2>
+        <h2 class="text-xl font-medium border-l-2 border-primary pl-3 mb-2">🧰 Tools (Under development)</h2>
         <p class="text-foreground/90 text-sm mb-4">Explore my collection of utility tools and applications.</p>
         <router-link 
           to="/toolbox"

@@ -18,7 +18,7 @@
       <!-- PDF Tools Card -->
       <router-link 
         to="/toolbox/pdf"
-        class="group relative overflow-hidden card border-2 rounded-lg p-6 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-lg transition-all duration-300 cursor-pointer animate-fade-in "
+        class="group relative overflow-hidden card border-2 rounded-lg p-6 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-lg transition-all duration-300 cursor-pointer animate-fade-in opacity-50 pointer-events-none"
       >
         <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent dark:from-blue-900 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div class="relative">
@@ -39,13 +39,14 @@
             <span class="inline-block px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded text-xs">Vue 3</span>
             <span class="inline-block px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded text-xs">Python</span>
           </div>
+          <span class="mt-4 inline-block px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 rounded text-xs font-semibold">Coming Soon</span>
         </div>
       </router-link>
 
       <!-- Tic Tac Toe Card -->
       <router-link 
         to="/toolbox/tictactoe"
-        class="group relative overflow-hidden card border-2 rounded-lg p-6 hover:border-green-500 dark:hover:border-green-400 hover:shadow-lg transition-all cursor-pointer animate-fade-in"
+        class="group relative overflow-hidden card border-2 rounded-lg p-6 hover:border-green-500 dark:hover:border-green-400 hover:shadow-lg transition-all cursor-pointer animate-fade-in opacity-50 pointer-events-none"
       >
         <div class="absolute inset-0 bg-gradient-to-br from-green-50 to-transparent dark:from-green-900 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div class="relative">
@@ -63,13 +64,14 @@
           <div class="mt-4 flex gap-2">
             <span class="inline-block px-2 py-1 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded text-xs">Vue 3</span>
           </div>
+          <span class="mt-4 inline-block px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 rounded text-xs font-semibold">Coming Soon</span>
         </div>
       </router-link>
 
       <!-- Flip Coin Card -->
       <router-link 
         to="/toolbox/flipcoin"
-        class="group relative overflow-hidden card border-2 rounded-lg p-6 hover:border-yellow-500 dark:hover:border-yellow-400 hover:shadow-lg transition-all cursor-pointer animate-fade-in"
+        class="group relative overflow-hidden card border-2 rounded-lg p-6 hover:border-yellow-500 dark:hover:border-yellow-400 hover:shadow-lg transition-all cursor-pointer animate-fade-in opacity-50 pointer-events-none"
       >
         <div class="absolute inset-0 bg-gradient-to-br from-yellow-50 to-transparent dark:from-yellow-900 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div class="relative">
@@ -87,6 +89,7 @@
           <div class="mt-4 flex gap-2">
             <span class="inline-block px-2 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 rounded text-xs">Vue 3</span>
           </div>
+          <span class="mt-4 inline-block px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 rounded text-xs font-semibold">Coming Soon</span>
         </div>
       </router-link>
 
