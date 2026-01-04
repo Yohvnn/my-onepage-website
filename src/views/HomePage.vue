@@ -9,14 +9,14 @@ import SkillsList from '../components/SkillsList.vue'
     <div class="grid lg:grid-cols-2 gap-8 h-full">
       <!-- Left column: About -->
       <section class="flex items-start">
-        <div class="max-w-5xl lg:mt-20 mt-10">
-          <h2 class="text-5xl font-medium mb-3">{{ $t('home.aboutTitle') }}</h2>
-          <p class="text-muted text-2xl max-w-prose">{{ $t('home.aboutText') }}</p>
+        <div class="max-w-5xl lg:mt-20 mt-5">
+          <h2 class="lg:text-5xl text-3xl font-medium mb-3">{{ $t('home.aboutTitle') }}</h2>
+          <p class="text-muted lg:text-2xl text-xl max-w-prose">{{ $t('home.aboutText') }}</p>
         </div>
       </section>
 
       <!-- Right column: Stacked lists -->
-      <section class="mt-12 lg:mt-20">
+      <section class="mt-5 lg:mt-20">
         <div class="flex flex-col gap-8 lg:pl-8 lg:border-l lg:border-border">
           <div>
             <h2 class="text-base mb-2">{{ $t('home.workTitle') }}</h2>

@@ -1,9 +1,9 @@
 <template>
-  <div class="lg:mt-20 mt-10 animate-fade-in">
+  <div class="lg:mt-20 mt-5 animate-fade-in">
     <!-- Header -->
     <div class="mb-8">
-      <h2 class="text-5xl">{{ t('toolbox.title') }}</h2>
-      <p class="text-muted text-2xl mt-2">{{ t('toolbox.subtitle') }}</p>
+      <h2 class="lg:text-5xl text-3xl">{{ t('toolbox.title') }}</h2>
+      <p class="text-muted lg:text-2xl text-xl mt-2">{{ t('toolbox.subtitle') }}</p>
     </div>
 
     <!-- Tools Grid -->

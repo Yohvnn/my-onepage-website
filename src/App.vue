@@ -1,24 +1,20 @@
 <template>
   <div
-    class="h-screen bg-background text-foreground overflow-hidden flex flex-col transition-all duration-300 ease-in-out relative"
+    class="h-full bg-background text-foreground overflow-hidden flex flex-col transition-all duration-300 ease-in-out relative"
   >
     <!-- Loading Screen -->
     <div v-if="isLoading" class="fixed inset-0 bg-background z-50 flex items-center justify-center">
-      <LoaderBar :progress="loadingProgress" label="Loading" />
+      <LoaderBar :progress="loadingProgress" label="Loading." />
     </div>
 
     <div
       v-else
       class="w-full relative flex-grow flex flex-col h-full overflow-auto smooth-scroll scroll-container"
-      :class="[isStudioHome ? 'bg-cover bg-center bg-no-repeat bg-local' : '']"
-      :style="isStudioHome ? { backgroundImage: `url('/wall.jpg')` } : {}"
     >
-      <!-- Contrast overlay inside scroll container so it scrolls with content -->
-      <div v-if="isStudioHome" aria-hidden="true" class="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/50 via-black/30 to-black/20 z-0"></div>
-      <div class="p-4 relative z-10 flex flex-col h-full">
+      <div class="pt-4 relative z-10 flex flex-col h-full">
       <!-- Global Minimal Header (moved from StudioHome.vue) -->
-      <header class="mb-4">
-        <div class="flex items-center justify-between">
+      <header class="pl-4 pr-4 mb-4">
+        <div class="flex items-center justify-between flex-wrap">
           <div class="flex items-center gap-2">
             <router-link to="/" class="font-semibold text-lg link" aria-label="Go to Home">YohannStudio.</router-link>
           </div>
@@ -34,22 +30,32 @@
               <a :href="href" @click="navigate" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">RESUME</a>
             </router-link>
           </nav>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 w-full sm:w-auto justify-end sm:justify-start mt-2 sm:mt-0">
             <span class="w-1.5 h-1.5 rounded-full" style="background-color: var(--color-primary)"></span>
-            <span class="text-sm text-muted">{{ timeString }}</span>
+            <span class="text-sm text-muted font-light">
+              <template v-if="timeString.includes(':')">
+                <span style="white-space:nowrap">
+                  {{ timeString.split(':')[0] }}<span class="timer-colon-animate">:</span>{{ timeString.split(':')[1].split(' ')[0] }}
+                </span>
+                <span v-if="timeString.split(' ').length > 1">&nbsp;{{ timeString.split(' ').slice(1).join(' ') }}</span>
+              </template>
+              <template v-else>
+                {{ timeString }}
+              </template>
+            </span>
           </div>
         </div>
       </header>
 
       <!-- Router View -->
-      <main class="flex-1">
+      <main class="flex-1 pl-4 pr-4">
         <router-view />
       </main>
 
       <!-- App Footer -->
-      <footer class="mt-auto pt-4 flex items-center justify-between flex-wrap gap-3">
+      <footer class="pt-4 pl-1 pr-1 pb-4 flex items-center justify-between flex-wrap gap-3">
         <a href="mailto:hello@yohanncch.studio" class="link bg-background border rounded-full px-3 py-1 shadow-sm" aria-label="Contact via email">
-          hello@yohanncch.studio
+          <span class="text-primary">hello</span><span class="text-muted">@yohanncch.studio</span>
         </a>
         <button @click="toggleDarkMode" class="btn h-9 px-3 rounded-full bg-background border hover:bg-border flex items-center gap-2 shadow-sm" aria-label="Toggle dark mode">
           <i :class="isDarkMode ? 'fas fa-sun' : 'fas fa-moon'" class="text-accent"></i>
@@ -62,8 +68,7 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount, ref, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { useDarkMode } from './composables/useDarkMode'
 import { useLoader } from './composables/useLoader'
 import { useLazyImages } from './composables/useLazyImages'
@@ -86,10 +91,6 @@ const formatter = new Intl.DateTimeFormat(locale, {
 const timeString = ref(formatter.format(now.value))
 let clockTimer
 
-// Route-based background: show wall only on StudioHome
-const route = useRoute()
-const isStudioHome = computed(() => route.path === '/' || route.name === 'StudioHome')
-
 onMounted(() => {
   applyInitialDarkModeTransition()
   setupImageLazyLoading()
@@ -109,5 +110,12 @@ onBeforeUnmount(() => {
 </script>
 
 <style>
+.timer-colon-animate {
+  animation: timer-blink 1.2s steps(1, end) infinite;
+}
+@keyframes timer-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.2; }
+}
 
 </style>

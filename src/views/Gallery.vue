@@ -1,10 +1,10 @@
 <template>
   <div class="w-full animate-fade-in">
-    <div class="rounded-lg lg:mt-20 mt-10">
+    <div class="rounded-lg lg:mt-20 mt-5">
       <div class="mb-6 flex items-center justify-between">
         <div>
-          <h2 class="text-5xl">{{ $t('gallery.title') }}</h2>
-          <p class="text-muted text-2xl mt-2">{{ $t('gallery.subtitle') }}</p>
+          <h2 class="lg:text-5xl text-3xl">{{ $t('gallery.title') }}</h2>
+          <p class="text-muted lg:text-2xl text-xl mt-2">{{ $t('gallery.subtitle') }}</p>
         </div>
       </div>
 
@@ -13,16 +13,16 @@
       <GalleryGrid v-else :items="images" @select="openExifModal" />
     </div>
     <!-- EXIF Modal -->
-    <div v-if="selected" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4" @click.self="closeExifModal">
+    <Modal v-model="modalOpen" @close="closeExifModal">
       <div class="card rounded-lg p-6 w-full max-w-4xl">
         <div class="flex items-center justify-between mb-4">
-          <h3 class="text-lg font-medium">{{ selected.title || 'Photo details' }}</h3>
+          <h3 class="text-lg font-medium">{{ selected?.title || 'Photo details' }}</h3>
           <button class="btn h-8 px-3 rounded-full bg-background border" @click="closeExifModal">Close</button>
         </div>
         <div class="relative w-full max-h-[80vh] flex items-center justify-center">
           <img
-            :src="selected.url"
-            :alt="selected.title || 'Selected photo'"
+            :src="selected?.url"
+            :alt="selected?.title || 'Selected photo'"
             class="object-contain max-w-full max-h-full rounded-md"
           />
         </div>
@@ -42,7 +42,7 @@
           <div v-if="exif.gps"><span class="text-muted">GPS:</span> {{ exif.gps }}</div>
         </div>
       </div>
-    </div>
+    </Modal>
   </div>
 </template>
 
@@ -51,8 +51,9 @@
 /* global defineOptions */
 <script setup>
 defineOptions({ name: 'GalleryView' })
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import GalleryGrid from '../components/GalleryGrid.vue'
+import Modal from '../components/ui/Modal.vue'
 
 const images = ref([])
 const isLoading = ref(true)
@@ -60,6 +61,7 @@ const error = ref(null)
 
 // EXIF modal state
 const selected = ref(null)
+const modalOpen = ref(false)
 const exif = ref(null)
 const exifLoading = ref(false)
 const exifError = ref(null)
@@ -69,6 +71,7 @@ async function openExifModal(item) {
   exif.value = null
   exifError.value = null
   exifLoading.value = true
+  modalOpen.value = true
   try {
     const mod = await import('exifr')
     const parseFn = mod.parse || (mod.default && mod.default.parse)
@@ -79,6 +82,8 @@ async function openExifModal(item) {
   } finally {
     exifLoading.value = false
   }
+  await nextTick()
+  // Focus is handled by Modal component
 }
 
 function closeExifModal() {
@@ -86,6 +91,7 @@ function closeExifModal() {
   exif.value = null
   exifError.value = null
   exifLoading.value = false
+  modalOpen.value = false
 }
 
 function normalizeExif(data) {
