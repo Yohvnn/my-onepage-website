@@ -223,7 +223,7 @@ watch(isEduOpen, (val) => {
                   About Yohann.
               </h1>
                 <p class="mt-4 text-base text-muted max-w-prose">
-                    {{ aboutText }}
+                    {{ aboutText }}<span class="timer-colon-animate">_</span>
                 </p>
           </div>
 
