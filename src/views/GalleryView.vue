@@ -1,17 +1,28 @@
 <template>
-  <div class="w-full animate-fade-in">
-    <div class="rounded-lg lg:mt-20 mt-5">
-      <div class="mb-6 flex items-center justify-between">
-        <div>
-          <h2 class="lg:text-5xl text-3xl">{{ $t('gallery.title') }}</h2>
-          <p class="text-muted lg:text-2xl text-xl mt-2">{{ $t('gallery.subtitle') }}</p>
+  <div class="h-full">
+    <div class="grid lg:grid-cols-2 gap-8 h-full min-h-full">
+      <!-- Left: Hero -->
+      <section class="flex items-start lg:self-start">
+        <div class="max-w-5xl lg:mt-20 mt-5 flex flex-col items-start animate-float-in">
+          <h1 class="leading-[0.95] lg:text-5xl text-3xl font-light">
+            {{ $t('gallery.title') }}
+          </h1>
+          <p class="text-muted lg:text-2xl text-xl mt-3 font-light">
+            {{ $t('gallery.subtitle') }}
+          </p>
         </div>
-      </div>
+      </section>
 
-      <div v-if="isLoading" class="text-muted">{{ $t('gallery.loading') }}</div>
-      <div v-else-if="error" class="text-red-600 dark:text-red-400">{{ error }}</div>
-      <GalleryGrid v-else :items="images" @select="openExifModal" />
+      <!-- Right: Gallery Grid -->
+      <section class="mt-12 lg:mt-0 flex flex-col gap-4 lg:self-center" aria-label="Gallery overview">
+        <div class="flex flex-col gap-3 lg:pl-6 lg:border-l lg:border-border w-full">
+          <div v-if="isLoading" class="text-muted">{{ $t('gallery.loading') }}</div>
+          <div v-else-if="error" class="text-red-600 dark:text-red-400">{{ error }}</div>
+          <GalleryGrid v-else :items="images" @select="openExifModal" />
+        </div>
+      </section>
     </div>
+
     <!-- EXIF Modal -->
     <Modal v-model="modalOpen" @close="closeExifModal">
       <div class="card rounded-lg p-6 w-full max-w-4xl">
@@ -29,28 +40,42 @@
         <div v-if="exifLoading" class="text-muted mt-4">Reading EXIF…</div>
         <div v-else-if="exifError" class="text-red-600 dark:text-red-400 mt-4">{{ exifError }}</div>
         <div v-else-if="exif" class="space-y-2 text-sm mt-4">
-          <div v-if="exif.make || exif.model"><span class="text-muted">Camera:</span> {{ [exif.make, exif.model].filter(Boolean).join(' ') }}</div>
-          <div v-if="exif.lens"><span class="text-muted">Lens:</span> {{ exif.lens }}</div>
-          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
-            <div v-if="exif.focalLength"><span class="text-muted">Focal:</span> {{ exif.focalLength }}</div>
-            <div v-if="exif.aperture"><span class="text-muted">Aperture:</span> {{ exif.aperture }}</div>
-            <div v-if="exif.shutter"><span class="text-muted">Shutter:</span> {{ exif.shutter }}</div>
-            <div v-if="exif.iso"><span class="text-muted">ISO:</span> {{ exif.iso }}</div>
-            <div v-if="exif.dimensions"><span class="text-muted">Size:</span> {{ exif.dimensions }}</div>
-            <div v-if="exif.date"><span class="text-muted">Taken:</span> {{ exif.date }}</div>
+          <div v-if="exif.make || exif.model">
+            <span class="text-muted">Camera:</span> {{ [exif.make, exif.model].filter(Boolean).join(' ') }}
           </div>
-          <div v-if="exif.gps"><span class="text-muted">GPS:</span> {{ exif.gps }}</div>
+          <div v-if="exif.lens">
+            <span class="text-muted">Lens:</span> {{ exif.lens }}
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div v-if="exif.focalLength">
+              <span class="text-muted">Focal:</span> {{ exif.focalLength }}
+            </div>
+            <div v-if="exif.aperture">
+              <span class="text-muted">Aperture:</span> {{ exif.aperture }}
+            </div>
+            <div v-if="exif.shutter">
+              <span class="text-muted">Shutter:</span> {{ exif.shutter }}
+            </div>
+            <div v-if="exif.iso">
+              <span class="text-muted">ISO:</span> {{ exif.iso }}
+            </div>
+            <div v-if="exif.dimensions">
+              <span class="text-muted">Size:</span> {{ exif.dimensions }}
+            </div>
+            <div v-if="exif.date">
+              <span class="text-muted">Taken:</span> {{ exif.date }}
+            </div>
+          </div>
+          <div v-if="exif.gps">
+            <span class="text-muted">GPS:</span> {{ exif.gps }}
+          </div>
         </div>
       </div>
     </Modal>
   </div>
 </template>
 
-
-/* eslint-disable vue/multi-word-component-names */
-/* global defineOptions */
 <script setup>
-defineOptions({ name: 'GalleryView' })
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import GalleryGrid from '../components/GalleryGrid.vue'
 import Modal from '../components/ui/ModalPhoto.vue'
@@ -64,7 +89,7 @@ const selected = ref(null)
 const modalOpen = ref(false)
 const exif = ref(null)
 const exifLoading = ref(false)
-const exifError = ref(null)
+const exifError = ref(false)
 
 async function openExifModal(item) {
   selected.value = item
@@ -83,7 +108,6 @@ async function openExifModal(item) {
     exifLoading.value = false
   }
   await nextTick()
-  // Focus is handled by Modal component
 }
 
 function closeExifModal() {
@@ -146,7 +170,6 @@ onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown)
 })
 </script>
-
 
 <style scoped>
 </style>

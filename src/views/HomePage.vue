@@ -10,7 +10,7 @@ import SkillsList from '../components/SkillsList.vue'
       <!-- Left column: About -->
       <section class="flex items-start">
         <div class="max-w-5xl lg:mt-20 mt-5">
-          <h2 class="lg:text-5xl text-3xl font-medium mb-3">{{ $t('home.aboutTitle') }}</h2>
+          <h2 class="lg:text-5xl text-3xl font-light mb-3">{{ $t('home.aboutTitle') }}</h2>
           <p class="text-muted lg:text-2xl text-xl max-w-prose">{{ $t('home.aboutText') }}</p>
         </div>
       </section>

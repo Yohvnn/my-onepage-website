@@ -123,7 +123,4 @@ onUnmounted(() => {
   transform: scale(0.98) translateY(4px);
 }
 
-.modal-content {
-  /* Ensure transitions apply to wrapper around slotted content */
-}
 </style>

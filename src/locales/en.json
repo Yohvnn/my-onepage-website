@@ -13,7 +13,7 @@
     "location": "Paris, France"
   },
   "home": {
-    "aboutTitle": "About Me",
+    "aboutTitle": "ABOUT ME",
     "aboutText": "Junior Research Engineer in Bagneux, France.\n\nI create digital tools across IoT, web, and UX/UI, and explore visual storytelling through photography and video, often after a gravel ride",
     "educationTitle": "EDUCATION",
     "workTitle": "EXPERIENCE",
@@ -30,38 +30,38 @@
     }
   },
   "toolbox": {
-    "title": "Toolbox",
+    "title": "TOOLBOX",
     "subtitle": "A collection of useful tools and utilities for everyday tasks.",
     "backToResume": "← Back to Resume",
     "pdf": {
-      "title": "PDF Tools",
+      "title": "PDF TOOLS",
       "desc": "Compress, split, and extract pages from PDF files with ease.",
       "tags": ["Vue 3", "Python"],
-      "comingSoon": "Coming Soon"
+      "comingSoon": "COMING SOON"
     },
     "tictactoe": {
-      "title": "Tic Tac Toe",
+      "title": "TIC TAC TOE",
       "desc": "Classic game of Tic Tac Toe. Play against a friend or the computer.",
       "tags": ["Vue 3"],
-      "comingSoon": "Coming Soon"
+      "comingSoon": "COMING SOON"
     },
     "flipcoin": {
-      "title": "Flip Coin",
+      "title": "FLIP COIN",
       "desc": "Heads or Tails? Let fate decide with a 3D coin flip.",
       "tags": ["Vue 3"],
-      "comingSoon": "Coming Soon"
+      "comingSoon": "COMING SOON"
     },
     "rag": {
-      "title": "RAG Chatbot",
+      "title": "RAG CHATBOT",
       "desc": "AI-powered document question answering with vector search and LLM integration.",
       "tags": ["Next.js", "FastAPI"],
-      "comingSoon": "Coming Soon"
+      "comingSoon": "COMING SOON"
     },
-    "comingSoonTitle": "Coming Soon",
+    "comingSoonTitle": "COMING SOON",
     "comingSoonText": "More tools are in development! Check back soon for exciting new features."
   },
   "gallery": {
-    "title": "Gallery",
+    "title": "GALLERY",
     "subtitle": "A curated selection of my photography. High-res images served via CDN.",
     "back": "← Back to Resume",
     "loading": "Loading photos…"

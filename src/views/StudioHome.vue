@@ -282,4 +282,13 @@ watch(isEduOpen, (val) => {
 </template>
 
 <style scoped>
+.timer-colon-animate {
+  animation: timer-blink 1.2s steps(1, end) infinite;
+  position: relative; /* Ensure it is above any background elements */
+  z-index: 10; /* Higher than the video background */
+}
+@keyframes timer-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.2; }
+}
 </style>

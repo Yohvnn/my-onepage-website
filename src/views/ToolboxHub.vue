@@ -1,65 +1,65 @@
 <template>
-  <div class="lg:mt-20 mt-5 animate-fade-in">
-    <!-- Header -->
-    <div class="mb-8">
-      <h2 class="lg:text-5xl text-3xl">{{ t('toolbox.title') }}</h2>
-      <p class="text-muted lg:text-2xl text-xl mt-2">{{ t('toolbox.subtitle') }}</p>
-    </div>
-
-    <!-- Tools Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- PDF Tools Card -->
-      <div class="rounded-lg border px-4 py-3 opacity-50">
-        <h3 class="text-lg font-medium mb-2">{{ t('toolbox.pdf.title') }}</h3>
-        <p class="text-muted text-base">{{ t('toolbox.pdf.desc') }}</p>
-        <div class="mt-4 flex gap-2">
-          <span v-for="tag in (tm('toolbox.pdf.tags') || [])" :key="tag" class="inline-block px-2 py-1 bg-border text-foreground rounded text-sm">{{ tag }}</span>
+  <div class="h-full">
+    <div class="grid lg:grid-cols-2 gap-8 h-full min-h-full">
+      <!-- Left: Hero -->
+      <section class="flex items-start lg:self-start">
+        <div class="max-w-5xl lg:mt-20 mt-5 flex flex-col items-start animate-float-in">
+          <h1 class="leading-[0.95] lg:text-5xl text-3xl font-light">
+            {{ t('toolbox.title') }}
+          </h1>
+          <p class="text-muted lg:text-2xl text-xl mt-3 font-light">{{ t('toolbox.subtitle') }}</p>
         </div>
-        <span class="mt-4 inline-block px-3 py-1 bg-border text-muted rounded text-sm">{{ t('toolbox.pdf.comingSoon') }}</span>
-      </div>
+      </section>
 
-      <!-- Tic Tac Toe Card -->
-      <div class="rounded-lg border px-4 py-3 opacity-50">
-        <h3 class="text-lg font-medium mb-2">{{ t('toolbox.tictactoe.title') }}</h3>
-        <p class="text-muted text-base">{{ t('toolbox.tictactoe.desc') }}</p>
-        <div class="mt-4 flex gap-2">
-          <span v-for="tag in (tm('toolbox.tictactoe.tags') || [])" :key="tag" class="inline-block px-2 py-1 bg-border text-foreground rounded text-sm">{{ tag }}</span>
+      <!-- Right: Tools stack -->
+      <section class="mt-12 lg:mt-0 flex flex-col gap-4 lg:self-center" aria-label="Toolbox overview">
+        <div class="flex flex-col gap-3 lg:pl-6 lg:border-l lg:border-border w-full">
+          <ul class="space-y-3">
+            <li class="animate-fade-in opacity-50">
+              <div class="flex text-base flex-col">
+                <span class="text-foreground">{{ t('toolbox.pdf.title') }}</span>
+                <span class="text-muted">{{ t('toolbox.pdf.desc') }}</span>
+                <span class="text-muted text-sm">{{ t('toolbox.pdf.comingSoon') }}</span>
+              </div>
+            </li>
+
+            <li class="animate-fade-in opacity-50">
+              <div class="flex text-base flex-col">
+                <span class="text-foreground">{{ t('toolbox.tictactoe.title') }}</span>
+                <span class="text-muted">{{ t('toolbox.tictactoe.desc') }}</span>
+                <span class="text-muted text-sm">{{ t('toolbox.tictactoe.comingSoon') }}</span>
+              </div>
+            </li>
+
+            <li class="animate-fade-in opacity-50">
+              <div class="flex text-base flex-col">
+                <span class="text-foreground">{{ t('toolbox.flipcoin.title') }}</span>
+                <span class="text-muted">{{ t('toolbox.flipcoin.desc') }}</span>
+                <span class="text-muted text-sm">{{ t('toolbox.flipcoin.comingSoon') }}</span>
+              </div>
+            </li>
+
+            <li class="animate-fade-in opacity-50">
+              <div class="flex text-base flex-col">
+                <span class="text-foreground">{{ t('toolbox.rag.title') }}</span>
+                <span class="text-muted">{{ t('toolbox.rag.desc') }}</span>
+                <span class="text-muted text-sm">{{ t('toolbox.rag.comingSoon') }}</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="pt-4">
+            <p class="text-muted text-base">
+              {{ t('toolbox.comingSoonText') }}
+            </p>
+          </div>
         </div>
-        <span class="mt-4 inline-block px-3 py-1 bg-border text-muted rounded text-sm">{{ t('toolbox.tictactoe.comingSoon') }}</span>
-      </div>
-
-      <!-- Flip Coin Card -->
-      <div class="rounded-lg border px-4 py-3 opacity-50">
-        <h3 class="text-lg font-medium mb-2">{{ t('toolbox.flipcoin.title') }}</h3>
-        <p class="text-muted text-base">{{ t('toolbox.flipcoin.desc') }}</p>
-        <div class="mt-4 flex gap-2">
-          <span v-for="tag in (tm('toolbox.flipcoin.tags') || [])" :key="tag" class="inline-block px-2 py-1 bg-border text-foreground rounded text-sm">{{ tag }}</span>
-        </div>
-        <span class="mt-4 inline-block px-3 py-1 bg-border text-muted rounded text-sm">{{ t('toolbox.flipcoin.comingSoon') }}</span>
-      </div>
-
-      <!-- RAG Chatbot Card (Coming Soon) -->
-      <div class="rounded-lg border px-4 py-3 opacity-50">
-        <h3 class="text-lg font-medium mb-2">{{ t('toolbox.rag.title') }}</h3>
-        <p class="text-muted text-base">{{ t('toolbox.rag.desc') }}</p>
-        <div class="mt-4 flex gap-2">
-          <span v-for="tag in (tm('toolbox.rag.tags') || [])" :key="tag" class="inline-block px-2 py-1 bg-border text-foreground rounded text-sm">{{ tag }}</span>
-        </div>
-        <span class="mt-4 inline-block px-3 py-1 bg-border text-muted rounded text-sm">{{ t('toolbox.rag.comingSoon') }}</span>
-      </div>
-    </div>
-
-    <!-- Coming Soon Section -->
-    <div class="mt-8">
-      <h3 class="text-xl font-medium tracking-tight text-gray-900 dark:text-white mb-2 flex items-center gap-2">
-        {{ t('toolbox.comingSoonTitle') }}
-      </h3>
-      <p class="text-muted">{{ t('toolbox.comingSoonText') }}</p>
+      </section>
     </div>
   </div>
 </template>
 
 <script setup>
 import { useI18n } from 'vue-i18n'
-const { t, tm } = useI18n({ useScope: 'global' })
+const { t } = useI18n({ useScope: 'global' })
 </script>

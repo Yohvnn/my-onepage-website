@@ -17,7 +17,3 @@ const items = tm('education.items')
     </ul>
   </div>
 </template>
-
-<style scoped>
-/* Let CSS animations handle the entry animations */
-</style>
