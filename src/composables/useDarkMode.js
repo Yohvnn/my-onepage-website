@@ -1,49 +1,41 @@
-import { ref } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 
 export function useDarkMode() {
   const isDarkMode = ref(localStorage.getItem('isDarkMode') === 'true')
 
   function applyInitialDarkModeTransition() {
-    if (!isDarkMode.value) return
-
-    const appElement = document.getElementById('app')
-    if (appElement) appElement.classList.add('dark-mode-transition')
-    document.documentElement.classList.add('dark-mode-transition')
-    document.body.classList.add('dark-mode-transition')
-
-    document.documentElement.classList.add('dark')
-    document.body.classList.add('dark')
-
-    setTimeout(() => {
-      if (appElement) appElement.classList.remove('dark-mode-transition')
-      document.documentElement.classList.remove('dark-mode-transition')
-      document.body.classList.remove('dark-mode-transition')
-    }, 300)
+    if (isDarkMode.value) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
   }
 
   function toggleDarkMode() {
-    const appElement = document.getElementById('app')
-    if (appElement) appElement.classList.add('dark-mode-transition')
-    document.documentElement.classList.add('dark-mode-transition')
-    document.body.classList.add('dark-mode-transition')
-
     isDarkMode.value = !isDarkMode.value
     localStorage.setItem('isDarkMode', isDarkMode.value)
 
-    if (isDarkMode.value) {
-      document.documentElement.classList.add('dark')
-      document.body.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-      document.body.classList.remove('dark')
-    }
-
-    setTimeout(() => {
-      if (appElement) appElement.classList.remove('dark-mode-transition')
-      document.documentElement.classList.remove('dark-mode-transition')
-      document.body.classList.remove('dark-mode-transition')
-    }, 300)
+    // Reload the page to ensure all styles are applied
+    window.location.reload();
   }
 
-  return { isDarkMode, toggleDarkMode, applyInitialDarkModeTransition }
+  // Watch for changes in isDarkMode and update the DOM dynamically
+  watch(isDarkMode, (newVal) => {
+    if (newVal) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+    // Force reflow to ensure Tailwind updates styles
+    document.documentElement.classList.toggle('dark', newVal);
+    document.documentElement.offsetHeight; // Trigger reflow
+    console.log('Dark mode toggled:', newVal, document.documentElement.classList);
+  })
+
+  // Ensure the initial state is applied on mount
+  onMounted(() => {
+    applyInitialDarkModeTransition()
+  })
+
+  return { isDarkMode, toggleDarkMode }
 }

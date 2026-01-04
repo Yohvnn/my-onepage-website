@@ -21,6 +21,8 @@ module.exports = {
         foreground: 'var(--color-foreground)',
         border: 'var(--color-border)',
         muted: 'var(--color-muted)',
+        white: '#faf7f2', 
+        black: '#111111',
       },
       fontFamily: {
         sans: ['Inter', 'Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],

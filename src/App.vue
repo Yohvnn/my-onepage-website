@@ -1,6 +1,7 @@
 <template>
   <div
     class="h-full bg-background text-foreground overflow-hidden flex flex-col transition-all duration-300 ease-in-out relative"
+    :class="{ 'dark-mode': isDarkMode }"
   >
     <!-- Background Video (Only for Home) -->
     <div v-if="$route.name === 'Home'" class="absolute inset-0 w-full h-full z-0">
@@ -9,9 +10,9 @@
         Your browser does not support the video tag.
       </video>
       <!-- Dark Overlay for Dark Mode -->
-      <div v-if="isDarkMode" class="absolute inset-0 bg-[#111111] bg-opacity-90"></div>
+      <div v-if="isDarkMode" :key="'dark-overlay'" class="absolute inset-0 bg-black bg-opacity-90 transition-colors duration-300"></div>
       <!-- Bright Overlay for Light Mode -->
-      <div v-else class="absolute inset-0 bg-[#faf7f2] bg-opacity-90"></div>
+      <div v-else :key="'light-overlay'" class="absolute inset-0 bg-white bg-opacity-90 transition-colors duration-300"></div>
     </div>
 
     <div v-if="isLoading" class="fixed inset-0 bg-background z-50 flex items-center justify-center">
@@ -33,7 +34,7 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount } from 'vue'
+import { onMounted, onBeforeUnmount, watch } from 'vue'
 import { useDarkMode } from './composables/useDarkMode'
 import { useLoader } from './composables/useLoader'
 import { useLazyImages } from './composables/useLazyImages'
@@ -43,14 +44,13 @@ import LoaderBar from './components/ui/LoaderBar.vue'
 import AppHeader from './components/AppHeader.vue'
 import AppFooter from './components/AppFooter.vue'
 
-const { applyInitialDarkModeTransition, isDarkMode } = useDarkMode()
+const { isDarkMode } = useDarkMode()
 const { isLoading, loadingProgress, startLoader } = useLoader()
 const { setupImageLazyLoading, cleanupLazyLoading } = useLazyImages()
 const { optimizeScrollPerformance, cleanupScrollPerformance } = useScrollPerformance()
 const $route = useRoute()
 
 onMounted(() => {
-  applyInitialDarkModeTransition()
   setupImageLazyLoading()
   startLoader()
   optimizeScrollPerformance()
@@ -59,6 +59,11 @@ onMounted(() => {
 onBeforeUnmount(() => {
   cleanupLazyLoading()
   cleanupScrollPerformance()
+})
+
+// Watch for changes in isDarkMode to ensure reactivity
+watch(isDarkMode, (newVal) => {
+  console.log('Dark mode changed:', newVal)
 })
 </script>
 
