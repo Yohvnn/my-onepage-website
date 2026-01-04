@@ -16,7 +16,17 @@
       <!-- Right: Gallery Grid -->
       <section class="mt-12 lg:mt-0 flex flex-col gap-4 lg:self-center" aria-label="Gallery overview">
         <div class="flex flex-col gap-3 lg:pl-6 lg:border-l lg:border-border w-full">
-          <div v-if="isLoading" class="text-muted">{{ $t('gallery.loading') }}</div>
+          <div v-if="isLoading">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              <div v-for="n in 10" :key="n" class="overflow-hidden rounded-md border border-gray-200 dark:border-gray-800 bg-muted/20">
+                <div class="w-full h-40 bg-muted/30 animate-pulse" />
+                <div class="p-2">
+                  <div class="h-3 w-24 bg-muted/30 animate-pulse rounded" />
+                  <div class="h-3 w-16 bg-muted/20 animate-pulse rounded mt-2" />
+                </div>
+              </div>
+            </div>
+          </div>
           <div v-else-if="error" class="text-red-600 dark:text-red-400">{{ error }}</div>
           <GalleryGrid v-else :items="images" @select="openExifModal" />
         </div>

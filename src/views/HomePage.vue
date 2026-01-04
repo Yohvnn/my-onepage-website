@@ -12,6 +12,20 @@ import SkillsList from '../components/SkillsList.vue'
         <div class="max-w-5xl lg:mt-20 mt-5">
           <h2 class="lg:text-5xl text-3xl font-light mb-3">{{ $t('home.aboutTitle') }}</h2>
           <p class="text-muted lg:text-2xl text-xl max-w-prose">{{ $t('home.aboutText') }}</p>
+          <!-- Link to About the Studio -->
+          <div class="mt-3">
+            <router-link :to="{ name: 'About' }" class="text-muted hover:underline text-sm">
+              {{ $t('about.title') }}...
+            </router-link>
+          </div>
+          <!-- Social Links -->
+          <div class="mt-5">
+            <a href="https://github.com/Yohvnn" target="_blank" class="text-muted hover:underline">GitHub</a>
+            <span class="mx-2">|</span>
+            <a href="https://www.linkedin.com/in/yohann-chan-chew-hong" target="_blank" class="text-muted hover:underline">LinkedIn</a>
+            <span class="mx-2">|</span>
+            <a href="https://strava.app.link/L7dTSyHhFZb" target="_blank" class="text-muted hover:underline">Strava</a>
+          </div>
         </div>
       </section>
 

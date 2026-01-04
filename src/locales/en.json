@@ -14,7 +14,7 @@
   },
   "home": {
     "aboutTitle": "ABOUT ME",
-    "aboutText": "Junior Research Engineer in Bagneux, France.\n\nI create digital tools across IoT, web, and UX/UI, and explore visual storytelling through photography and video, often after a gravel ride",
+    "aboutText": "Junior Research Engineer based in Paris, France.\n\nI create digital tools across IoT, web, and UX/UI, and explore visual storytelling through photography and video, often after a gravel ride",
     "educationTitle": "EDUCATION",
     "workTitle": "EXPERIENCE",
     "skillsTitle": "SKILLS",
@@ -41,13 +41,13 @@
     },
     "tictactoe": {
       "title": "TIC TAC TOE",
-      "desc": "Classic game of Tic Tac Toe. Play against a friend or the computer.",
+      "desc": "Bored in a line or in public transportation? Play the classic Tic Tac Toe against a friend or the computer.",
       "tags": ["Vue 3"],
       "comingSoon": "COMING SOON"
     },
     "flipcoin": {
       "title": "FLIP COIN",
-      "desc": "Heads or Tails? Let fate decide with a 3D coin flip.",
+      "desc": "Need to choose between pizza or burger? Heads or Tails? Let fate decide with a coin flip.",
       "tags": ["Vue 3"],
       "comingSoon": "COMING SOON"
     },
@@ -62,7 +62,7 @@
   },
   "gallery": {
     "title": "GALLERY",
-    "subtitle": "A curated selection of my photography. High-res images served via CDN.",
+    "subtitle": "A curated selection of my photography. High-res images served via CDN. If you wish to use any photo, please contact me for permission but feel free to use the photos setting to guide you to take your best shot!",
     "back": "← Back to Resume",
     "loading": "Loading photos…"
   },
@@ -85,6 +85,8 @@
     "description": "A space to design and build small tools, explore AI-driven frontends, and share photography.",
     "servicesTitle": "Services",
     "services": ["Front-end prototyping", "AI/RAG experimentation", "Photography and media"],
+    "stackTitle": "Tech Stack",
+    "stack": ["Vue.js", "Tailwind CSS", "Vite", "i18n", "CDN for high-res images"],
     "contactTitle": "Contact",
     "contactText": "Reach out for collaborations or project ideas."
   },

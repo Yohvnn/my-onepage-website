@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, onMounted, watch, nextTick } from 'vue'
+import { computed, ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
 import WorkList from '@/components/WorkList.vue'
 import EducationList from '@/components/EducationList.vue'
@@ -20,11 +20,17 @@ const eduHeaderRef = ref(null)
 const workHeaderInnerRef = ref(null)
 const eduHeaderInnerRef = ref(null)
 const rightSectionRef = ref(null)
-
-
+const bioHeaderRef = ref(null)
 
 const isAnimatingAlign = ref(false)
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+
+// Reactive large-screen flag to control BIO visibility at lg+
+const isLargeScreen = ref(false)
+const updateIsLargeScreen = () => {
+  if (typeof window === 'undefined') return
+  isLargeScreen.value = window.matchMedia('(min-width: 1024px)').matches
+}
 
 const toggleAlignment = async () => {
   if (isAnimatingAlign.value) return
@@ -34,6 +40,7 @@ const toggleAlignment = async () => {
   const isLg = typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches
   const prevWorkOpen = isWorkOpen.value
   const prevEduOpen = isEduOpen.value
+  const prevAboutVisible = isAboutVisible.value
 
   if (isLg && el) {
     // Direction: move toward current align button (end if right-aligned, start if left-aligned)
@@ -43,6 +50,7 @@ const toggleAlignment = async () => {
     // 1) Close dropdowns first (height collapse)
     isWorkOpen.value = false
     isEduOpen.value = false
+    isAboutVisible.value = false
     await nextTick()
 
     // 2) Fade + slide out toward the align button
@@ -75,6 +83,7 @@ const toggleAlignment = async () => {
     // 5) Restore dropdown open states
     if (prevWorkOpen) isWorkOpen.value = true
     if (prevEduOpen) isEduOpen.value = true
+    if (prevAboutVisible) isAboutVisible.value = true
 
     // Cleanup inline styles
     setTimeout(() => {
@@ -94,6 +103,7 @@ const toggleAlignment = async () => {
 // Per-section dropdowns
 const isWorkOpen = ref(true)
 const isEduOpen = ref(true)
+const isAboutVisible = ref(true)
 
 const scrollMainToBottomMobile = () => {
   if (window.matchMedia('(min-width: 1024px)').matches) return
@@ -108,6 +118,7 @@ const scrollMainToBottomMobile = () => {
   }, 320)
 }
 
+
 const toggleWorkOpen = () => {
   const opening = !isWorkOpen.value
   isWorkOpen.value = opening
@@ -117,6 +128,12 @@ const toggleWorkOpen = () => {
 const toggleEduOpen = () => {
   const opening = !isEduOpen.value
   isEduOpen.value = opening
+  if (opening) scrollMainToBottomMobile()
+}
+
+const toggleAboutVisible = () => {
+  const opening = !isAboutVisible.value
+  isAboutVisible.value = opening
   if (opening) scrollMainToBottomMobile()
 }
 
@@ -163,6 +180,12 @@ const onLeave = (el, done) => {
 
 // Persist UI state across navigations
 onMounted(() => {
+  // Track large-screen breakpoint
+  updateIsLargeScreen()
+  if (typeof window !== 'undefined') {
+    window.addEventListener('resize', updateIsLargeScreen)
+  }
+
   const savedAlign = localStorage.getItem('studio:isRightAligned')
   if (savedAlign !== null) isRightAligned.value = savedAlign === 'true'
 
@@ -171,6 +194,15 @@ onMounted(() => {
 
   const savedEdu = localStorage.getItem('studio:isEduOpen')
   if (savedEdu !== null) isEduOpen.value = savedEdu === 'true'
+
+  const savedAbout = localStorage.getItem('studio:isAboutVisible')
+  if (savedAbout !== null) isAboutVisible.value = savedAbout === 'true'
+})
+
+onUnmounted(() => {
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('resize', updateIsLargeScreen)
+  }
 })
 
 watch(isRightAligned, (val) => {
@@ -184,6 +216,10 @@ watch(isWorkOpen, (val) => {
 watch(isEduOpen, (val) => {
   localStorage.setItem('studio:isEduOpen', String(val))
 })
+
+watch(isAboutVisible, (val) => {
+  localStorage.setItem('studio:isAboutVisible', String(val))
+})
 </script>
 
 <template>
@@ -194,88 +230,105 @@ watch(isEduOpen, (val) => {
       <section aria-label="Studio tagline" class="flex items-start lg:self-start">
         <div class="max-w-5xl lg:mt-20 mt-10 flex flex-col items-start animate-float-in">
           <h1 class="leading-[0.95] lg:text-6xl text-3xl">
-            {{ headline }} <span class="text-muted">{{ subtext }}</span> 
+            {{ headline }} <span class="text-muted">{{ subtext }}</span>
           </h1>
-         
+
         </div>
       </section>
 
       <!-- Right: Stacked sections -->
-      <section
-        aria-label="Resume overview"
-        class="mt-12 lg:mt-0 flex flex-col gap-3 lg:self-center"
-        :class="isRightAligned ? 'lg:items-end lg:text-right' : 'lg:items-start lg:text-left'"
-        ref="rightSectionRef"
-      >
-          <!-- Alignment Toggle (large screens) -->
-          <div class="mb-4 hidden lg:flex" :class="isRightAligned ? 'lg:self-end' : 'lg:self-start'">
-            
-            <button @click="toggleAlignment" class="btn h-8 px-3 rounded-full bg-background border hover:bg-border text-xs shadow-sm transition-colors" aria-label="Toggle right column alignment">
+      <section aria-label="Resume overview" class="mt-12 lg:mt-0 flex flex-col gap-3 lg:self-center"
+        :class="isRightAligned ? 'lg:items-end lg:text-right' : 'lg:items-start lg:text-left'" ref="rightSectionRef">
+        <!-- Alignment Toggle (large screens) -->
+        <div class="mb-4 hidden lg:flex" :class="isRightAligned ? 'lg:self-end' : 'lg:self-start'">
+
+          <button @click="toggleAlignment"
+            class="btn h-8 px-3 rounded-full bg-background border hover:bg-border text-xs shadow-sm transition-colors"
+            aria-label="Toggle right column alignment">
+            <span class="flex items-center gap-1">
+              <i class="fas fa-exchange-alt transition-transform duration-300"
+                :class="isRightAligned ? 'rotate-180' : 'rotate-0'"></i>
+              <span>{{ isRightAligned ? 'Align Left' : 'Align Right' }}</span>
+            </span>
+          </button>
+        </div>
+        <!-- Work Experience -->
+        <div>
+          <h1 class="lg:text-5xl text-2xl">
+            About Yohann.
+          </h1>
+          <div class="lg:hidden mt-2 inline-flex items-center gap-2">
+            <h2 class="text-base">BIO</h2>
+            <button ref="bioHeaderRef" @click="toggleAboutVisible"
+              class="btn h-7 px-2 rounded-full bg-background border hover:bg-border text-xs shadow-sm transition-colors"
+              :aria-expanded="isAboutVisible" aria-controls="bio-collapsible">
               <span class="flex items-center gap-1">
-                <i class="fas fa-exchange-alt transition-transform duration-300" :class="isRightAligned ? 'rotate-180' : 'rotate-0'"></i>
-                <span>{{ isRightAligned ? 'Align Left' : 'Align Right' }}</span>
+                <i class="fas fa-chevron-down transition-transform duration-300"
+                  :class="isAboutVisible ? 'rotate-180' : 'rotate-0'"></i>
+                <span>{{ isAboutVisible ? 'Hide' : 'Show' }}</span>
               </span>
+
             </button>
           </div>
-          <!-- Work Experience -->
-          <div>
-              <h1 class="lg:text-5xl text-2xl">
-                  About Yohann.
-              </h1>
-                <p class="mt-4 text-base text-muted max-w-prose">
-                    {{ aboutText }}<span class="timer-colon-animate">_</span>
-                </p>
-          </div>
 
-          <!-- Work dropdown -->
-          <div class="block w-full" :class="isRightAligned ? 'lg:self-end' : 'lg:self-start'">
-            <div ref="workHeaderRef" class="flex w-full mb-2" :class="isRightAligned ? 'lg:justify-end' : 'lg:justify-start'">
-              <div ref="workHeaderInnerRef" class="inline-flex items-center gap-2">
-                <h2 class="text-base">{{ workTitle }}</h2>
-                <button
-                  @click="toggleWorkOpen"
-                  class="btn h-7 px-2 rounded-full bg-background border hover:bg-border text-xs shadow-sm"
-                  :aria-expanded="isWorkOpen"
-                  aria-controls="work-collapsible"
-                >
-                  <span class="flex items-center gap-1">
-                    <i class="fas fa-chevron-down transition-transform duration-200" :class="isWorkOpen ? 'rotate-180' : 'rotate-0'"></i>
-                    <span>{{ isWorkOpen ? 'Hide' : 'Show' }}</span>
-                  </span>
-                </button>
-              </div>
-            </div>
-            <transition @before-enter="onBeforeEnter" @enter="onEnter" @before-leave="onBeforeLeave" @leave="onLeave">
-              <div v-show="isWorkOpen" id="work-collapsible" class="max-w-prose lg:max-w-none">
-                <WorkList />
-              </div>
-            </transition>
-          </div>
 
-          <!-- Education dropdown -->
-          <div class="block w-full" :class="isRightAligned ? 'lg:self-end' : 'lg:self-start'">
-            <div ref="eduHeaderRef" class="flex w-full mb-2" :class="isRightAligned ? 'lg:justify-end' : 'lg:justify-start'">
-              <div ref="eduHeaderInnerRef" class="inline-flex items-center gap-2">
-                <h2 class="text-base">{{ educationTitle }}</h2>
-                <button
-                  @click="toggleEduOpen"
-                  class="btn h-7 px-2 rounded-full bg-background border hover:bg-border text-xs shadow-sm"
-                  :aria-expanded="isEduOpen"
-                  aria-controls="edu-collapsible"
-                >
-                  <span class="flex items-center gap-1">
-                    <i class="fas fa-chevron-down transition-transform duration-200" :class="isEduOpen ? 'rotate-180' : 'rotate-0'"></i>
-                    <span>{{ isEduOpen ? 'Hide' : 'Show' }}</span>
-                  </span>
-                </button>
-              </div>
+          <transition @before-enter="onBeforeEnter" @enter="onEnter" @before-leave="onBeforeLeave" @leave="onLeave">
+            <div v-show="isAboutVisible || isLargeScreen" id="bio-collapsible" class="lg:block">
+              <p class="lg:mt-4 text-base text-muted max-w-prose">
+                {{ aboutText }}<span class="timer-colon-animate">_</span>
+              </p>
             </div>
-            <transition @before-enter="onBeforeEnter" @enter="onEnter" @before-leave="onBeforeLeave" @leave="onLeave">
-              <div v-show="isEduOpen" id="edu-collapsible" class="max-w-prose lg:max-w-none">
-                <EducationList />
-              </div>
-            </transition>
+          </transition>
+
+        </div>
+
+        <!-- Work dropdown -->
+        <div class="block w-full" :class="isRightAligned ? 'lg:self-end' : 'lg:self-start'">
+          <div ref="workHeaderRef" class="flex w-full mb-2"
+            :class="isRightAligned ? 'lg:justify-end' : 'lg:justify-start'">
+            <div ref="workHeaderInnerRef" class="inline-flex items-center gap-2">
+              <h2 class="text-base">{{ workTitle }}</h2>
+              <button @click="toggleWorkOpen"
+                class="btn h-7 px-2 rounded-full bg-background border hover:bg-border text-xs shadow-sm"
+                :aria-expanded="isWorkOpen" aria-controls="work-collapsible">
+                <span class="flex items-center gap-1">
+                  <i class="fas fa-chevron-down transition-transform duration-200"
+                    :class="isWorkOpen ? 'rotate-180' : 'rotate-0'"></i>
+                  <span>{{ isWorkOpen ? 'Hide' : 'Show' }}</span>
+                </span>
+              </button>
+            </div>
           </div>
+          <transition @before-enter="onBeforeEnter" @enter="onEnter" @before-leave="onBeforeLeave" @leave="onLeave">
+            <div v-show="isWorkOpen" id="work-collapsible" class="max-w-prose lg:max-w-none">
+              <WorkList />
+            </div>
+          </transition>
+        </div>
+
+        <!-- Education dropdown -->
+        <div class="block w-full" :class="isRightAligned ? 'lg:self-end' : 'lg:self-start'">
+          <div ref="eduHeaderRef" class="flex w-full mb-2"
+            :class="isRightAligned ? 'lg:justify-end' : 'lg:justify-start'">
+            <div ref="eduHeaderInnerRef" class="inline-flex items-center gap-2">
+              <h2 class="text-base">{{ educationTitle }}</h2>
+              <button @click="toggleEduOpen"
+                class="btn h-7 px-2 rounded-full bg-background border hover:bg-border text-xs shadow-sm"
+                :aria-expanded="isEduOpen" aria-controls="edu-collapsible">
+                <span class="flex items-center gap-1">
+                  <i class="fas fa-chevron-down transition-transform duration-200"
+                    :class="isEduOpen ? 'rotate-180' : 'rotate-0'"></i>
+                  <span>{{ isEduOpen ? 'Hide' : 'Show' }}</span>
+                </span>
+              </button>
+            </div>
+          </div>
+          <transition @before-enter="onBeforeEnter" @enter="onEnter" @before-leave="onBeforeLeave" @leave="onLeave">
+            <div v-show="isEduOpen" id="edu-collapsible" class="max-w-prose lg:max-w-none">
+              <EducationList />
+            </div>
+          </transition>
+        </div>
       </section>
     </div>
   </div>
@@ -284,11 +337,22 @@ watch(isEduOpen, (val) => {
 <style scoped>
 .timer-colon-animate {
   animation: timer-blink 1.2s steps(1, end) infinite;
-  position: relative; /* Ensure it is above any background elements */
-  z-index: 10; /* Higher than the video background */
+  position: relative;
+  /* Ensure it is above any background elements */
+  z-index: 10;
+  /* Higher than the video background */
 }
+
 @keyframes timer-blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0.2; }
+
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0.2;
+  }
 }
 </style>

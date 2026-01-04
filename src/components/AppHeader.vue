@@ -1,11 +1,11 @@
 <template>
   <header class="pl-4 pr-4 mb-4">
-    <div class="flex items-center justify-between flex-wrap">
+    <div class="relative flex items-center justify-start sm:justify-between flex-nowrap sm:flex-wrap">
       <div class="flex items-center gap-2">
         <router-link to="/" class="font-semibold text-lg link" aria-label="Go to Home">YohannStudio.</router-link>
       </div>
-      <!-- Horizontal Nav between brand and time -->
-      <nav class="flex items-center gap-4">
+      <!-- Desktop Nav -->
+      <nav id="primary-navigation" class="hidden sm:flex items-center gap-4 lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:z-40">
         <router-link to="/tools" custom v-slot="{ href, navigate, isExactActive }">
           <a :href="href" @click="navigate" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">TOOLS</a>
         </router-link>
@@ -16,7 +16,22 @@
           <a :href="href" @click="navigate" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">RESUME</a>
         </router-link>
       </nav>
-      <div class="flex items-center gap-2 w-full sm:w-auto justify-end sm:justify-start mt-2 sm:mt-0">
+      <!-- Mobile Hamburger Button -->
+      <button
+        class="sm:hidden inline-flex items-center p-2 rounded"
+        :aria-expanded="isMenuOpen"
+        aria-label="Toggle navigation"
+        aria-controls="mobile-navigation"
+        @click="isMenuOpen = !isMenuOpen"
+      >
+        <svg v-if="!isMenuOpen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M18 6l-12 12" />
+        </svg>
+      </button>
+      <div class="flex items-center gap-2 ml-auto w-auto justify-end sm:justify-start mt-0">
         <span class="w-1.5 h-1.5 rounded-full" style="background-color: var(--color-primary)"></span>
         <span class="text-sm text-muted font-light">
           <template v-if="timeString.includes(':')">
@@ -31,6 +46,26 @@
         </span>
       </div>
     </div>
+    <!-- Mobile Nav Panel -->
+    <transition name="menu">
+      <nav
+        id="mobile-navigation"
+        v-if="isMenuOpen"
+        class="sm:hidden absolute right-0 z-50 mt-0"
+      >
+        <div class="flex justify-end gap-2 px-4 py-3">
+          <router-link to="/tools" custom v-slot="{ href, navigate, isExactActive }">
+            <a :href="href" @click="(e) => { navigate(e); isMenuOpen = false }" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">TOOLS</a>
+          </router-link>
+          <router-link to="/gallery" custom v-slot="{ href, navigate, isExactActive }">
+            <a :href="href" @click="(e) => { navigate(e); isMenuOpen = false }" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">GALLERY</a>
+          </router-link>
+          <router-link to="/resume" custom v-slot="{ href, navigate, isExactActive }">
+            <a :href="href" @click="(e) => { navigate(e); isMenuOpen = false }" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">RESUME</a>
+          </router-link>
+        </div>
+      </nav>
+    </transition>
   </header>
 </template>
 
@@ -38,6 +73,7 @@
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 
 const now = ref(new Date())
+const isMenuOpen = ref(false)
 const locale = navigator.language || 'en-US'
 const formatter = new Intl.DateTimeFormat(locale, {
   hour: '2-digit',
@@ -66,5 +102,21 @@ onBeforeUnmount(() => {
 @keyframes timer-blink {
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0.2; }
+}
+
+/* Mobile menu slide/fade transition */
+.menu-enter-active,
+.menu-leave-active {
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.menu-enter-from,
+.menu-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+.menu-enter-to,
+.menu-leave-from {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
