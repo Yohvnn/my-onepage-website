@@ -53,7 +53,7 @@
 defineOptions({ name: 'GalleryView' })
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import GalleryGrid from '../components/GalleryGrid.vue'
-import Modal from '../components/ui/Modal.vue'
+import Modal from '../components/ui/ModalPhoto.vue'
 
 const images = ref([])
 const isLoading = ref(true)

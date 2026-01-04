@@ -2,8 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import StudioHome from '../views/StudioHome.vue'
 import HomePage from '../views/HomePage.vue'
 import ToolboxHub from '../views/ToolboxHub.vue'
-import Gallery from '../views/Gallery.vue'
-import About from '../views/About.vue'
+import GalleryView from '../views/GalleryView.vue'
+import AboutView from '../views/AboutView.vue'
 import NotFound from '../views/NotFound.vue'
 
 const routes = [
@@ -16,13 +16,13 @@ const routes = [
   {
     path: '/gallery',
     name: 'Gallery',
-    component: Gallery,
+    component: GalleryView,
     meta: { title: 'Studio — Gallery', description: 'Photo gallery and latest shoots.' }
   },
   {
     path: '/about',
     name: 'About',
-    component: About,
+    component: AboutView,
     meta: { title: 'Studio — About', description: 'About the studio, services, and contact.' }
   },
   {
