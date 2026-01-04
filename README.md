@@ -1,4 +1,4 @@
-# [my-onepage-website](https://yohanncch.me/)
+# [YohannStudio](https://yohanncch.studio/)
 
 ## Project setup
 ```

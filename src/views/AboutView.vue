@@ -5,10 +5,10 @@ const { t, tm } = useI18n()
 
 <template>
   <Transition name="fade-up" appear>
-    <div class="">
-    <h2 class="text-xl font-medium tracking-tight border-l-2 border-primary pl-3 mb-3">{{ t('about.title') }}</h2>
-    <p class="text-foreground/90 leading-relaxed text-base mb-4">{{ t('about.description') }}</p>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="max-w-5xl lg:mt-20 mt-5">
+    <h2 class="lg:text-5xl text-3xl font-light mb-3">{{ t('about.title') }}</h2>
+    <p class="text-muted lg:text-2xl text-xl max-w-prose">{{ t('about.description') }}</p>
+    <div class="grid grid-cols-1 mt-6 md:grid-cols-2 gap-4">
       <div>
         <h3 class="font-medium tracking-tight mb-2">{{ t('about.servicesTitle') }}</h3>
         <ul class="list-disc pl-5 text-base text-muted">
@@ -33,7 +33,7 @@ const { t, tm } = useI18n()
     <!-- Credits Section -->
     <div class="mt-6">
       <h3 class="font-medium tracking-tight mb-2">Credits</h3>
-      <p class="text-base text-muted">All photos and videos showcased here are captured by me during my various adventures.</p>
+      <p class="text-base text-muted">{{ t('about.creditsPhotos') }}</p>
     </div>
     </div>
   </Transition>

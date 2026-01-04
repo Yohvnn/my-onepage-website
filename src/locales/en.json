@@ -84,11 +84,12 @@
     "title": "About the Studio",
     "description": "A space to design and build small tools, explore AI-driven frontends, and share photography.",
     "servicesTitle": "Services",
-    "services": ["Front-end prototyping", "AI/RAG experimentation", "Photography and media"],
+    "services": ["Front-end prototyping", "AI/RAG experimentation", "Photography and media", "More is coming..."],
     "stackTitle": "Tech Stack",
     "stack": ["Vue.js", "Tailwind CSS", "Vite", "i18n", "CDN for high-res images"],
     "contactTitle": "Contact",
-    "contactText": "Reach out for collaborations or project ideas."
+    "contactText": "Reach out for collaborations or project ideas.",
+    "creditsPhotos": "All photos and videos showcased here are captured by me during my various adventures."
   },
   "education": {
     "items": [
