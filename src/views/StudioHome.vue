@@ -194,12 +194,9 @@ watch(isEduOpen, (val) => {
       <section aria-label="Studio tagline" class="flex items-start lg:self-start">
         <div class="max-w-5xl lg:mt-20 mt-10 flex flex-col items-start animate-float-in">
           <h1 class="leading-[0.95] lg:text-6xl text-3xl">
-            {{ headline }}
+            {{ headline }} <span class="text-muted">{{ subtext }}</span> 
           </h1>
-          <p class="mt-6 lg:text-6xl text-3xl text-muted max-w-prose">
-            {{ subtext }}
-          </p>
-          
+         
         </div>
       </section>
 
