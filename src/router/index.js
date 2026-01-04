@@ -1,22 +1,43 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import StudioHome from '../views/StudioHome.vue'
 import HomePage from '../views/HomePage.vue'
 import ToolboxHub from '../views/ToolboxHub.vue'
-import ToolboxIndex from '../views/ToolboxIndex.vue'
+import Gallery from '../views/Gallery.vue'
+import About from '../views/About.vue'
+import NotFound from '../views/NotFound.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
+    component: StudioHome,
+    meta: { title: 'Studio — Home', description: 'Overview of tools, gallery, and studio updates.' }
+  },
+  {
+    path: '/gallery',
+    name: 'Gallery',
+    component: Gallery,
+    meta: { title: 'Studio — Gallery', description: 'Photo gallery and latest shoots.' }
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About,
+    meta: { title: 'Studio — About', description: 'About the studio, services, and contact.' }
+  },
+  {
+    path: '/resume',
+    name: 'Resume',
     component: HomePage
   },
   {
-    path: '/toolbox',
+    path: '/tools',
     component: ToolboxHub,
     children: [
       {
         path: '',
-        name: 'Toolbox',
-        component: ToolboxIndex
+        name: 'Tools',
+        component: ToolboxHub
       },
       {
         path: 'pdf',
@@ -38,11 +59,22 @@ const routes = [
       }
     ]
   }
+  , { path: '/toolbox', redirect: '/tools' },
+  { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+// Simple SEO: set document title from route meta
+router.beforeEach((to, from, next) => {
+  const title = to.meta?.title || 'Studio'
+  if (typeof document !== 'undefined') {
+    document.title = title
+  }
+  next()
 })
 
 export default router

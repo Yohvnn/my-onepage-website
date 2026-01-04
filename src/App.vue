@@ -1,475 +1,111 @@
 <template>
-  <div class="h-screen bg-background text-foreground overflow-hidden flex flex-col transition-all duration-300 ease-in-out">
+  <div
+    class="h-screen bg-background text-foreground overflow-hidden flex flex-col transition-all duration-300 ease-in-out relative"
+  >
     <!-- Loading Screen -->
-    <div v-if="isLoading" class="fixed inset-0 bg-background z-50 flex flex-col items-center justify-center transition-all duration-300 ease-in-out">
-      <!-- Geeky AI Loading Animation -->
-      <div class="relative mb-8">
-        <!-- Matrix-style background -->
-        <div class="absolute inset-0 overflow-hidden opacity-10">
-          <div class="matrix-rain"></div>
-        </div>
-        
-        <!-- Neural Network Visualization -->
-        <div class="relative w-32 h-32 flex items-center justify-center">
-          <!-- Central AI Core -->
-          <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center relative animate-pulse">
-            <span class="text-white font-bold text-xl">YC</span>
-            <!-- Data points around the core -->
-            <div class="absolute -top-2 -left-2 w-4 h-4 bg-accent rounded-full animate-ping"></div>
-            <div class="absolute -top-2 -right-2 w-3 h-3 bg-accent rounded-full animate-ping" style="animation-delay: 0.5s;"></div>
-            <div class="absolute -bottom-2 -left-2 w-3 h-3 bg-accent rounded-full animate-ping" style="animation-delay: 1s;"></div>
-            <div class="absolute -bottom-2 -right-2 w-4 h-4 bg-accent rounded-full animate-ping" style="animation-delay: 1.5s;"></div>
-          </div>
-          
-          <!-- Orbiting Data Nodes -->
-          <div class="absolute inset-0 animate-spin" style="animation-duration: 3s;">
-            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full"></div>
-            <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-3 h-3 bg-primary rounded-full"></div>
-            <div class="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full"></div>
-            <div class="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full"></div>
-          </div>
-          
-          <!-- Counter-rotating ring -->
-          <div class="absolute inset-2 border-2 border-primary/30 rounded-full animate-spin" style="animation-duration: 2s; animation-direction: reverse;"></div>
-        </div>
-      </div>
-      
-      <!-- Geeky Loading Message -->
-      <div class="text-center w-96 max-w-sm mx-auto px-4">
-        <div class="text-xl font-bold text-primary mb-2 font-mono h-8 flex items-center justify-center">
-          {{ currentMessage }}
-        </div>
-        <div class="text-sm text-muted font-mono h-6 flex items-center justify-center">
-          {{ currentSubMessage }}
-        </div>
-        
-        <!-- Progress Bar - Fixed width -->
-        <div class="w-80 bg-border rounded-full h-2 mt-6 overflow-hidden mx-auto">
-          <div class="bg-primary h-2 rounded-full animate-pulse transition-all duration-300" :style="{ width: loadingProgress + '%' }"></div>
-        </div>
-        
-        <!-- Terminal-style output - Fixed size -->
-        <div class="mt-6 text-left bg-black/10 rounded-md p-4 font-mono text-xs text-muted border w-80 h-32 mx-auto overflow-hidden">
-          <div class="h-full flex flex-col justify-end">
-            <div v-for="(log, index) in terminalLogs.slice(-4)" :key="index" class="animate-fade-in leading-tight">
-              <span class="text-accent">></span> {{ log }}
-            </div>
-            <div class="flex items-center">
-              <span class="text-accent">></span>
-              <span class="animate-pulse ml-1">█</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div v-if="isLoading" class="fixed inset-0 bg-background z-50 flex items-center justify-center">
+      <LoaderBar :progress="loadingProgress" label="Loading" />
     </div>
 
-    <div v-else class="container mx-auto p-3 relative flex-grow flex flex-col h-full overflow-auto smooth-scroll scroll-container">
+    <div
+      v-else
+      class="w-full relative flex-grow flex flex-col h-full overflow-auto smooth-scroll scroll-container"
+      :class="[isStudioHome ? 'bg-cover bg-center bg-no-repeat bg-local' : '']"
+      :style="isStudioHome ? { backgroundImage: `url('/wall.jpg')` } : {}"
+    >
+      <!-- Contrast overlay inside scroll container so it scrolls with content -->
+      <div v-if="isStudioHome" aria-hidden="true" class="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/50 via-black/30 to-black/20 z-0"></div>
+      <div class="p-4 relative z-10 flex flex-col h-full">
+      <!-- Global Minimal Header (moved from StudioHome.vue) -->
+      <header class="mb-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <router-link to="/" class="font-semibold text-lg link" aria-label="Go to Home">YohannStudio.</router-link>
+          </div>
+          <!-- Horizontal Nav between brand and time -->
+          <nav class="flex items-center gap-4">
+            <router-link to="/tools" custom v-slot="{ href, navigate, isExactActive }">
+              <a :href="href" @click="navigate" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">TOOLS</a>
+            </router-link>
+            <router-link to="/gallery" custom v-slot="{ href, navigate, isExactActive }">
+              <a :href="href" @click="navigate" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">GALLERY</a>
+            </router-link>
+            <router-link to="/resume" custom v-slot="{ href, navigate, isExactActive }">
+              <a :href="href" @click="navigate" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">RESUME</a>
+            </router-link>
+          </nav>
+          <div class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full" style="background-color: var(--color-primary)"></span>
+            <span class="text-sm text-muted">{{ timeString }}</span>
+          </div>
+        </div>
+      </header>
+
       <!-- Router View -->
-      <router-view />
+      <main class="flex-1">
+        <router-view />
+      </main>
+
+      <!-- App Footer -->
+      <footer class="mt-auto pt-4 flex items-center justify-between flex-wrap gap-3">
+        <a href="mailto:hello@yohanncch.studio" class="link bg-background border rounded-full px-3 py-1 shadow-sm" aria-label="Contact via email">
+          hello@yohanncch.studio
+        </a>
+        <button @click="toggleDarkMode" class="btn h-9 px-3 rounded-full bg-background border hover:bg-border flex items-center gap-2 shadow-sm" aria-label="Toggle dark mode">
+          <i :class="isDarkMode ? 'fas fa-sun' : 'fas fa-moon'" class="text-accent"></i>
+          <span class="text-sm">{{ isDarkMode ? 'Light' : 'Dark' }}</span>
+        </button>
+      </footer>
+      </div>
     </div>
   </div>
 </template>
 
-<script>
-import { useColorPickerStore } from '@/lib/colorPickerStore'
+<script setup>
+import { onMounted, onBeforeUnmount, ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { useDarkMode } from './composables/useDarkMode'
+import { useLoader } from './composables/useLoader'
+import { useLazyImages } from './composables/useLazyImages'
+import { useScrollPerformance } from './composables/useScrollPerformance'
+import LoaderBar from './components/ui/LoaderBar.vue'
 
-export default {
-  setup() {
-    const colorStore = useColorPickerStore()
-    colorStore.init()
-    return { colorStore }
-  },
-  data() {
-    return {
-      isDarkMode: localStorage.getItem('isDarkMode') === 'true',
-      isLoading: true,
-      isColorPickerVisible: false,
-      currentTheme: 'default',
-      hexColor: '#000000',
-      colorPresets: ['#000000', '#ffffff', '#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899'],
-      showToast: false,
-      toastMessage: '',
-      proficiencySkills: [
-        { name: "Programming", level: 80 },
-        { name: "Machine Learning & Data Science", level: 70 },
-        { name: "Web Development", level: 65 },
-        { name: "Database Management", level: 75 },
-        { name: "Media & Design", level: 70 },
-        { name: "English (C1)", level: 90 },
-      ],
-      messages: [
-        "Training neural networks...",
-        "Optimizing algorithms...",
-        "Processing data tensors...",
-        "Calibrating AI models...",
-        "Initializing machine learning...",
-        "Compiling deep learning layers...",
-        "Loading feature vectors...",
-        "Synchronizing data pipelines..."
-      ],
-      subMessages: [
-        "Gradient descent in progress...",
-        "Backpropagation active...",
-        "Feature engineering complete",
-        "Model weights converging...",
-        "Data preprocessing finished",
-        "Hyperparameter tuning...",
-        "Cross-validation running...",
-        "Ensemble methods loading..."
-      ],
-      terminalLogs: [],
-      currentMessageIndex: 0,
-      currentSubMessageIndex: 0,
-      loadingProgress: 0,
-      imageObserver: null,
-      imagesLoaded: 0,
-    };
-  },
-  computed: {
-    currentMessage() {
-      return this.messages[this.currentMessageIndex];
-    },
-    currentSubMessage() {
-      return this.subMessages[this.currentSubMessageIndex];
-    },
-    isValidHex() {
-      return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(this.hexColor);
-    },
-    filteredColorPresets() {
-      if (this.isDarkMode) {
-        // In dark mode, hide black color (#000000)
-        return this.colorPresets.filter(color => color !== '#000000');
-      } else {
-        // In light mode, hide white color (#ffffff)
-        return this.colorPresets.filter(color => color !== '#ffffff');
-      }
-    },
-  },
-  mounted() {
-    // Load saved color first
-    this.loadSavedColor();
-    
-    // Apply dark mode if needed with smooth transition
-    if (this.isDarkMode) {
-      // Add transition class for initial load
-      const appElement = document.getElementById('app');
-      if (appElement) {
-        appElement.classList.add('dark-mode-transition');
-      }
-      document.documentElement.classList.add('dark-mode-transition');
-      document.body.classList.add('dark-mode-transition');
-      
-      document.documentElement.classList.add('dark');
-      document.body.classList.add('dark');
-      
-      // Clean up transitions after initial load
-      setTimeout(() => {
-        if (appElement) {
-          appElement.classList.remove('dark-mode-transition');
-        }
-        document.documentElement.classList.remove('dark-mode-transition');
-        document.body.classList.remove('dark-mode-transition');
-      }, 300);
-    }
-    
-    // Setup Intersection Observer for lazy loading
-    this.setupImageLazyLoading();
-    
-    // Enhanced geeky loading sequence
-    const loadingDuration = 3500; // 3.5 seconds
-    const logMessages = [
-      "Initializing neural pathways...",
-      "Loading training datasets...",
-      "Configuring transformer models...",
-      "Establishing data connections...",
-      "Optimizing inference speed...",
-      "Ready to rock!"
-    ];
-    
-    // Progress bar animation
-    const progressInterval = setInterval(() => {
-      this.loadingProgress += 2;
-      if (this.loadingProgress >= 100) {
-        clearInterval(progressInterval);
-      }
-    }, 80);
-    
-    // Terminal logs animation
-    let logIndex = 0;
-    const logInterval = setInterval(() => {
-      if (logIndex < logMessages.length) {
-        this.terminalLogs.push(logMessages[logIndex]);
-        logIndex++;
-      } else {
-        clearInterval(logInterval);
-      }
-    }, 600);
-    
-    // Main message rotation
-    const messageInterval = setInterval(() => {
-      this.currentMessageIndex = (this.currentMessageIndex + 1) % this.messages.length;
-      this.currentSubMessageIndex = (this.currentSubMessageIndex + 1) % this.subMessages.length;
-    }, 500);
-    
-    // Hide loading screen
-    setTimeout(() => {
-      this.isLoading = false;
-      clearInterval(messageInterval);
-      clearInterval(progressInterval);
-      clearInterval(logInterval);
-    }, loadingDuration);
-    
-    // Performance optimizations for scrolling
-    this.optimizeScrollPerformance();
-  },
-  beforeUnmount() {
-    // Disconnect observer to prevent memory leaks
-    if (this.imageObserver) {
-      this.imageObserver.disconnect();
-    }
-    
-    // Remove event listeners
-    window.removeEventListener('scroll', this.throttledScrollHandler);
-    
-    // Clean up custom color style element
-    this.removePrimaryColorOverride();
-  },
-  methods: {
-    toggleDarkMode() {
-      // Add transition class for synchronized animation
-      const appElement = document.getElementById('app');
-      if (appElement) {
-        appElement.classList.add('dark-mode-transition');
-      }
-      document.documentElement.classList.add('dark-mode-transition');
-      document.body.classList.add('dark-mode-transition');
-      
-      this.isDarkMode = !this.isDarkMode;
-      localStorage.setItem('isDarkMode', this.isDarkMode);
-      
-      // Apply dark mode to both document and body synchronously
-      if (this.isDarkMode) {
-        document.documentElement.classList.add('dark');
-        document.body.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-        document.body.classList.remove('dark');
-      }
-      
-      // Maintain custom primary color after theme switch
-      this.loadSavedColor(true); // Pass silent=true to avoid toast during theme switch
-      
-      // Remove transition classes after animation completes
-      setTimeout(() => {
-        if (appElement) {
-          appElement.classList.remove('dark-mode-transition');
-        }
-        document.documentElement.classList.remove('dark-mode-transition');
-        document.body.classList.remove('dark-mode-transition');
-      }, 300);
-    },
-    setupImageLazyLoading() {
-      // Setup Intersection Observer for images
-      const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-      };
-      
-      this.imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target;
-            const src = img.getAttribute('data-src');
-            
-            if (src) {
-              img.src = src;
-              img.removeAttribute('data-src');
-              this.imagesLoaded++;
-            }
-            
-            observer.unobserve(img);
-          }
-        });
-      }, options);
-      
-      // Start observing images after component mounts
-      this.$nextTick(() => {
-        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-        lazyImages.forEach(img => this.imageObserver.observe(img));
-      });
-    },
-    optimizeScrollPerformance() {
-      // Force browsers to use hardware acceleration
-      const contentContainer = document.querySelector('.overflow-auto');
-      if (contentContainer) {
-        contentContainer.style.willChange = 'transform';
-        contentContainer.style.transform = 'translateZ(0)';
-        
-        // Add passive event listeners for better scroll performance
-        const throttledScrollHandler = this.throttle(() => {
-          // Could add scroll-based animations here
-        }, 100);
-        
-        contentContainer.addEventListener('scroll', throttledScrollHandler, { passive: true });
-        this.throttledScrollHandler = throttledScrollHandler;
-      }
-    },
-    throttle(callback, limit) {
-      let waiting = false;
-      return function() {
-        if (!waiting) {
-          callback.apply(this, arguments);
-          waiting = true;
-          setTimeout(() => {
-            waiting = false;
-          }, limit);
-        }
-      };
-    },
-    // Color Picker Methods
-    toggleColorPicker() {
-      this.isColorPickerVisible = !this.isColorPickerVisible;
-      if (this.isColorPickerVisible) {
-        // Get current primary color from localStorage or use current computed color
-        const savedColor = localStorage.getItem('primaryColor');
-        if (savedColor) {
-          this.hexColor = savedColor;
-        } else {
-          const currentColor = getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim();
-          this.hexColor = currentColor || (this.isDarkMode ? '#ffffff' : '#000000');
-        }
-      }
-    },
-    closeColorPicker() {
-      this.isColorPickerVisible = false;
-    },
-    validateHex() {
-      // Auto-add # if not present
-      if (this.hexColor && !this.hexColor.startsWith('#')) {
-        this.hexColor = '#' + this.hexColor;
-      }
-    },
-    selectColor(color) {
-      // Check if the color is allowed in current theme
-      if (this.isDarkMode && color === '#000000') {
-        this.showToastMessage("You can't do that! Black color is not allowed in dark mode.");
-        return;
-      }
-      if (!this.isDarkMode && color === '#ffffff') {
-        this.showToastMessage("You can't do that! White color is not allowed in light mode.");
-        return;
-      }
-      
-      this.hexColor = color;
-    },
-    applyColor() {
-      if (this.isValidHex) {
-        // Additional validation for manual hex input
-        if (this.isDarkMode && this.hexColor.toLowerCase() === '#000000') {
-          this.showToastMessage("You can't do that! Black color is not allowed in dark mode.");
-          return;
-        }
-        if (!this.isDarkMode && this.hexColor.toLowerCase() === '#ffffff') {
-          this.showToastMessage("You can't do that! White color is not allowed in light mode.");
-          return;
-        }
-        
-        this.setPrimaryColor(this.hexColor);
-        
-        // Store in localStorage for persistence
-        localStorage.setItem('primaryColor', this.hexColor);
-        
-        // Close the picker
-        this.closeColorPicker();
-      }
-    },
-    resetToDefault() {
-      // Remove custom color
-      localStorage.removeItem('primaryColor');
-      this.removePrimaryColorOverride();
-      
-      // Set default color based on theme
-      const defaultColor = this.isDarkMode ? '#ffffff' : '#000000';
-      this.hexColor = defaultColor;
-      
-      this.closeColorPicker();
-    },
-    loadSavedColor(silent = false) {
-      const savedColor = localStorage.getItem('primaryColor');
-      if (savedColor && this.isValidColorFormat(savedColor)) {
-        // Validate that the saved color is appropriate for current theme
-        if (this.isDarkMode && savedColor.toLowerCase() === '#000000') {
-          if (!silent) {
-            this.showToastMessage("You can't do that! Removing incompatible black color from dark mode.");
-          }
-          localStorage.removeItem('primaryColor');
-          this.removePrimaryColorOverride();
-          return;
-        }
-        if (!this.isDarkMode && savedColor.toLowerCase() === '#ffffff') {
-          if (!silent) {
-            this.showToastMessage("You can't do that! Removing incompatible white color from light mode.");
-          }
-          localStorage.removeItem('primaryColor');
-          this.removePrimaryColorOverride();
-          return;
-        }
-        
-        this.setPrimaryColor(savedColor);
-        this.hexColor = savedColor;
-      } else {
-        // Remove any custom color override to use theme defaults
-        this.removePrimaryColorOverride();
-      }
-    },
-    setPrimaryColor(color) {
-      // Create or update a style element to override CSS custom properties
-      let styleElement = document.getElementById('custom-primary-color');
-      if (!styleElement) {
-        styleElement = document.createElement('style');
-        styleElement.id = 'custom-primary-color';
-        document.head.appendChild(styleElement);
-      }
-      
-      // Use high specificity CSS to override both light and dark mode
-      styleElement.textContent = `
-        :root {
-          --color-primary: ${color} !important;
-        }
-        .dark {
-          --color-primary: ${color} !important;
-        }
-        html.dark {
-          --color-primary: ${color} !important;
-        }
-        body.dark {
-          --color-primary: ${color} !important;
-        }
-      `;
-    },
-    removePrimaryColorOverride() {
-      const styleElement = document.getElementById('custom-primary-color');
-      if (styleElement) {
-        styleElement.remove();
-      }
-    },
-    showToastMessage(message) {
-      this.toastMessage = message;
-      this.showToast = true;
-      
-      // Auto-hide toast after 3 seconds
-      setTimeout(() => {
-        this.showToast = false;
-      }, 3000);
-    },
-    isValidColorFormat(color) {
-      // Validate hex color format
-      return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color);
-    }
-    // Other existing methods...
-  }
-};
+const { isDarkMode, toggleDarkMode, applyInitialDarkModeTransition } = useDarkMode()
+const { isLoading, loadingProgress, startLoader } = useLoader()
+const { setupImageLazyLoading, cleanupLazyLoading } = useLazyImages()
+const { optimizeScrollPerformance, cleanupScrollPerformance } = useScrollPerformance()
+
+// Shared clock/timezone display (moved from StudioHome.vue)
+const now = ref(new Date())
+const locale = navigator.language || 'en-US'
+const formatter = new Intl.DateTimeFormat(locale, {
+  hour: '2-digit',
+  minute: '2-digit',
+  timeZoneName: 'short'
+})
+const timeString = ref(formatter.format(now.value))
+let clockTimer
+
+// Route-based background: show wall only on StudioHome
+const route = useRoute()
+const isStudioHome = computed(() => route.path === '/' || route.name === 'StudioHome')
+
+onMounted(() => {
+  applyInitialDarkModeTransition()
+  setupImageLazyLoading()
+  startLoader()
+  optimizeScrollPerformance()
+  clockTimer = setInterval(() => {
+    now.value = new Date()
+    timeString.value = formatter.format(now.value)
+  }, 30000)
+})
+
+onBeforeUnmount(() => {
+  cleanupLazyLoading()
+  cleanupScrollPerformance()
+  if (clockTimer) clearInterval(clockTimer)
+})
 </script>
 
 <style>

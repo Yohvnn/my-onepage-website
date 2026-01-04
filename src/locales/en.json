@@ -1,0 +1,117 @@
+{
+  "nav": {
+    "home": "Home",
+    "resume": "Resume",
+    "toolbox": "Toolbox",
+    "gallery": "Gallery",
+    "about": "About",
+    "contact": "Contact Me"
+  },
+  "profile": {
+    "name": "YOHANN CHAN CHEW HONG",
+    "title": "Junior Gen AI Research Engineer",
+    "location": "Paris, France"
+  },
+  "home": {
+    "aboutTitle": "About Me",
+    "aboutText": "Junior Research Engineer in Bagneux, France.\n\nI create digital tools across IoT, web, and UX/UI, and explore visual storytelling through photography and video, often after a gravel ride.",
+    "educationTitle": "EDUCATION",
+    "workTitle": "EXPERIENCE",
+    "skillsTitle": "SKILLS",
+    "proficiencyTitle": "Proficiency",
+    "toolsTitle": "Tools (Under development)",
+    "toolsSubtitle": "Explore my collection of utility tools and applications.",
+    "viewToolbox": "View Toolbox",
+    "footerBuilt": "Built with <3 in Vue.js & Tailwind CSS",
+    "copyright": "© {year} Yohann Chan Chew Hong",
+    "social": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
+    }
+  },
+  "toolbox": {
+    "title": "Toolbox",
+    "subtitle": "A collection of useful tools and utilities for everyday tasks.",
+    "backToResume": "← Back to Resume",
+    "pdf": {
+      "title": "PDF Tools",
+      "desc": "Compress, split, and extract pages from PDF files with ease.",
+      "tags": ["Vue 3", "Python"],
+      "comingSoon": "Coming Soon"
+    },
+    "tictactoe": {
+      "title": "Tic Tac Toe",
+      "desc": "Classic game of Tic Tac Toe. Play against a friend or the computer.",
+      "tags": ["Vue 3"],
+      "comingSoon": "Coming Soon"
+    },
+    "flipcoin": {
+      "title": "Flip Coin",
+      "desc": "Heads or Tails? Let fate decide with a 3D coin flip.",
+      "tags": ["Vue 3"],
+      "comingSoon": "Coming Soon"
+    },
+    "rag": {
+      "title": "RAG Chatbot",
+      "desc": "AI-powered document question answering with vector search and LLM integration.",
+      "tags": ["Next.js", "FastAPI"],
+      "comingSoon": "Coming Soon"
+    },
+    "comingSoonTitle": "Coming Soon",
+    "comingSoonText": "More tools are in development! Check back soon for exciting new features."
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "A curated selection of my photography. High-res images served via CDN.",
+    "back": "← Back to Resume",
+    "loading": "Loading photos…"
+  },
+  "studio": {
+    "home": {
+      "title": "Creative Studio",
+      "subtitle": "AI-assisted frontends, small tools, and photography projects.",
+      "ctaTools": "Explore Tools",
+      "ctaGallery": "View Gallery",
+      "featuredTools": "Featured Tools",
+      "latestPhotos": "Latest Photos",
+      "viewAll": "View All"
+    },
+    "hero": {
+      "headline": "Digital Studio prototyping personal projects.",
+      "subtext": "A small place focused on shipping useful tools, photography and career updates."    }
+  },
+  "about": {
+    "title": "About the Studio",
+    "description": "A space to design and build small tools, explore AI-driven frontends, and share photography.",
+    "servicesTitle": "Services",
+    "services": ["Front-end prototyping", "AI/RAG experimentation", "Photography and media"],
+    "contactTitle": "Contact",
+    "contactText": "Reach out for collaborations or project ideas."
+  },
+  "education": {
+    "items": [
+      { "date": "2026. 08", "title": "MSC IN DATA SCIENCE & AI", "org": "DATA SCIENCETECH INSTITUTE - SCHOOL OF ENGINEERING" },
+      { "date": "2024. 08", "title": "BACHELOR'S IN ECONOMICS (DATA SCIENCE CMI ENGINEER TRACK)", "org": "PARIS X UNIVERSITY" },
+      { "date": "2021. 08", "title": "GENERAL BACCALAUREATE IN MATHEMATICS AND ECONOMICS", "org": "FRENCH SCHOOL OF TAMATAVE" }
+    ]
+  },
+  "work": {
+    "items": [
+      { "date": "2024 - 26", "title": "GEN AI FRONTEND DEVELOPER", "org": "CREDIT AGRICOLE (CAPFM)" },
+      { "date": "2024. 07", "title": "AMAZON STOREFRONT DEVELOPER", "org": "BI Paris" },
+      { "date": "2024. 03", "title": "WEBMASTER", "org": "EXCELSIOR BEEMADA" }
+    ]
+  },
+  "skills": {
+    "titles": {
+      "programming": "PROGRAMMING & DATA SCIENCE",
+      "database": "DATABASES & DATA MANAGEMENT",
+      "web": "WEB DEVELOPMENT & SYSTEMS",
+      "media": "MEDIA & DESIGN"
+    },
+    "programming": ["C", "C++", "Python", "Java", "R", "TensorFlow", "PyTorch", "RDF", "SPARQL"],
+    "database": ["SQL", "PL/SQL", "MariaDB", "MySQL", "Neo4j", "SAS", "AWS", "Git", "Bash"],
+    "web": ["Vue.js", "Nest", "Typescript", "Tailwind", "Lambda", "RAG", "Vectorization"],
+    "media": ["Premiere Pro", "Lightroom", "Photoshop", "Figma", "Canva", "WordPress"]
+  }
+}

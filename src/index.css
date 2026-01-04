@@ -1,41 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&display=swap');
 
 :root {
-  /* Pure Minimalist Color Palette - Only Black and White */
-  --color-primary: #1d3c5c;
-  /* Pure black */
-  --color-background: #ffffff;
-  /* Pure white */
-  --color-foreground: #000000;
-  /* Pure black */
-  --color-border: #d1d5db;
-  /* Lighter gray border for light mode */
-  --color-muted: #6b7280;
-  /* Gray text */
-  --color-accent: #000000;
-  /* Pure black accent */
+  /* Studio-inspired minimalist palette (light mode) */
+  --color-primary: #d9380f;     /* primary accent */
+  --color-secondary: #111111;   /* deep ink for subtle elements */
+  --color-background: #FAF7F2;  /* soft cream background */
+  --color-foreground: #111111;  /* near-black text */
+  --color-border: #E7E2DA;      /* warm light border */
+  --color-muted: #6E6A67;       /* neutral muted copy */
+  --color-accent: #111111;      /* ink accents for links/icons */
 }
 
 .dark,
 .dark:root {
-  --color-primary: #6290be;
-  /* Pure white for dark mode */
-  --color-background: #000000;
-  /* Pure black background */
-  --color-foreground: #ffffff;
-  /* Pure white text */
-  --color-border: #2a2a2a;
-  /* Darker border for dark mode */
-  --color-muted: #9ca3af;
-  /* Light gray text */
-  --color-accent: #ffffff;
-  /* Pure white accent */
+  --color-primary: #d9380f;     /* primary accent on dark */
+  --color-secondary: #FAF7F2;   /* cream for subtle accents */
+  --color-background: #111111;  /* deep ink background */
+  --color-foreground: #FAF7F2;  /* soft cream text */
+  --color-border: #2A2623;      /* warm dark border */
+  --color-muted: #A8A29E;       /* neutral muted on dark */
+  --color-accent: #FAF7F2;      /* cream accents */
 }
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  /* Nav link with bracket hover effect without layout shift */
+  .nav-link {
+    color: var(--color-accent);
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    padding: 0 0.6ch; /* reserve space for brackets */
+    transition: opacity 0.2s ease-in-out;
+    font-weight:400;
+    font-size: small;
+  }
+
+  .nav-link::before,
+  .nav-link::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    opacity: 0;
+    color: var(--color-accent);
+    transition: opacity 0.15s ease-in-out;
+    pointer-events: none;
+  }
+
+  .nav-link::before { content: '['; left: 0; }
+  .nav-link::after { content: ']'; right: 0; }
+
+  .nav-link:hover:not(.link-active) { opacity: 0.85; }
+  .nav-link:hover:not(.link-active)::before,
+  .nav-link:hover:not(.link-active)::after { opacity: 1; }
+
+  .nav-link:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+    text-decoration: none;
+  }
+
+  /* Active nav link state */
+  .nav-link.link-active {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .nav-link.link-active::before,
+  .nav-link.link-active::after { opacity: 0; }
+}
+
+@layer utilities {
+  /* Map utility to brand primary color variable */
+  .text-primary {
+    color: var(--color-primary);
+  }
+}
 
 @layer base {
   html {
@@ -47,7 +94,7 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', 'Poppins', 'ui-sans-serif', 'system-ui', sans-serif;
+    font-family: 'Onest', 'Inter', 'Poppins', 'ui-sans-serif', 'system-ui', sans-serif;
     overflow-x: hidden;
     scroll-behavior: smooth;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
@@ -62,15 +109,20 @@
 
 @layer components {
   .card {
-    @apply rounded-lg border border-border bg-background shadow-sm;
+    @apply rounded-lg bg-background shadow-none;
     padding: 1.5rem;
     /* 24px */
     transition: all 0.3s ease-in-out;
   }
 
   .card-hover {
-    @apply hover:border-border hover:shadow-lg;
+    @apply hover:shadow-none;
     transition: all 0.3s ease-in-out;
+  }
+
+  /* Add border only on hover for minimalist look */
+  .card-hover:hover {
+    border: 1px solid var(--color-primary);
   }
 
   .btn {
@@ -85,20 +137,59 @@
   }
 
   .btn-primary:hover {
-    /* background: #2a2a2a; */
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0.9;
   }
 
   .btn-outline {
-    @apply border border-primary text-primary hover:text-white;
+    @apply border;
+    border-color: var(--color-accent);
+    color: var(--color-accent);
     background: transparent;
     transition: all 0.3s ease-in-out;
   }
 
   .btn-outline:hover {
-    background: var(--color-primary);
+    background: var(--color-accent);
     color: var(--color-background);
+  }
+
+  /* Reusable subtle link style (for non-nav links) */
+  .link {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: opacity 0.2s ease-in-out, text-decoration-color 0.2s ease-in-out;
+  }
+
+  .link:hover:not(.nav-link) {
+    opacity: 0.8;
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+  }
+
+  /* Keyboard focus state */
+  .link:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+    text-decoration: none;
+  }
+
+  /* Active link state for vertical nav */
+  .link-active {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* Icon-only link: no underline, subtle color shift */
+  .link-icon {
+    color: var(--color-muted);
+    transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  }
+
+  .link-icon:hover {
+    color: var(--color-accent);
+    opacity: 0.9;
   }
 
   /* Simple Plain Contact Button */
@@ -268,7 +359,7 @@
 html,
 body {
   scroll-behavior: smooth;
-  font-family: 'Inter', 'Poppins', 'ui-sans-serif', 'system-ui', sans-serif;
+  font-family: 'Onest', 'Inter', 'Poppins', 'ui-sans-serif', 'system-ui', sans-serif;
   height: 100%;
   margin: 0;
   padding: 0;

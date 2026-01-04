@@ -1,0 +1,119 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "resume": "CV",
+    "toolbox": "Outils",
+    "gallery": "Galerie",
+    "about": "À propos",
+    "contact": "Me contacter"
+  },
+  "profile": {
+    "name": "YOHANN CHAN CHEW HONG",
+    "title": "Ingénieur junior en IA générative",
+    "location": "Paris, France"
+  },
+  "home": {
+    "aboutTitle": "À propos",
+    "aboutText": "Ingénieur d'étude junior à Bagneux, France.\n\nJe conçois des outils numériques centrés sur l’humain — IoT, web, UX/UI — et j’explore le storytelling visuel à travers la photographie et la vidéo, souvent après une sortie gravel.",
+    "educationTitle": "Éducation",
+    "workTitle": "Expérience professionnelle",
+    "skillsTitle": "Compétences",
+    "proficiencyTitle": "Maîtrise",
+    "toolsTitle": "Outils (en développement)",
+    "toolsSubtitle": "Découvrez ma collection d'utilitaires et d'applications.",
+    "viewToolbox": "Voir les outils",
+    "footerBuilt": "Construit avec <3 en Vue.js & Tailwind CSS",
+    "copyright": "© {year} Yohann Chan Chew Hong",
+    "social": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
+    }
+  },
+  "toolbox": {
+    "title": "Outils",
+    "subtitle": "Une collection d'outils utiles pour les tâches quotidiennes.",
+    "backToResume": "← Retour au CV",
+    "pdf": {
+      "title": "Outils PDF",
+      "desc": "Compresser, découper et extraire des pages de fichiers PDF facilement.",
+      "tags": ["Vue 3", "Python"],
+      "comingSoon": "Bientôt disponible"
+    },
+    "tictactoe": {
+      "title": "Morpion",
+      "desc": "Jeu classique de morpion. Jouez contre un ami ou l'ordinateur.",
+      "tags": ["Vue 3"],
+      "comingSoon": "Bientôt disponible"
+    },
+    "flipcoin": {
+      "title": "Pile ou Face",
+      "desc": "Pile ou face ? Laissez le hasard décider avec une pièce en 3D.",
+      "tags": ["Vue 3"],
+      "comingSoon": "Bientôt disponible"
+    },
+    "rag": {
+      "title": "Chatbot RAG",
+      "desc": "Question-réponse sur documents avec recherche vectorielle et LLM.",
+      "tags": ["Next.js", "FastAPI"],
+      "comingSoon": "Bientôt disponible"
+    },
+    "comingSoonTitle": "Bientôt",
+    "comingSoonText": "D'autres outils sont en développement ! Revenez bientôt pour de nouvelles fonctionnalités."
+  },
+  "gallery": {
+    "title": "Galerie photo",
+    "subtitle": "Une sélection de mes photos. Images haute résolution via CDN.",
+    "back": "← Retour au CV",
+    "loading": "Chargement des photos…"
+  },
+  "studio": {
+    "home": {
+      "title": "Studio créatif",
+      "subtitle": "Frontends assistés par IA, petits outils et projets photo.",
+      "ctaTools": "Explorer les outils",
+      "ctaGallery": "Voir la galerie",
+      "featuredTools": "Outils à la une",
+      "latestPhotos": "Dernières photos",
+      "viewAll": "Tout voir"
+    },
+    "hero": {
+      "headline": "Studio numérique — prototypage d'applications LLM/RAG, frontends Vue/Tailwind et expérimentations utilitaires — basé à Bagneux, France",
+      "subtext": "Un petit studio dédié à livrer des outils utiles et des expériences guidées par la photographie.",
+      "inspiration": "(inspiré par KauStudio)"
+    }
+  },
+  "about": {
+    "title": "À propos du studio",
+    "description": "Un espace pour concevoir de petits outils, explorer des frontends pilotés par l'IA et partager la photographie.",
+    "servicesTitle": "Services",
+    "services": ["Prototypage front-end", "Expérimentation IA/RAG", "Photographie et média"],
+    "contactTitle": "Contact",
+    "contactText": "Contactez-moi pour des collaborations ou des idées de projets."
+  },
+  "education": {
+    "items": [
+      { "date": "2026. 08", "title": "MSc appliqué en Data Science & IA", "org": "Data ScienceTech Institute - School of Engineering" },
+      { "date": "2024. 08", "title": "Licence en Économie (parcours ingénieur CMI Data Science pour les Sciences Sociales)", "org": "Université Paris X" },
+      { "date": "2021. 08", "title": "Baccalauréat général en Mathématiques et Économie", "org": "Lycée français de Tamatave" }
+    ]
+  },
+  "work": {
+    "items": [
+      { "date": "2024 - 26", "title": "Ingénieur de recherche junior pour applications front-end d'IA générative", "org": "Crédit Agricole Personal Finance & Mobility (CAPFM)" },
+      { "date": "2024. 07", "title": "Responsable boutique Amazon", "org": "Beauté Insolente Paris" },
+      { "date": "2024. 03", "title": "Webmaster", "org": "Excelsior, BeeMada" }
+    ]
+  },
+  "skills": {
+    "titles": {
+      "programming": "Programmation & Data Science",
+      "database": "Bases de données & gestion des données",
+      "web": "Développement web & systèmes",
+      "media": "Média & Design"
+    },
+    "programming": ["C", "C++", "Python", "Java", "R", "TensorFlow", "PyTorch", "RDF", "SPARQL"],
+    "database": ["SQL", "PL/SQL", "MariaDB", "MySQL", "Neo4j", "SAS", "AWS", "Git", "Bash"],
+    "web": ["Vue.js", "Nest", "Typescript", "Tailwind", "Lambda", "RAG", "Vectorisation"],
+    "media": ["Premiere Pro", "Lightroom", "Photoshop", "Figma", "Canva", "WordPress"]
+  }
+}
