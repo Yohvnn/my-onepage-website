@@ -22,7 +22,7 @@
     "skillsTitle": "COMPÉTENCES",
     "proficiencyTitle": "MAÎTRISE",
     "toolsTitle": "OUTILS (EN DÉVELOPPEMENT)",
-    "toolsSubtitle": "Découvrez ma collection d'utilitaires et d'applications.",
+    "toolsSubtitle": "Découvre ma collection d'utilitaires et d'applications.",
     "viewToolbox": "Voir les outils",
     "footerBuilt": "Construit avec <3 en Vue.js & Tailwind CSS",
     "copyright": "© {year} Yohann Chan Chew Hong",
@@ -34,38 +34,38 @@
   },
   "toolbox": {
     "title": "BOÎTE À OUTILS",
-    "subtitle": "Une collection d'outils utiles pour les tâches quotidiennes.",
+    "subtitle": "Une collection d'outils utiles pour les tâches quotidiennes ou pour ne pas s'ennuyer pendant que tu attends le prochain bus",
     "backToResume": "← Retour au CV",
     "pdf": {
       "title": "OUTILS PDF",
-      "desc": "Compresser, découper et extraire des pages de fichiers PDF facilement.",
+      "desc": "Compresser, découper et extraire des pages de fichiers PDF facilement (un peu comme ilovepdf... mais fait maison et avec des infos sur où sont conservés tes données).",
       "tags": ["Vue 3", "Python"],
       "comingSoon": "BIENTÔT DISPONIBLE"
     },
     "tictactoe": {
       "title": "MORPION",
-      "desc": "Jeu classique de morpion. Jouez contre un ami ou l'ordinateur.",
+      "desc": "Tu t'ennuies dans une file d'attente ou dans les transports en commun ? Teste ce classique du morpion contre un ami ou l'ordinateur.",
       "tags": ["Vue 3"],
       "comingSoon": "BIENTÔT DISPONIBLE"
     },
     "flipcoin": {
       "title": "PILE OU FACE",
-      "desc": "Pile ou face ? Laissez le hasard décider avec une pièce en 3D.",
+      "desc": "Tu hésites entre pizza ou burger ? Pile ou face ? Laisse le hasard décider avec une pièce en 3D.",
       "tags": ["Vue 3"],
       "comingSoon": "BIENTÔT DISPONIBLE"
     },
     "rag": {
-      "title": "Chatbot RAG",
-      "desc": "Question-réponse sur documents avec recherche vectorielle et LLM.",
+      "title": "HAWKAI",
+      "desc": "Tu as un document et tu souhaiterais effectuer une recherche sémantique approfondie sur le sujet ? Tu déposes tes documents et ce chatbot utilise la recherche vectorielle pour répondre à tes questions.",
       "tags": ["Next.js", "FastAPI"],
       "comingSoon": "BIENTÔT DISPONIBLE"
     },
     "comingSoonTitle": "BIENTÔT DISPONIBLE",
-    "comingSoonText": "D'autres outils sont en développement ! Revenez bientôt pour de nouvelles fonctionnalités."
+    "comingSoonText": "Tu as besoin d'autres outils ? Contacte-moi pour qu'on en discute ou attends que mes idées fusent et reviens plus tard pour de nouvelles fonctionnalités."
   },
   "gallery": {
     "title": "GALERIE",
-    "subtitle": "Une sélection de mes photos. Si vous souhaitez utiliser une photo, veuillez me contacter. Mais n'hésitez pas à utiliser les paramètres de la photo pour vous guider et prendre votre meilleur cliché !",
+    "subtitle": "Une sélection de mes photos. Si tu souhaites utiliser une photo, contacte-moi d'abord. Sinon n'hésite pas à t'inspirer des paramètres utilisées sur chaque photo pour te guider à prendre tes meilleurs clichés !",
     "back": "← Retour au CV",
     "loading": "Chargement des photos…",
     "photoDetails": "Détails de la photo",
@@ -81,7 +81,7 @@
     "size": "Taille :",
     "taken": "Date de prise :",
     "gps": "GPS :",
-    "noPhotos": "Pas encore de photos. Remplissez public/gallery/index.json avec des entrées d'images.",
+    "noPhotos": "Pas encore de photos. Remplis public/gallery/index.json avec des entrées d'images.",
     "photoAlt": "Photo {number}"
   },
   "studio": {
@@ -129,7 +129,7 @@
       "CDN pour des images en haute résolution"
     ],
     "contactTitle": "Contact",
-    "contactText": "Contactez-moi pour des collaborations ou des idées de projets.",
+    "contactText": "Contacte-moi pour des collaborations ou des idées de projets.",
     "creditsPhotos": "Toutes les photos et vidéos présentées ici ont été capturées par moi lors de mes diverses aventures."
   },
   "education": {
@@ -172,7 +172,7 @@
   },
   "notFound": {
     "title": "Page Introuvable",
-    "description": "La page que vous recherchez n'existe pas.",
+    "description": "La page que tu recherches n'existe pas.",
     "backToStudio": "RETOUR AU STUDIO"
   }
 }
