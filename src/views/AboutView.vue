@@ -24,8 +24,8 @@ const { t, tm } = useI18n()
       <div>
         <h3 class="font-medium tracking-tight mb-2">{{ t('about.contactTitle') }}</h3>
         <p class="text-base text-muted">{{ t('about.contactText') }}</p>
-        <div class="mt-3 flex gap-3">
-          <a href="mailto:cchongyohann@gmail.com" class="link">{{ t('nav.contact') }}</a>
+        <div class="mt-3 flex gap-3 text-muted">
+          <a href="mailto:cchongyohann@gmail.com" class="link">{{ t('nav.contact') }}</a> |
           <a href="https://github.com/Yohvnn/" target="_blank" rel="noopener" class="link">GitHub</a>
         </div>
       </div>
