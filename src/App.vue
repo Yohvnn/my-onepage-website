@@ -10,9 +10,9 @@
         {{ $t('app.videoNotSupported') }}
       </video>
       <!-- Dark Overlay for Dark Mode -->
-      <div v-if="isDarkMode" :key="'dark-overlay'" class="absolute inset-0 bg-black bg-opacity-90 transition-colors duration-300"></div>
+      <div v-if="isDarkMode" :key="'dark-overlay'" class="absolute inset-0 bg-black bg-opacity-80 transition-colors duration-300"></div>
       <!-- Bright Overlay for Light Mode -->
-      <div v-else :key="'light-overlay'" class="absolute inset-0 bg-white bg-opacity-90 transition-colors duration-300"></div>
+      <div v-else :key="'light-overlay'" class="absolute inset-0 bg-white bg-opacity-80 transition-colors duration-300"></div>
     </div>
 
     <div v-if="isLoading" class="fixed inset-0 bg-background z-50 flex items-center justify-center">
