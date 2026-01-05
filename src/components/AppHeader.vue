@@ -55,13 +55,13 @@
       >
         <div class="flex justify-end gap-2 px-4 py-3">
           <router-link to="/tools" custom v-slot="{ href, navigate, isExactActive }">
-            <a :href="href" @click="(e) => { navigate(e); isMenuOpen = false }" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">TOOLS</a>
+            <a :href="href" @click="(e) => { navigate(e); isMenuOpen = false }" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">{{ t('nav.toolbox') }}</a>
           </router-link>
           <router-link to="/gallery" custom v-slot="{ href, navigate, isExactActive }">
-            <a :href="href" @click="(e) => { navigate(e); isMenuOpen = false }" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">GALLERY</a>
+            <a :href="href" @click="(e) => { navigate(e); isMenuOpen = false }" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">{{ t('nav.gallery') }}</a>
           </router-link>
           <router-link to="/resume" custom v-slot="{ href, navigate, isExactActive }">
-            <a :href="href" @click="(e) => { navigate(e); isMenuOpen = false }" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">RESUME</a>
+            <a :href="href" @click="(e) => { navigate(e); isMenuOpen = false }" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">{{ t('nav.resume') }}</a>
           </router-link>
         </div>
       </nav>
