@@ -42,6 +42,10 @@ module.exports = {
       animation: {
         'float': 'floating 3s ease-in-out infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'typewriter': 'typewriter var(--tw-typewriter-speed, 2s) steps(var(--tw-typewriter-steps, 28), end) 1 both',
+        'caret': 'caret var(--tw-caret-speed, .8s) step-end infinite',
+        'typewriter-blink': 'typewriter var(--tw-typewriter-speed, 2.5s) steps(var(--tw-typewriter-steps, 28), end) 1 both, caret var(--tw-caret-speed, .8s) step-end infinite',
+        'reveal': 'reveal var(--tw-typewriter-speed, 1.4s) both linear',
       },
       keyframes: {
         floating: {
@@ -51,6 +55,18 @@ module.exports = {
           '50%': {
             transform: 'translateY(-5px)',
           },
+        },
+        typewriter: {
+          '0%': { width: '0' },
+          '100%': { width: '100%' },
+        },
+        caret: {
+          '0%, 100%': { 'border-color': 'currentColor' },
+          '50%': { 'border-color': 'transparent' },
+        },
+        reveal: {
+          '0%': { 'clip-path': 'inset(0 100% 0 0)' },
+          '100%': { 'clip-path': 'inset(0 0 0 0)' },
         },
       },
     },

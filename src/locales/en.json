@@ -1,11 +1,13 @@
 {
   "nav": {
     "home": "Home",
-    "resume": "Resume",
-    "toolbox": "Toolbox",
-    "gallery": "Gallery",
-    "about": "About",
-    "contact": "Contact Me"
+    "resume": "RESUME",
+    "toolbox": "TOOLS",
+    "gallery": "GALLERY",
+    "about": "ABOUT",
+    "contact": "CONTACT ME",
+    "goHome": "Go to Home",
+    "toggleNavigation": "Toggle navigation"
   },
   "profile": {
     "name": "YOHANN CHAN CHEW HONG",
@@ -26,7 +28,8 @@
     "copyright": "© {year} Yohann Chan Chew Hong",
     "social": {
       "linkedin": "LinkedIn",
-      "github": "GitHub"
+      "github": "GitHub",
+      "strava": "Strava"
     }
   },
   "toolbox": {
@@ -64,7 +67,22 @@
     "title": "GALLERY",
     "subtitle": "A curated selection of my photography. High-res images served via CDN. If you wish to use any photo, please contact me for permission but feel free to use the photos setting to guide you to take your best shot!",
     "back": "← Back to Resume",
-    "loading": "Loading photos…"
+    "loading": "Loading photos…",
+    "photoDetails": "Photo details",
+    "close": "Close",
+    "readingExif": "Reading EXIF…",
+    "exifError": "Failed to read EXIF data",
+    "camera": "Camera:",
+    "lens": "Lens:",
+    "focal": "Focal:",
+    "aperture": "Aperture:",
+    "shutter": "Shutter:",
+    "iso": "ISO:",
+    "size": "Size:",
+    "taken": "Taken:",
+    "gps": "GPS:",
+    "noPhotos": "No photos yet. Populate public/gallery/index.json with image entries.",
+    "photoAlt": "Photo {number}"
   },
   "studio": {
     "home": {
@@ -74,19 +92,41 @@
       "ctaGallery": "View Gallery",
       "featuredTools": "Featured Tools",
       "latestPhotos": "Latest Photos",
-      "viewAll": "View All"
+      "viewAll": "View All",
+      "aboutHeading": "About Yohann.",
+      "bioLabel": "BIO"
     },
     "hero": {
       "headline": "Digital Studio prototyping personal projects.",
-      "subtext": "A small place focused on shipping useful tools, photography and career updates."    }
+      "subtext": "A small place focused on shipping useful tools, photography and sharing personal experiences.","buttonName": "Explore Now",
+      "hideShowButton": "Hide/Show",
+      "alignLeftButton": "Align Left",
+      "alignRightButton": "Align Right",
+      "displayText": "Every text displayed in the front"
+    },
+    "common": {
+      "hide": "Hide",
+      "show": "Show"
+    }
   },
   "about": {
     "title": "About the Studio",
-    "description": "A space to design and build small tools, explore AI-driven frontends, and share photography.",
+    "description": "A space to design and build small tools, explore frontends design, and share photography.",
     "servicesTitle": "Services",
-    "services": ["Front-end prototyping", "AI/RAG experimentation", "Photography and media", "More is coming..."],
+    "services": [
+      "Front-end prototyping",
+      "AI/RAG experimentation",
+      "Photography and media",
+      "More is coming..."
+    ],
     "stackTitle": "Tech Stack",
-    "stack": ["Vue.js", "Tailwind CSS", "Vite", "i18n", "CDN for high-res images"],
+    "stack": [
+      "Vue.js",
+      "Tailwind CSS",
+      "Vite",
+      "i18n",
+      "CDN for high-res images"
+    ],
     "contactTitle": "Contact",
     "contactText": "Reach out for collaborations or project ideas.",
     "creditsPhotos": "All photos and videos showcased here are captured by me during my various adventures."
@@ -116,5 +156,22 @@
     "database": ["SQL", "PL/SQL", "MariaDB", "MySQL", "Neo4j", "SAS", "AWS", "Git", "Bash"],
     "web": ["Vue.js", "Nest", "Typescript", "Tailwind", "Lambda", "RAG", "Vectorization"],
     "media": ["Premiere Pro", "Lightroom", "Photoshop", "Figma", "Canva", "WordPress"]
+  },
+  "app": {
+    "darkMode": "dark-mode",
+    "loading": "Loading.",
+    "videoNotSupported": "Your browser does not support the video tag.",
+    "brand": "YohannStudio.",
+    "loadingStatus": "Loading status",
+    "light": "Light",
+    "dark": "Dark",
+    "toggleDarkMode": "Toggle dark mode",
+    "toggleLanguage": "Toggle language",
+    "contactEmail": "Contact via email"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for does not exist.",
+    "backToStudio": "BACK TO STUDIO"
   }
 }

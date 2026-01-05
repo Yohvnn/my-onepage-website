@@ -11,6 +11,10 @@
   --color-border: #E7E2DA;      /* warm light border */
   --color-muted: #6E6A67;       /* neutral muted copy */
   --color-accent: #111111;      /* ink accents for links/icons */
+  /* Defaults for global typewriter animation (faster) */
+  --tw-typewriter-speed: 1s;
+  --tw-typewriter-steps: 28;
+  --tw-caret-speed: .6s;
 }
 
 .dark,
@@ -126,6 +130,32 @@
     scroll-behavior: smooth;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
+}
+
+/* Global reveal effect (headings only, preserves wrapping) */
+@layer base {
+  /* Respect accessibility preferences */
+  @media (prefers-reduced-motion: reduce) {
+    h1, h2, h3, h4, .typewriter, .typewriter-multiline { animation: none !important; border-right-color: transparent !important; clip-path: none !important; }
+  }
+
+  /* Apply reveal animation for headings; allow wrapping */
+  h1, h2, h3, h4 {
+    @apply overflow-hidden block break-words animate-reveal;
+  }
+}
+
+/* Optional utility class for selective usage */
+@layer components {
+  .typewriter {
+    @apply overflow-hidden whitespace-nowrap inline-block align-baseline border-r-2 border-current animate-typewriter-blink;
+  }
+  /* Multiline-friendly reveal (no caret) */
+  .typewriter-multiline {
+    @apply overflow-hidden block break-words animate-reveal;
+  }
+  /* Opt-out helper */
+  .no-typewriter { animation: none !important; border-right-color: transparent !important; clip-path: none !important; }
 }
 
 @layer components {
@@ -384,7 +414,8 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 #app {

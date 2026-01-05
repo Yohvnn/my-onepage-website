@@ -1,70 +1,88 @@
 {
   "nav": {
-    "home": "Accueil",
-    "resume": "CV",
-    "toolbox": "Outils",
-    "gallery": "Galerie",
-    "about": "À propos",
-    "contact": "Me contacter"
+    "home": "ACCUEIL",
+    "resume": "CURRICULUM VITAE",
+    "toolbox": "OUTILS",
+    "gallery": "GALERIE",
+    "about": "À PROPOS",
+    "contact": "CONTACTE",
+    "goHome": "Aller à l'accueil",
+    "toggleNavigation": "Basculer la navigation"
   },
   "profile": {
     "name": "YOHANN CHAN CHEW HONG",
-    "title": "Ingénieur junior en IA générative",
+    "title": "Apprenti ingénieur d'étude en IA générative",
     "location": "Paris, France"
   },
   "home": {
-    "aboutTitle": "À propos",
-    "aboutText": "Ingénieur d'étude junior à Bagneux, France.\n\nJe conçois des outils numériques centrés sur l’humain — IoT, web, UX/UI — et j’explore le storytelling visuel à travers la photographie et la vidéo, souvent après une sortie gravel.",
-    "educationTitle": "Éducation",
-    "workTitle": "Expérience professionnelle",
-    "skillsTitle": "Compétences",
-    "proficiencyTitle": "Maîtrise",
-    "toolsTitle": "Outils (en développement)",
+    "aboutTitle": "A PROPOS DE MOI",
+    "aboutText": "Ingénieur d'étude junior localisé à Paris, France.\n\nJe conçois des outils numériques centrés sur IOT, WEB, UX/UI, et j’explore le storytelling visuel à travers la photographie et la vidéo, souvent lors de mes sorties GRAVEL",
+    "educationTitle": "FORMATION",
+    "workTitle": "EXPÉRIENCE PROFESSIONNELLE",
+    "skillsTitle": "COMPÉTENCES",
+    "proficiencyTitle": "MAÎTRISE",
+    "toolsTitle": "OUTILS (EN DÉVELOPPEMENT)",
     "toolsSubtitle": "Découvrez ma collection d'utilitaires et d'applications.",
     "viewToolbox": "Voir les outils",
     "footerBuilt": "Construit avec <3 en Vue.js & Tailwind CSS",
     "copyright": "© {year} Yohann Chan Chew Hong",
     "social": {
       "linkedin": "LinkedIn",
-      "github": "GitHub"
+      "github": "GitHub",
+      "strava": "Strava"
     }
   },
   "toolbox": {
-    "title": "Outils",
+    "title": "BOÎTE À OUTILS",
     "subtitle": "Une collection d'outils utiles pour les tâches quotidiennes.",
     "backToResume": "← Retour au CV",
     "pdf": {
-      "title": "Outils PDF",
+      "title": "OUTILS PDF",
       "desc": "Compresser, découper et extraire des pages de fichiers PDF facilement.",
       "tags": ["Vue 3", "Python"],
-      "comingSoon": "Bientôt disponible"
+      "comingSoon": "BIENTÔT DISPONIBLE"
     },
     "tictactoe": {
-      "title": "Morpion",
+      "title": "MORPION",
       "desc": "Jeu classique de morpion. Jouez contre un ami ou l'ordinateur.",
       "tags": ["Vue 3"],
-      "comingSoon": "Bientôt disponible"
+      "comingSoon": "BIENTÔT DISPONIBLE"
     },
     "flipcoin": {
-      "title": "Pile ou Face",
+      "title": "PILE OU FACE",
       "desc": "Pile ou face ? Laissez le hasard décider avec une pièce en 3D.",
       "tags": ["Vue 3"],
-      "comingSoon": "Bientôt disponible"
+      "comingSoon": "BIENTÔT DISPONIBLE"
     },
     "rag": {
       "title": "Chatbot RAG",
       "desc": "Question-réponse sur documents avec recherche vectorielle et LLM.",
       "tags": ["Next.js", "FastAPI"],
-      "comingSoon": "Bientôt disponible"
+      "comingSoon": "BIENTÔT DISPONIBLE"
     },
-    "comingSoonTitle": "Bientôt",
+    "comingSoonTitle": "BIENTÔT DISPONIBLE",
     "comingSoonText": "D'autres outils sont en développement ! Revenez bientôt pour de nouvelles fonctionnalités."
   },
   "gallery": {
-    "title": "Galerie photo",
-    "subtitle": "Une sélection de mes photos. Images haute résolution via CDN.",
+    "title": "GALERIE",
+    "subtitle": "Une sélection de mes photos. Si vous souhaitez utiliser une photo, veuillez me contacter. Mais n'hésitez pas à utiliser les paramètres de la photo pour vous guider et prendre votre meilleur cliché !",
     "back": "← Retour au CV",
-    "loading": "Chargement des photos…"
+    "loading": "Chargement des photos…",
+    "photoDetails": "Détails de la photo",
+    "close": "Fermer",
+    "readingExif": "Lecture des EXIF…",
+    "exifError": "Échec de la lecture des données EXIF",
+    "camera": "Appareil photo :",
+    "lens": "Objectif :",
+    "focal": "Focale :",
+    "aperture": "Ouverture :",
+    "shutter": "Vitesse d'obturation :",
+    "iso": "ISO :",
+    "size": "Taille :",
+    "taken": "Date de prise :",
+    "gps": "GPS :",
+    "noPhotos": "Pas encore de photos. Remplissez public/gallery/index.json avec des entrées d'images.",
+    "photoAlt": "Photo {number}"
   },
   "studio": {
     "home": {
@@ -74,46 +92,87 @@
       "ctaGallery": "Voir la galerie",
       "featuredTools": "Outils à la une",
       "latestPhotos": "Dernières photos",
-      "viewAll": "Tout voir"
+      "viewAll": "Tout voir",
+      "aboutHeading": "À propos de Yohann.",
+      "bioLabel": "BIO"
     },
     "hero": {
-      "headline": "Studio numérique — prototypage d'applications LLM/RAG, frontends Vue/Tailwind et expérimentations utilitaires — basé à Bagneux, France",
-      "subtext": "Un petit studio dédié à livrer des outils utiles et des expériences guidées par la photographie.",
-      "inspiration": "(inspiré par KauStudio)"
+      "headline": "Studio virtuelle et numérique pour prototyper des projets personnels.",
+      "subtext": "Une plateforme dédiée à livrer des outils utiles, des photos et partager des expériences personnelles.",
+      "buttonName": "Explorer maintenant",
+      "hideShowButton": "Afficher/Masquer",
+      "alignLeftButton": "Aligner à gauche",
+      "alignRightButton": "Aligner à droite",
+      "displayText": "Tous les textes affichés à l'avant"
+    },
+    "common": {
+      "hide": "Masquer",
+      "show": "Afficher"
     }
   },
   "about": {
     "title": "À propos du studio",
-    "description": "Un espace pour concevoir de petits outils, explorer des frontends pilotés par l'IA et partager la photographie.",
+    "description": "Un espace pour concevoir de petits outils, explorer des designs frontends et partager ma passion pour la photographie.",
     "servicesTitle": "Services",
-    "services": ["Prototypage front-end", "Expérimentation IA/RAG", "Photographie et média"],
+    "services": [
+      "Prototypage front-end",
+      "Expérimentation IA/RAG",
+      "Photographie et média",
+      "Plus à venir..."
+    ],
+    "stackTitle": "Stack",
+    "stack": [
+      "Vue.js",
+      "Tailwind CSS",
+      "Vite",
+      "i18n",
+      "CDN pour des images en haute résolution"
+    ],
     "contactTitle": "Contact",
-    "contactText": "Contactez-moi pour des collaborations ou des idées de projets."
+    "contactText": "Contactez-moi pour des collaborations ou des idées de projets.",
+    "creditsPhotos": "Toutes les photos et vidéos présentées ici ont été capturées par moi lors de mes diverses aventures."
   },
   "education": {
     "items": [
-      { "date": "2026. 08", "title": "MSc appliqué en Data Science & IA", "org": "Data ScienceTech Institute - School of Engineering" },
-      { "date": "2024. 08", "title": "Licence en Économie (parcours ingénieur CMI Data Science pour les Sciences Sociales)", "org": "Université Paris X" },
-      { "date": "2021. 08", "title": "Baccalauréat général en Mathématiques et Économie", "org": "Lycée français de Tamatave" }
+      { "date": "2026. 08", "title": "MSC APPLIQUÉ EN DATA SCIENCE & IA", "org": "DATA SCIENCETECH INSTITUTE - SCHOOL OF ENGINEERING" },
+      { "date": "2024. 08", "title": "LICENCE EN ÉCONOMIE ET GESTION (PARCOURS CMI DATA SCIENCE POUR LES SCIENCES SOCIALES)", "org": "UNIVERSITÉ PARIS X" },
+      { "date": "2021. 08", "title": "BACCALAURÉAT GÉNÉRAL EN MATHÉMATIQUES ET ÉCONOMIE", "org": "LYCÉE FRANÇAIS DE TAMATAVE" }
     ]
   },
   "work": {
     "items": [
-      { "date": "2024 - 26", "title": "Ingénieur de recherche junior pour applications front-end d'IA générative", "org": "Crédit Agricole Personal Finance & Mobility (CAPFM)" },
-      { "date": "2024. 07", "title": "Responsable boutique Amazon", "org": "Beauté Insolente Paris" },
-      { "date": "2024. 03", "title": "Webmaster", "org": "Excelsior, BeeMada" }
+      { "date": "2024 - 26", "title": "APPRENTIS INGÉNIEUR D'ÉTUDE POUR DES SOLUTIONS D'IA GÉNÉRATIVE", "org": "CRÉDIT AGRICOLE PERSONAL FINANCE & MOBILITY (CAPFM)" },
+      { "date": "2024. 07", "title": "RESPONSABLE BOUTIQUE AMAZON", "org": "BEAUTÉ INSOLENTE PARIS" },
+      { "date": "2024. 03", "title": "WEBMASTER", "org": "EXCELSIOR, BEEMADA" }
     ]
   },
   "skills": {
     "titles": {
-      "programming": "Programmation & Data Science",
-      "database": "Bases de données & gestion des données",
-      "web": "Développement web & systèmes",
-      "media": "Média & Design"
+      "programming": "PROGRAMMATION & DATA SCIENCE",
+      "database": "BASES DE DONNÉES & GESTION DES DONNÉES",
+      "web": "DÉVELOPPEMENT WEB & SYSTÈMES",
+      "media": "MÉDIA & DESIGN"
     },
     "programming": ["C", "C++", "Python", "Java", "R", "TensorFlow", "PyTorch", "RDF", "SPARQL"],
     "database": ["SQL", "PL/SQL", "MariaDB", "MySQL", "Neo4j", "SAS", "AWS", "Git", "Bash"],
     "web": ["Vue.js", "Nest", "Typescript", "Tailwind", "Lambda", "RAG", "Vectorisation"],
     "media": ["Premiere Pro", "Lightroom", "Photoshop", "Figma", "Canva", "WordPress"]
+  },
+  "app": {
+    "darkMode": "dark-mode",
+    "loading": "Chargement.",
+    "videoNotSupported": "Votre navigateur ne supporte pas la balise vidéo.",
+    "brand": "YohannStudio.",
+    "loadingStatus": "Statut de chargement",
+    "light": "Clair",
+    "dark": "Sombre",
+    "toggleDarkMode": "Basculer le mode sombre",
+    "toggleLanguage": "Changer de langue",
+    "contactEmail": "Contacter par email"
+  },
+  "notFound": {
+    "title": "Page Introuvable",
+    "description": "La page que vous recherchez n'existe pas.",
+    "backToStudio": "RETOUR AU STUDIO"
   }
 }

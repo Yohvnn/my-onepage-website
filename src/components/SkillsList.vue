@@ -1,10 +1,11 @@
 <script setup>
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-const { t, tm } = useI18n()
-const programmingSkills = tm('skills.programming')
-const databaseSkills = tm('skills.database')
-const webSkills = tm('skills.web')
-const mediaSkills = tm('skills.media')
+const { t, locale, getLocaleMessage } = useI18n()
+const programmingSkills = computed(() => (getLocaleMessage(locale.value)?.skills?.programming) || [])
+const databaseSkills = computed(() => (getLocaleMessage(locale.value)?.skills?.database) || [])
+const webSkills = computed(() => (getLocaleMessage(locale.value)?.skills?.web) || [])
+const mediaSkills = computed(() => (getLocaleMessage(locale.value)?.skills?.media) || [])
 </script>
 
 <template>

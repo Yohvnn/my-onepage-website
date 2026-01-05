@@ -220,6 +220,7 @@ watch(isEduOpen, (val) => {
 watch(isAboutVisible, (val) => {
   localStorage.setItem('studio:isAboutVisible', String(val))
 })
+
 </script>
 
 <template>
@@ -248,24 +249,24 @@ watch(isAboutVisible, (val) => {
             <span class="flex items-center gap-1">
               <i class="fas fa-exchange-alt transition-transform duration-300"
                 :class="isRightAligned ? 'rotate-180' : 'rotate-0'"></i>
-              <span>{{ isRightAligned ? 'Align Left' : 'Align Right' }}</span>
+              <span>{{ isRightAligned ? t('studio.hero.alignLeftButton') : t('studio.hero.alignRightButton') }}</span>
             </span>
           </button>
         </div>
         <!-- Work Experience -->
         <div>
           <h1 class="lg:text-5xl text-2xl">
-            About Yohann.
+            {{ t('studio.home.aboutHeading') }}
           </h1>
           <div class="lg:hidden mt-2 inline-flex items-center gap-2">
-            <h2 class="text-base">BIO</h2>
+            <h2 class="text-base">{{ t('studio.home.bioLabel') }}</h2>
             <button ref="bioHeaderRef" @click="toggleAboutVisible"
               class="btn h-7 px-2 rounded-full bg-background border hover:bg-border text-xs shadow-sm transition-colors"
               :aria-expanded="isAboutVisible" aria-controls="bio-collapsible">
               <span class="flex items-center gap-1">
                 <i class="fas fa-chevron-down transition-transform duration-300"
                   :class="isAboutVisible ? 'rotate-180' : 'rotate-0'"></i>
-                <span>{{ isAboutVisible ? 'Hide' : 'Show' }}</span>
+                <span>{{ isAboutVisible ? t('studio.common.hide') : t('studio.common.show') }}</span>
               </span>
 
             </button>
@@ -294,7 +295,7 @@ watch(isAboutVisible, (val) => {
                 <span class="flex items-center gap-1">
                   <i class="fas fa-chevron-down transition-transform duration-200"
                     :class="isWorkOpen ? 'rotate-180' : 'rotate-0'"></i>
-                  <span>{{ isWorkOpen ? 'Hide' : 'Show' }}</span>
+                  <span>{{ isWorkOpen ? t('studio.common.hide') : t('studio.common.show') }}</span>
                 </span>
               </button>
             </div>
@@ -318,7 +319,7 @@ watch(isAboutVisible, (val) => {
                 <span class="flex items-center gap-1">
                   <i class="fas fa-chevron-down transition-transform duration-200"
                     :class="isEduOpen ? 'rotate-180' : 'rotate-0'"></i>
-                  <span>{{ isEduOpen ? 'Hide' : 'Show' }}</span>
+                  <span>{{ isEduOpen ? t('studio.common.hide') : t('studio.common.show') }}</span>
                 </span>
               </button>
             </div>

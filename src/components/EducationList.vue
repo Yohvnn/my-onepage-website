@@ -1,7 +1,8 @@
 <script setup>
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-const { tm } = useI18n()
-const items = tm('education.items')
+const { locale, getLocaleMessage } = useI18n()
+const items = computed(() => (getLocaleMessage(locale.value)?.education?.items) || [])
 </script>
 
 <template>

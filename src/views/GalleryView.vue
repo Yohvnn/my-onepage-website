@@ -37,47 +37,47 @@
     <Modal v-model="modalOpen" @close="closeExifModal">
       <div class="card rounded-lg p-6 w-full max-w-4xl">
         <div class="flex items-center justify-between mb-4">
-          <h3 class="text-lg font-medium">{{ selected?.title || 'Photo details' }}</h3>
-          <button class="btn h-8 px-3 rounded-full bg-background border" @click="closeExifModal">Close</button>
+          <h3 class="text-lg font-medium">{{ selected?.title || $t('gallery.photoDetails') }}</h3>
+          <button class="btn h-8 px-3 rounded-full bg-background border" @click="closeExifModal">{{ $t('gallery.close') }}</button>
         </div>
         <div class="relative w-full max-h-[80vh] flex items-center justify-center">
           <img
             :src="selected?.url"
-            :alt="selected?.title || 'Selected photo'"
+            :alt="selected?.title || $t('gallery.photoDetails')"
             class="object-contain max-w-full max-h-full rounded-md"
           />
         </div>
-        <div v-if="exifLoading" class="text-muted mt-4">Reading EXIF…</div>
-        <div v-else-if="exifError" class="text-red-600 dark:text-red-400 mt-4">{{ exifError }}</div>
+        <div v-if="exifLoading" class="text-muted mt-4">{{ $t('gallery.readingExif') }}</div>
+        <div v-else-if="exifError" class="text-red-600 dark:text-red-400 mt-4">{{ $t('gallery.exifError') }}</div>
         <div v-else-if="exif" class="space-y-2 text-sm mt-4">
           <div v-if="exif.make || exif.model">
-            <span class="text-muted">Camera:</span> {{ [exif.make, exif.model].filter(Boolean).join(' ') }}
+            <span class="text-muted">{{ $t('gallery.camera') }}</span> {{ [exif.make, exif.model].filter(Boolean).join(' ') }}
           </div>
           <div v-if="exif.lens">
-            <span class="text-muted">Lens:</span> {{ exif.lens }}
+            <span class="text-muted">{{ $t('gallery.lens') }}</span> {{ exif.lens }}
           </div>
           <div class="grid grid-cols-2 gap-x-4 gap-y-2">
             <div v-if="exif.focalLength">
-              <span class="text-muted">Focal:</span> {{ exif.focalLength }}
+              <span class="text-muted">{{ $t('gallery.focal') }}</span> {{ exif.focalLength }}
             </div>
             <div v-if="exif.aperture">
-              <span class="text-muted">Aperture:</span> {{ exif.aperture }}
+              <span class="text-muted">{{ $t('gallery.aperture') }}</span> {{ exif.aperture }}
             </div>
             <div v-if="exif.shutter">
-              <span class="text-muted">Shutter:</span> {{ exif.shutter }}
+              <span class="text-muted">{{ $t('gallery.shutter') }}</span> {{ exif.shutter }}
             </div>
             <div v-if="exif.iso">
-              <span class="text-muted">ISO:</span> {{ exif.iso }}
+              <span class="text-muted">{{ $t('gallery.iso') }}</span> {{ exif.iso }}
             </div>
             <div v-if="exif.dimensions">
-              <span class="text-muted">Size:</span> {{ exif.dimensions }}
+              <span class="text-muted">{{ $t('gallery.size') }}</span> {{ exif.dimensions }}
             </div>
             <div v-if="exif.date">
-              <span class="text-muted">Taken:</span> {{ exif.date }}
+              <span class="text-muted">{{ $t('gallery.taken') }}</span> {{ exif.date }}
             </div>
           </div>
           <div v-if="exif.gps">
-            <span class="text-muted">GPS:</span> {{ exif.gps }}
+            <span class="text-muted">{{ $t('gallery.gps') }}</span> {{ exif.gps }}
           </div>
         </div>
       </div>

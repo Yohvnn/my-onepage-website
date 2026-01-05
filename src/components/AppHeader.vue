@@ -2,25 +2,25 @@
   <header class="pl-4 pr-4 mb-4">
     <div class="relative flex items-center justify-start sm:justify-between flex-nowrap sm:flex-wrap">
       <div class="flex items-center gap-2">
-        <router-link to="/" class="font-semibold text-lg link" aria-label="Go to Home">YohannStudio.</router-link>
+        <router-link to="/" class="font-semibold text-lg link" :aria-label="t('nav.goHome')">{{ t('app.brand') }}</router-link>
       </div>
       <!-- Desktop Nav -->
       <nav id="primary-navigation" class="hidden sm:flex items-center gap-4 lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:z-40">
         <router-link to="/tools" custom v-slot="{ href, navigate, isExactActive }">
-          <a :href="href" @click="navigate" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">TOOLS</a>
+          <a :href="href" @click="navigate" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">{{ t('nav.toolbox') }}</a>
         </router-link>
         <router-link to="/gallery" custom v-slot="{ href, navigate, isExactActive }">
-          <a :href="href" @click="navigate" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">GALLERY</a>
+          <a :href="href" @click="navigate" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">{{ t('nav.gallery') }}</a>
         </router-link>
         <router-link to="/resume" custom v-slot="{ href, navigate, isExactActive }">
-          <a :href="href" @click="navigate" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">RESUME</a>
+          <a :href="href" @click="navigate" class="nav-link" :class="{ 'link-active': isExactActive }" :aria-current="isExactActive ? 'page' : null">{{ t('nav.resume') }}</a>
         </router-link>
       </nav>
       <!-- Mobile Hamburger Button -->
       <button
         class="sm:hidden inline-flex items-center p-2 rounded"
         :aria-expanded="isMenuOpen"
-        aria-label="Toggle navigation"
+        :aria-label="t('nav.toggleNavigation')"
         aria-controls="mobile-navigation"
         @click="isMenuOpen = !isMenuOpen"
       >
@@ -71,6 +71,7 @@
 
 <script setup>
 import { onMounted, onBeforeUnmount, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 const now = ref(new Date())
 const isMenuOpen = ref(false)
@@ -82,6 +83,8 @@ const formatter = new Intl.DateTimeFormat(locale, {
 })
 const timeString = ref(formatter.format(now.value))
 let clockTimer
+
+const { t } = useI18n()
 
 onMounted(() => {
   clockTimer = setInterval(() => {

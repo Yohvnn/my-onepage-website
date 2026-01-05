@@ -11,15 +11,15 @@ import SkillsList from '../components/SkillsList.vue'
       <section class="flex items-start">
         <div class="max-w-5xl lg:mt-20 mt-5">
           <h2 class="lg:text-5xl text-3xl font-light mb-3">{{ $t('home.aboutTitle') }}</h2>
-          <p class="text-muted lg:text-2xl text-xl max-w-prose">{{ $t('home.aboutText') }}.</p>
+          <p class="text-muted lg:text-2xl text-xl max-w-prose">{{ $t('home.aboutText') }}</p>
           
           <!-- Social Links -->
           <div class="mt-4 text-muted">
-            <a href="https://github.com/Yohvnn" target="_blank" class=" hover:underline">GitHub</a>
+            <a href="https://github.com/Yohvnn" target="_blank" class=" hover:underline">{{ $t('home.social.github') }}</a>
             <span class="mx-2 text-muted">|</span>
-            <a href="https://www.linkedin.com/in/yohanncch" target="_blank" class="hover:underline">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/yohanncch" target="_blank" class="hover:underline">{{ $t('home.social.linkedin') }}</a>
             <span class="mx-2 text-muted">|</span>
-            <a href="https://strava.app.link/L7dTSyHhFZb" target="_blank" class="hover:underline">Strava</a>
+            <a href="https://strava.app.link/L7dTSyHhFZb" target="_blank" class="hover:underline">{{ $t('home.social.strava') }}</a>
           </div>
 
           <!-- Link to About the Studio -->

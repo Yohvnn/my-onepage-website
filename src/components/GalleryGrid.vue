@@ -1,6 +1,7 @@
 /* global defineProps, defineEmits */
 <script setup>
 import { reactive } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 defineProps({
   items: {
@@ -14,6 +15,8 @@ const emit = defineEmits(['select'])
 // Track which images have finished loading to hide skeletons
 const loaded = reactive({})
 
+const { t } = useI18n()
+
 function markLoaded(key) {
   if (!key) return
   loaded[key] = true
@@ -26,7 +29,7 @@ function onSelect(img) {
 
 <template>
   <div>
-    <div v-if="!items.length" class="text-muted text-sm">No photos yet. Populate <code>public/gallery/index.json</code> with image entries.</div>
+    <div v-if="!items.length" class="text-muted text-sm">{{ t('gallery.noPhotos') }}</div>
     <div v-else class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
       <figure
         v-for="(img, i) in items"
@@ -41,7 +44,7 @@ function onSelect(img) {
         <div class="relative w-full h-40">
           <img
             :src="img.url"
-            :alt="img.title || 'Photo ' + (i+1)"
+            :alt="img.title || t('gallery.photoAlt', { number: i+1 })"
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 transition-opacity"
             :class="loaded[img.url] ? 'opacity-100' : 'opacity-0'"
             loading="lazy"
