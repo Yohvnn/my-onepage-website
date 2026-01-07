@@ -67,7 +67,7 @@
   },
   "gallery": {
     "title": "GALLERY",
-    "subtitle": "A curated selection of my photography. High-res images served via CDN. If you wish to use any photo, please contact me for permission",
+    "subtitle": "A curated selection of my photography. High-res images served via CDN. If you wish to use any photo, please contact me first.",
     "back": "← Back to Resume",
     "loading": "Loading photos…",
     "photoDetails": "Photo details",
