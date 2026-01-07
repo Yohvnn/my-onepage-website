@@ -16,7 +16,7 @@
     </div>
 
     <div v-if="isLoading" class="fixed inset-0 bg-background z-50 flex items-center justify-center">
-      <LoaderBar :progress="loadingProgress" :label="$t('app.loading')" />
+      <LoaderBar :progress="loadingProgress" />
     </div>
     <div
       v-else

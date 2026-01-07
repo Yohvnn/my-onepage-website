@@ -7,7 +7,8 @@
     "about": "ABOUT",
     "contact": "Contact",
     "goHome": "Go to Home",
-    "toggleNavigation": "Toggle navigation"
+    "toggleNavigation": "Toggle navigation",
+    "timerTooltip": "Hhhm, something's missing...perhaps a Pomodoro timer?"
   },
   "profile": {
     "name": "YOHANN CHAN CHEW HONG",

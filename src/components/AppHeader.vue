@@ -31,7 +31,9 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M18 6l-12 12" />
         </svg>
       </button>
-      <div class="flex items-center gap-2 ml-auto w-auto justify-end sm:justify-start mt-0">
+      <div class="flex items-center gap-2 ml-auto w-auto justify-end sm:justify-start mt-0 cursor-pointer relative"
+           @click="onTimerClick"
+           aria-label="Timer and session shortcuts hint">
         <span class="w-1.5 h-1.5 rounded-full" style="background-color: var(--color-primary)"></span>
         <span class="text-sm text-muted font-light">
           <template v-if="timeString.includes(':')">
@@ -44,6 +46,13 @@
             {{ timeString }}
           </template>
         </span>
+        <transition name="fade">
+          <div v-if="showTooltip"
+               role="tooltip"
+               class="absolute -bottom-8 right-0 bg-black/80 text-white text-xs px-2 py-1 rounded shadow whitespace-nowrap italic z-50">
+            {{ t('nav.timerTooltip') }}
+          </div>
+        </transition>
       </div>
     </div>
     <!-- Mobile Nav Panel -->
@@ -75,6 +84,7 @@ import { useI18n } from 'vue-i18n'
 
 const now = ref(new Date())
 const isMenuOpen = ref(false)
+const showTooltip = ref(false)
 const locale = navigator.language || 'en-US'
 const formatter = new Intl.DateTimeFormat(locale, {
   hour: '2-digit',
@@ -83,6 +93,7 @@ const formatter = new Intl.DateTimeFormat(locale, {
 })
 const timeString = ref(formatter.format(now.value))
 let clockTimer
+let tooltipTimer
 
 const { t } = useI18n()
 
@@ -95,7 +106,16 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   if (clockTimer) clearInterval(clockTimer)
+  if (tooltipTimer) clearTimeout(tooltipTimer)
 })
+
+function onTimerClick() {
+  showTooltip.value = true
+  if (tooltipTimer) clearTimeout(tooltipTimer)
+  tooltipTimer = setTimeout(() => {
+    showTooltip.value = false
+  }, 2500)
+}
 </script>
 
 <style scoped>
@@ -121,5 +141,19 @@ onBeforeUnmount(() => {
 .menu-leave-from {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Tooltip fade transition */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 160ms ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
 }
 </style>
