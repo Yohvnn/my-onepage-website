@@ -5,18 +5,18 @@
     "toolbox": "OUTILS",
     "gallery": "GALERIE",
     "about": "À PROPOS",
-    "contact": "Contacte-moi",
+    "contact": "Contact",
     "goHome": "Aller à l'accueil",
     "toggleNavigation": "Basculer la navigation"
   },
   "profile": {
     "name": "YOHANN CHAN CHEW HONG",
-    "title": "Apprenti ingénieur d'étude en IA générative",
+    "title": "Apprenti ingénieur d'études en IA générative",
     "location": "Paris, France"
   },
   "home": {
-    "aboutTitle": "A PROPOS DE MOI",
-    "aboutText": "Ingénieur d'étude junior localisé à Paris, France.\n\nJe conçois des outils numériques centrés sur IOT, WEB, UX/UI, et j’explore le storytelling visuel à travers la photographie et la vidéo, souvent lors de mes sorties GRAVEL",
+    "aboutTitle": "À PROPOS DE MOI",
+    "aboutText": "Ingénieur d'études junior localisé à Paris, France.\n\nJe conçois des outils numériques centrés sur l'IoT, le Web, l'UX/UI, et j’explore le storytelling visuel à travers la photographie et la vidéo, souvent lors de mes sorties GRAVEL",
     "educationTitle": "FORMATION",
     "workTitle": "EXPÉRIENCE PROFESSIONNELLE",
     "skillsTitle": "COMPÉTENCES",
@@ -33,39 +33,41 @@
     }
   },
   "toolbox": {
-    "title": "BOÎTE À OUTILS",
-    "subtitle": "Une collection d'outils utiles pour les tâches quotidiennes ou pour ne pas s'ennuyer pendant que tu attends le prochain bus",
+    "title": "COLLECTION D'OUTILS",
+    "subtitle": "Une collection d'utilitaires et d'applications soigneusement réalisées",
     "backToResume": "← Retour au CV",
     "pdf": {
       "title": "OUTILS PDF",
-      "desc": "Compresser, découper et extraire des pages de fichiers PDF facilement (un peu comme ilovepdf... mais fait maison et avec des infos sur où sont conservés tes données).",
+      "desc": "Compresser, découper et extraire des pages PDF, simplement et rapidement.",
       "tags": ["Vue 3", "Python"],
       "comingSoon": "BIENTÔT DISPONIBLE"
     },
     "tictactoe": {
       "title": "MORPION",
-      "desc": "Tu t'ennuies dans une file d'attente ou dans les transports en commun ? Teste ce classique du morpion contre un ami ou l'ordinateur.",
+      "desc": "Un morpion minimal pour faire une pause, même en déplacement. Joue contre un ami ou l'ordinateur.",
       "tags": ["Vue 3"],
       "comingSoon": "BIENTÔT DISPONIBLE"
     },
     "flipcoin": {
       "title": "PILE OU FACE",
-      "desc": "Tu hésites entre pizza ou burger ? Pile ou face ? Laisse le hasard décider avec une pièce en 3D.",
+      "desc": "Une pièce 3D pour t’aider à décider. Pile ou face ?",
       "tags": ["Vue 3"],
       "comingSoon": "BIENTÔT DISPONIBLE"
     },
     "rag": {
       "title": "HAWKAI",
-      "desc": "Tu as un document et tu souhaiterais effectuer une recherche sémantique approfondie sur le sujet ? Tu déposes tes documents et ce chatbot utilise la recherche vectorielle pour répondre à tes questions.",
+      "desc": "Dépose tes documents et pose tes questions : la recherche vectorielle et un assistant IA s’occupent du reste.",
       "tags": ["Next.js", "FastAPI"],
-      "comingSoon": "BIENTÔT DISPONIBLE"
+      "comingSoon": "BIENTÔT DISPONIBLE",
+      "figcaption1": "Importer des documents (PDF, TXT, DOCX, etc.)",
+      "figcaption2": "Poser des questions et obtenir des réponses"
     },
     "comingSoonTitle": "BIENTÔT DISPONIBLE",
-    "comingSoonText": "Tu as besoin d'autres outils ? Contacte-moi pour qu'on en discute ou attends que mes idées fusent et reviens plus tard pour de nouvelles fonctionnalités."
+    "comingSoonText": "Tu as besoin d'autres outils ? Contacte-moi pour qu'on en discute ou reviens plus tard pour de nouvelles fonctionnalités."
   },
   "gallery": {
     "title": "GALERIE",
-    "subtitle": "Une sélection de mes photos. Si tu souhaites utiliser une photo, contacte-moi d'abord. Sinon n'hésite pas à t'inspirer des paramètres utilisées sur chaque photo pour te guider à prendre tes meilleurs clichés !",
+    "subtitle": "Une sélection de mes photos en haute résolution. Pour toute utilisation, contacte‑moi au préalable",
     "back": "← Retour au CV",
     "loading": "Chargement des photos…",
     "photoDetails": "Détails de la photo",
@@ -97,13 +99,13 @@
       "bioLabel": "BIO"
     },
     "hero": {
-      "headline": "Studio virtuelle et numérique pour prototyper des projets personnels.",
-      "subtext": "Une plateforme dédiée à livrer des outils utiles, des photos et partager des expériences personnelles.",
+      "headline": "Studio virtuel et numérique pour prototyper des projets personnels.",
+      "subtext": "Une plateforme dédiée à livrer des outils utiles et des photos.",
       "buttonName": "Explorer maintenant",
       "hideShowButton": "Afficher/Masquer",
       "alignLeftButton": "Aligner à gauche",
       "alignRightButton": "Aligner à droite",
-      "displayText": "Tous les textes affichés à l'avant"
+      "displayText": "Tous les textes affichés au premier plan"
     },
     "common": {
       "hide": "Masquer",
@@ -111,7 +113,7 @@
     }
   },
   "about": {
-    "title": "À propos du studio",
+    "title": "À PROPOS DU STUDIO",
     "description": "Un espace pour concevoir de petits outils, explorer des designs frontends et partager ma passion pour la photographie.",
     "servicesTitle": "Services",
     "services": [
@@ -141,7 +143,7 @@
   },
   "work": {
     "items": [
-      { "date": "2024 - 26", "title": "APPRENTIS INGÉNIEUR D'ÉTUDE POUR DES SOLUTIONS D'IA GÉNÉRATIVE", "org": "CRÉDIT AGRICOLE PERSONAL FINANCE & MOBILITY (CAPFM)" },
+      { "date": "2024 - 2026", "title": "APPRENTI INGÉNIEUR D'ÉTUDES POUR DES SOLUTIONS D'IA GÉNÉRATIVE", "org": "CRÉDIT AGRICOLE PERSONAL FINANCE & MOBILITY (CAPFM)" },
       { "date": "2024. 07", "title": "RESPONSABLE BOUTIQUE AMAZON", "org": "BEAUTÉ INSOLENTE PARIS" },
       { "date": "2024. 03", "title": "WEBMASTER", "org": "EXCELSIOR, BEEMADA" }
     ]
@@ -155,7 +157,7 @@
     },
     "programming": ["C", "C++", "Python", "Java", "R", "TensorFlow", "PyTorch", "RDF", "SPARQL"],
     "database": ["SQL", "PL/SQL", "MariaDB", "MySQL", "Neo4j", "SAS", "AWS", "Git", "Bash"],
-    "web": ["Vue.js", "Nest", "Typescript", "Tailwind", "Lambda", "RAG", "Vectorisation"],
+    "web": ["Vue.js", "Nest", "TypeScript", "Tailwind", "Lambda", "RAG", "Vectorisation"],
     "media": ["Premiere Pro", "Lightroom", "Photoshop", "Figma", "Canva", "WordPress"]
   },
   "app": {

@@ -1,3 +1,116 @@
+<template>
+  <div class="h-full">
+    <!-- Two-column responsive layout -->
+    <div class="grid lg:grid-cols-2 gap-8 h-full min-h-full">
+      <!-- Left: Hero -->
+      <section aria-label="Studio tagline" class="flex items-start lg:self-start">
+        <div class="max-w-5xl flex flex-col items-start animate-float-in">
+          <h1 class="lg:text-6xl text-3xl">
+            {{ headline }} <span class="text-muted">{{ subtext }}</span>
+          </h1>
+
+        </div>
+      </section>
+
+      <!-- Right: Stacked sections -->
+      <section aria-label="Resume overview" class="mt-12 lg:mt-0 flex flex-col gap-3 lg:self-center"
+        :class="isRightAligned ? 'lg:items-end lg:text-right' : 'lg:items-start lg:text-left'" ref="rightSectionRef">
+        <!-- Alignment Toggle (large screens) -->
+        <div class="mb-4 hidden lg:flex" :class="isRightAligned ? 'lg:self-end' : 'lg:self-start'">
+
+          <button @click="toggleAlignment"
+            class="btn h-8 px-3 rounded-full bg-background border hover:bg-border text-xs shadow-sm transition-colors"
+            aria-label="Toggle right column alignment">
+            <span class="flex items-center gap-1">
+              <i class="fas fa-exchange-alt transition-transform duration-300"
+                :class="isRightAligned ? 'rotate-180' : 'rotate-0'"></i>
+              <span>{{ isRightAligned ? t('studio.hero.alignLeftButton') : t('studio.hero.alignRightButton') }}</span>
+            </span>
+          </button>
+        </div>
+        <!-- Work Experience -->
+        <div>
+          <h1 class="lg:text-5xl text-2xl">
+            {{ t('studio.home.aboutHeading') }}
+          </h1>
+          <div class="lg:hidden mt-2 inline-flex items-center gap-2">
+            <h2 class="text-base">{{ t('studio.home.bioLabel') }}</h2>
+            <button ref="bioHeaderRef" @click="toggleAboutVisible"
+              class="btn h-7 px-2 rounded-full bg-background border hover:bg-border text-xs shadow-sm transition-colors"
+              :aria-expanded="isAboutVisible" aria-controls="bio-collapsible">
+              <span class="flex items-center gap-1">
+                <i class="fas fa-chevron-down transition-transform duration-300"
+                  :class="isAboutVisible ? 'rotate-180' : 'rotate-0'"></i>
+                <span>{{ isAboutVisible ? t('studio.common.hide') : t('studio.common.show') }}</span>
+              </span>
+
+            </button>
+          </div>
+
+
+          <transition @before-enter="onBeforeEnter" @enter="onEnter" @before-leave="onBeforeLeave" @leave="onLeave">
+            <div v-show="isAboutVisible || isLargeScreen" id="bio-collapsible" class="lg:block">
+              <p class="lg:mt-4 text-base text-muted max-w-prose">
+                {{ aboutText }}<span class="timer-colon-animate">_</span>
+              </p>
+            </div>
+          </transition>
+
+        </div>
+
+        <!-- Work dropdown -->
+        <div class="block w-full" :class="isRightAligned ? 'lg:self-end' : 'lg:self-start'">
+          <div ref="workHeaderRef" class="flex w-full mb-2"
+            :class="isRightAligned ? 'lg:justify-end' : 'lg:justify-start'">
+            <div ref="workHeaderInnerRef" class="inline-flex items-center gap-2">
+              <h2 class="text-base">{{ workTitle }}</h2>
+              <button @click="toggleWorkOpen"
+                class="btn h-7 px-2 rounded-full bg-background border hover:bg-border text-xs shadow-sm"
+                :aria-expanded="isWorkOpen" aria-controls="work-collapsible">
+                <span class="flex items-center gap-1">
+                  <i class="fas fa-chevron-down transition-transform duration-200"
+                    :class="isWorkOpen ? 'rotate-180' : 'rotate-0'"></i>
+                  <span>{{ isWorkOpen ? t('studio.common.hide') : t('studio.common.show') }}</span>
+                </span>
+              </button>
+            </div>
+          </div>
+          <transition @before-enter="onBeforeEnter" @enter="onEnter" @before-leave="onBeforeLeave" @leave="onLeave">
+            <div v-show="isWorkOpen" id="work-collapsible" class="max-w-prose lg:max-w-none">
+              <WorkList />
+            </div>
+          </transition>
+        </div>
+
+        <!-- Education dropdown -->
+        <div class="block w-full" :class="isRightAligned ? 'lg:self-end' : 'lg:self-start'">
+          <div ref="eduHeaderRef" class="flex w-full mb-2"
+            :class="isRightAligned ? 'lg:justify-end' : 'lg:justify-start'">
+            <div ref="eduHeaderInnerRef" class="inline-flex items-center gap-2">
+              <h2 class="text-base">{{ educationTitle }}</h2>
+              <button @click="toggleEduOpen"
+                class="btn h-7 px-2 rounded-full bg-background border hover:bg-border text-xs shadow-sm"
+                :aria-expanded="isEduOpen" aria-controls="edu-collapsible">
+                <span class="flex items-center gap-1">
+                  <i class="fas fa-chevron-down transition-transform duration-200"
+                    :class="isEduOpen ? 'rotate-180' : 'rotate-0'"></i>
+                  <span>{{ isEduOpen ? t('studio.common.hide') : t('studio.common.show') }}</span>
+                </span>
+              </button>
+            </div>
+          </div>
+          <transition @before-enter="onBeforeEnter" @enter="onEnter" @before-leave="onBeforeLeave" @leave="onLeave">
+            <div v-show="isEduOpen" id="edu-collapsible" class="max-w-prose lg:max-w-none">
+              <EducationList />
+            </div>
+          </transition>
+        </div>
+      </section>
+    </div>
+  </div>
+</template>
+
+
 <script setup>
 import { computed, ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -222,119 +335,3 @@ watch(isAboutVisible, (val) => {
 })
 
 </script>
-
-<template>
-  <div class="h-full">
-    <!-- Two-column responsive layout -->
-    <div class="grid lg:grid-cols-2 gap-8 h-full min-h-full">
-      <!-- Left: Hero -->
-      <section aria-label="Studio tagline" class="flex items-start lg:self-start">
-        <div class="max-w-5xl lg:mt-20 mt-10 flex flex-col items-start animate-float-in">
-          <h1 class="leading-[0.95] lg:text-6xl text-3xl">
-            {{ headline }} <span class="text-muted">{{ subtext }}</span>
-          </h1>
-
-        </div>
-      </section>
-
-      <!-- Right: Stacked sections -->
-      <section aria-label="Resume overview" class="mt-12 lg:mt-0 flex flex-col gap-3 lg:self-center"
-        :class="isRightAligned ? 'lg:items-end lg:text-right' : 'lg:items-start lg:text-left'" ref="rightSectionRef">
-        <!-- Alignment Toggle (large screens) -->
-        <div class="mb-4 hidden lg:flex" :class="isRightAligned ? 'lg:self-end' : 'lg:self-start'">
-
-          <button @click="toggleAlignment"
-            class="btn h-8 px-3 rounded-full bg-background border hover:bg-border text-xs shadow-sm transition-colors"
-            aria-label="Toggle right column alignment">
-            <span class="flex items-center gap-1">
-              <i class="fas fa-exchange-alt transition-transform duration-300"
-                :class="isRightAligned ? 'rotate-180' : 'rotate-0'"></i>
-              <span>{{ isRightAligned ? t('studio.hero.alignLeftButton') : t('studio.hero.alignRightButton') }}</span>
-            </span>
-          </button>
-        </div>
-        <!-- Work Experience -->
-        <div>
-          <h1 class="lg:text-5xl text-2xl">
-            {{ t('studio.home.aboutHeading') }}
-          </h1>
-          <div class="lg:hidden mt-2 inline-flex items-center gap-2">
-            <h2 class="text-base">{{ t('studio.home.bioLabel') }}</h2>
-            <button ref="bioHeaderRef" @click="toggleAboutVisible"
-              class="btn h-7 px-2 rounded-full bg-background border hover:bg-border text-xs shadow-sm transition-colors"
-              :aria-expanded="isAboutVisible" aria-controls="bio-collapsible">
-              <span class="flex items-center gap-1">
-                <i class="fas fa-chevron-down transition-transform duration-300"
-                  :class="isAboutVisible ? 'rotate-180' : 'rotate-0'"></i>
-                <span>{{ isAboutVisible ? t('studio.common.hide') : t('studio.common.show') }}</span>
-              </span>
-
-            </button>
-          </div>
-
-
-          <transition @before-enter="onBeforeEnter" @enter="onEnter" @before-leave="onBeforeLeave" @leave="onLeave">
-            <div v-show="isAboutVisible || isLargeScreen" id="bio-collapsible" class="lg:block">
-              <p class="lg:mt-4 text-base text-muted max-w-prose">
-                {{ aboutText }}<span class="timer-colon-animate">_</span>
-              </p>
-            </div>
-          </transition>
-
-        </div>
-
-        <!-- Work dropdown -->
-        <div class="block w-full" :class="isRightAligned ? 'lg:self-end' : 'lg:self-start'">
-          <div ref="workHeaderRef" class="flex w-full mb-2"
-            :class="isRightAligned ? 'lg:justify-end' : 'lg:justify-start'">
-            <div ref="workHeaderInnerRef" class="inline-flex items-center gap-2">
-              <h2 class="text-base">{{ workTitle }}</h2>
-              <button @click="toggleWorkOpen"
-                class="btn h-7 px-2 rounded-full bg-background border hover:bg-border text-xs shadow-sm"
-                :aria-expanded="isWorkOpen" aria-controls="work-collapsible">
-                <span class="flex items-center gap-1">
-                  <i class="fas fa-chevron-down transition-transform duration-200"
-                    :class="isWorkOpen ? 'rotate-180' : 'rotate-0'"></i>
-                  <span>{{ isWorkOpen ? t('studio.common.hide') : t('studio.common.show') }}</span>
-                </span>
-              </button>
-            </div>
-          </div>
-          <transition @before-enter="onBeforeEnter" @enter="onEnter" @before-leave="onBeforeLeave" @leave="onLeave">
-            <div v-show="isWorkOpen" id="work-collapsible" class="max-w-prose lg:max-w-none">
-              <WorkList />
-            </div>
-          </transition>
-        </div>
-
-        <!-- Education dropdown -->
-        <div class="block w-full" :class="isRightAligned ? 'lg:self-end' : 'lg:self-start'">
-          <div ref="eduHeaderRef" class="flex w-full mb-2"
-            :class="isRightAligned ? 'lg:justify-end' : 'lg:justify-start'">
-            <div ref="eduHeaderInnerRef" class="inline-flex items-center gap-2">
-              <h2 class="text-base">{{ educationTitle }}</h2>
-              <button @click="toggleEduOpen"
-                class="btn h-7 px-2 rounded-full bg-background border hover:bg-border text-xs shadow-sm"
-                :aria-expanded="isEduOpen" aria-controls="edu-collapsible">
-                <span class="flex items-center gap-1">
-                  <i class="fas fa-chevron-down transition-transform duration-200"
-                    :class="isEduOpen ? 'rotate-180' : 'rotate-0'"></i>
-                  <span>{{ isEduOpen ? t('studio.common.hide') : t('studio.common.show') }}</span>
-                </span>
-              </button>
-            </div>
-          </div>
-          <transition @before-enter="onBeforeEnter" @enter="onEnter" @before-leave="onBeforeLeave" @leave="onLeave">
-            <div v-show="isEduOpen" id="edu-collapsible" class="max-w-prose lg:max-w-none">
-              <EducationList />
-            </div>
-          </transition>
-        </div>
-      </section>
-    </div>
-  </div>
-</template>
-
-<style scoped>
-
-</style>

@@ -1,24 +1,29 @@
 <template>
   <div class="h-full">
-    <div class="grid lg:grid-cols-2 gap-8 h-full min-h-full">
-      <!-- Left: Hero -->
-      <section class="flex items-start lg:self-start">
-        <div class="max-w-5xl lg:mt-20 mt-5 flex flex-col items-start animate-float-in">
-          <h1 class="leading-[0.95] lg:text-5xl text-3xl font-light">
+    <div class="grid h-full min-h-full">
+      <!-- Hero -->
+      <section class=" items-start lg:self-start">
+        <div class="max-w-5xl items-start animate-float-in">
+          <h1 class=" lg:text-5xl text-3xl font-light">
             {{ $t('gallery.title') }}
           </h1>
-          <p class="text-muted lg:text-2xl text-xl mt-3 font-light">
-            {{ $t('gallery.subtitle') }}
-          </p>
+          <h2 class="text-muted lg:text-2xl text-xl mt-3 font-light">
+            {{ $t('gallery.subtitle') }}<span class="timer-colon-animate">_</span>
+          </h2>
         </div>
-      </section>
 
-      <!-- Right: Gallery Grid -->
-      <section class="mt-12 lg:mt-0 flex flex-col gap-4 lg:self-center" aria-label="Gallery overview">
-        <div class="flex flex-col gap-3 lg:pl-6 lg:border-l lg:border-border w-full">
+      </section>
+              <hr class="divider-bleed lg:hidden" />
+
+      <!-- Gallery Grid -->
+      <section class="" aria-label="Gallery overview">
+
+        <div class="flex flex-col gap-3 w-full">
+
           <div v-if="isLoading">
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              <div v-for="n in 10" :key="n" class="overflow-hidden rounded-md border border-gray-200 dark:border-gray-800 bg-muted/20">
+              <div v-for="n in 10" :key="n"
+                class="overflow-hidden rounded-md border border-gray-200 dark:border-gray-800 bg-muted/20">
                 <div class="w-full h-40 bg-muted/30 animate-pulse" />
                 <div class="p-2">
                   <div class="h-3 w-24 bg-muted/30 animate-pulse rounded" />
@@ -32,26 +37,23 @@
         </div>
       </section>
     </div>
-
     <!-- EXIF Modal -->
     <Modal v-model="modalOpen" @close="closeExifModal">
-      <div class="card rounded-lg p-6 w-full max-w-4xl">
+      <div class="card rounded-lg p-6 w-full max-w-4xl grid grid-rows-[auto,1fr,auto] max-h-[90vh]">
         <div class="flex items-center justify-between mb-4">
           <h3 class="text-lg font-medium">{{ selected?.title || $t('gallery.photoDetails') }}</h3>
-          <button class="btn h-8 px-3 rounded-full bg-background border" @click="closeExifModal">{{ $t('gallery.close') }}</button>
+          <button class="btn h-8 px-3 rounded-full bg-background border" @click="closeExifModal">{{ $t('gallery.close')
+            }}</button>
         </div>
-        <div class="relative w-full max-h-[80vh] flex items-center justify-center">
-          <img
-            :src="selected?.url"
-            :alt="selected?.title || $t('gallery.photoDetails')"
-            class="object-contain max-w-full max-h-full rounded-md"
-          />
+        <div class="relative w-full min-h-0 flex items-center justify-center overflow-auto">
+          <img :src="selected?.url" :alt="selected?.title || $t('gallery.photoDetails')"
+            class="object-contain max-w-full max-h-full rounded-md" />
         </div>
         <div v-if="exifLoading" class="text-muted mt-4">{{ $t('gallery.readingExif') }}</div>
         <div v-else-if="exifError" class="text-red-600 dark:text-red-400 mt-4">{{ $t('gallery.exifError') }}</div>
         <div v-else-if="exif" class="space-y-2 text-sm mt-4">
           <div v-if="exif.make || exif.model">
-            <span class="text-muted">{{ $t('gallery.camera') }}</span> {{ [exif.make, exif.model].filter(Boolean).join(' ') }}
+            <span class="text-muted">{{ $t('gallery.camera') }}</span> {{ [exif.make, exif.model].filter(Boolean).join('') }}
           </div>
           <div v-if="exif.lens">
             <span class="text-muted">{{ $t('gallery.lens') }}</span> {{ exif.lens }}
@@ -82,6 +84,8 @@
         </div>
       </div>
     </Modal>
+    
+
   </div>
 </template>
 
@@ -162,12 +166,19 @@ function handleKeydown(event) {
   }
 }
 
+function mapGalleryItem(item) {
+  const url = item?.url || ''
+  const fileName = url.split('/').pop() || ''
+  const thumb = fileName ? `/gallery/thumbs/${fileName}` : null
+  return { ...item, thumb }
+}
+
 onMounted(async () => {
   try {
     const res = await fetch('/gallery/index.json', { cache: 'no-cache' })
     if (!res.ok) throw new Error('Failed to load gallery index')
     const data = await res.json()
-    images.value = Array.isArray(data) ? data : []
+    images.value = Array.isArray(data) ? data.map(mapGalleryItem) : []
   } catch (e) {
     error.value = e.message
   } finally {
@@ -181,5 +192,4 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

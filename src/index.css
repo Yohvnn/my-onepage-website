@@ -8,7 +8,7 @@
   --color-secondary: #111111;   /* deep ink for subtle elements */
   --color-background: #FAF7F2;  /* soft cream background */
   --color-foreground: #111111;  /* near-black text */
-  --color-border: #E7E2DA;      /* warm light border */
+  --color-border: #D4CBBE;      /* warm light border */
   --color-muted: #6E6A67;       /* neutral muted copy */
   --color-accent: #111111;      /* ink accents for links/icons */
   /* Defaults for global typewriter animation (faster) */
@@ -50,6 +50,96 @@
   50%,
   100% {
     opacity: 0.2;
+  }
+}
+
+@layer components {
+  /* Nav link with bracket hover effect without layout shift */
+  .button-link {
+    color: var(--color-accent);
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    padding-left: 0; /* let left bracket hang outside */
+    padding-right: 0; /* reserve space for right bracket */
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .button-link::before,
+  .button-link::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    opacity: 0;
+    color: var(--color-accent);
+    transition: opacity 0.15s ease-in-out;
+    pointer-events: none;
+  }
+
+  .button-link::before { content: '['; left: -0.6ch; }
+  .button-link::after { content: ']'; right: -0.6ch; }
+
+  .button-link:hover:not(.link-active) { opacity: 0.85; }
+  .button-link:hover:not(.link-active)::before,
+  .button-link:hover:not(.link-active)::after { opacity: 1; }
+
+  .button-link:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+    text-decoration: none;
+  }
+
+  /* Active nav link state */
+  .button-link.link-active {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .button-link.link-active::before,
+  .button-link.link-active::after { opacity: 0; }
+}
+
+/* Full-bleed divider that spans the entire viewport width */
+@layer components {
+  .divider-bleed {
+    height: 1px;
+    width: 100vw;
+    background-color: var(--color-border);
+    border: none;
+    /* center the 100vw element inside any container */
+    margin: 0.75rem 0;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+}
+
+@layer components {
+  .divider-bleed-column {
+    height: 1px;
+    background-color: var(--color-border);
+    border: none;
+    display: block;
+    margin: 0.75rem 0;
+    /* Bleed within the column by compensating container inline padding */
+    width: calc(100% + (var(--col-inline-padding, 0px) * 2));
+    transform: translateX(calc(-1 * var(--col-inline-padding, 0px)));
+  }
+}
+
+@layer components {
+  /* Container for stacked column lists that use divider-bleed-column */
+  .column-list {
+    /* Default no inline padding compensation */
+    --col-inline-padding: 0px;
+  }
+
+  /* At lg breakpoint, match Tailwind's pl-4 (1rem) used in the view */
+  @media (min-width: 1024px) {
+    .column-list {
+      --col-inline-padding: 1rem;
+    }
   }
 }
 
@@ -139,7 +229,7 @@
     h1, h2, h3, h4, .typewriter, .typewriter-multiline { animation: none !important; border-right-color: transparent !important; clip-path: none !important; }
   }
 
-  /* Apply reveal animation for headings; allow wrapping */
+  /* Apply reveal animation for headings only; allow wrapping */
   h1, h2, h3, h4 {
     @apply overflow-hidden block break-words animate-reveal;
   }

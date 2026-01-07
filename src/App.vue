@@ -24,7 +24,7 @@
     >
       <div class="pt-4 relative z-10 flex flex-col h-full" :key="locale">
         <AppHeader />
-        <main class="flex-1 pl-4 pr-4">
+        <main class="flex-1 gap-8 lg:mt-15 mt-10 pl-4 pr-4">
           <router-view />
         </main>
         <AppFooter />

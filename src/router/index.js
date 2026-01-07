@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import StudioHome from '../views/StudioHome.vue'
-import HomePage from '../views/HomePage.vue'
+import ResumeViews from '../views/ResumeViews.vue'
 import ToolboxHub from '../views/ToolboxHub.vue'
 import GalleryView from '../views/GalleryView.vue'
 import AboutView from '../views/AboutView.vue'
@@ -28,7 +28,8 @@ const routes = [
   {
     path: '/resume',
     name: 'Resume',
-    component: HomePage
+    component: ResumeViews,
+    meta: { title: 'Studio — Resume', description: 'Professional resume and experience.' }
   },
   {
     path: '/tools',
@@ -57,7 +58,8 @@ const routes = [
         component: () => import('tool_flipcoin/FlipCoin'),
         meta: { toolName: 'Flip Coin', toolId: 'flipcoin' }
       }
-    ]
+    ],
+    meta: { title: 'Studio — Tools', description: 'A collection of useful tools and utilities.' }
   }
   , { path: '/toolbox', redirect: '/tools' },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }

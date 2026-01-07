@@ -1,11 +1,6 @@
-<script setup>
-import { useI18n } from 'vue-i18n'
-const { t, tm } = useI18n()
-</script>
-
 <template>
   <Transition name="fade-up" appear>
-    <div class="max-w-5xl lg:mt-20 mt-5">
+    <div class="max-w-5xl">
     <h2 class="lg:text-5xl text-3xl font-light mb-3">{{ t('about.title') }}</h2>
     <p class="text-muted lg:text-2xl text-xl max-w-prose">{{ t('about.description') }}</p>
     <div class="grid grid-cols-1 mt-6 md:grid-cols-2 gap-4">
@@ -38,6 +33,12 @@ const { t, tm } = useI18n()
     </div>
   </Transition>
 </template>
+
+
+<script setup>
+import { useI18n } from 'vue-i18n'
+const { t, tm } = useI18n()
+</script>
 
 <style scoped>
 .fade-up-enter-active, .fade-up-leave-active {

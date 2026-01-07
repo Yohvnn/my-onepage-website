@@ -1,9 +1,5 @@
 [
-  {
-    "url": "/gallery/djigravel.jpg",
-    "title": "DJI Gravel",
-    "location": "Île-de-France, France"
-  },
+
   {
     "url": "/gallery/velib.jpg",
     "title": "velib",
@@ -50,18 +46,8 @@
     "location": "Paris, France"
   },
   {
-    "url": "/gallery/R0003915.jpg",
-    "title": "Campagne",
-    "location": "Île-de-France, France"
-  },
-  {
     "url": "/gallery/R0003935.jpg",
     "title": "Gravel Path",
-    "location": "Île-de-France, France"
-  },
-  {
-    "url": "/gallery/R0006791.JPG",
-    "title": "GRX",
     "location": "Île-de-France, France"
   },
   {

@@ -5,7 +5,7 @@
     "toolbox": "TOOLS",
     "gallery": "GALLERY",
     "about": "ABOUT",
-    "contact": "Contact me",
+    "contact": "Contact",
     "goHome": "Go to Home",
     "toggleNavigation": "Toggle navigation"
   },
@@ -33,39 +33,41 @@
     }
   },
   "toolbox": {
-    "title": "TOOLBOX",
-    "subtitle": "A collection of useful tools and utilities for everyday tasks or not getting bored.",
+    "title": "TOOLS COLLECTION",
+    "subtitle": "A curated set of small, purposeful tools",
     "backToResume": "← Back to Resume",
     "pdf": {
       "title": "PDF TOOLS",
-      "desc": "Compress, split, and extract pages from PDF files with ease.",
+      "desc": "Compress, split, and extract PDF pages. Fast and local.",
       "tags": ["Vue 3", "Python"],
       "comingSoon": "COMING SOON"
     },
     "tictactoe": {
       "title": "TIC TAC TOE",
-      "desc": "Bored in a line or in public transportation? Play the classic Tic Tac Toe against a friend or the computer.",
+      "desc": "A minimal Tic Tac Toe to unwind on the go. Play against a friend or the computer.",
       "tags": ["Vue 3"],
       "comingSoon": "COMING SOON"
     },
     "flipcoin": {
       "title": "FLIP COIN",
-      "desc": "Need to choose between pizza or burger? Heads or Tails? Let fate decide with a coin flip.",
+      "desc": "A playful 3D coin to help you decide. Heads or tails?",
       "tags": ["Vue 3"],
       "comingSoon": "COMING SOON"
     },
     "rag": {
       "title": "RAG CHATBOT",
-      "desc": "AI-powered document question answering with vector search and LLM integration.",
+      "desc": "Ask your documents questions with vector search and an LLM‑powered assistant.",
       "tags": ["Next.js", "FastAPI"],
-      "comingSoon": "COMING SOON"
+      "comingSoon": "COMING SOON",
+      "figcaption1": "Upload documents (PDF, TXT, DOCX, etc.)",
+      "figcaption2": "Ask questions and get answers"
     },
     "comingSoonTitle": "COMING SOON",
-    "comingSoonText": "More tools are in development! Check back soon for exciting new features."
+    "comingSoonText": "More tools are in the works. Check back soon."
   },
   "gallery": {
     "title": "GALLERY",
-    "subtitle": "A curated selection of my photography. High-res images served via CDN. If you wish to use any photo, please contact me for permission but feel free to use the photos setting to guide you to take your best shot!",
+    "subtitle": "A curated selection of my photography. High-res images served via CDN. If you wish to use any photo, please contact me for permission",
     "back": "← Back to Resume",
     "loading": "Loading photos…",
     "photoDetails": "Photo details",
@@ -97,8 +99,8 @@
       "bioLabel": "BIO"
     },
     "hero": {
-      "headline": "Digital Studio prototyping personal projects.",
-      "subtext": "A small place focused on shipping useful tools, photography and sharing personal experiences.","buttonName": "Explore Now",
+      "headline": "A small studio prototyping thoughtful personal projects.",
+      "subtext": "A small portfolio focused on shipping useful tools, and photography.","buttonName": "Explore Now",
       "hideShowButton": "Hide/Show",
       "alignLeftButton": "Align Left",
       "alignRightButton": "Align Right",
@@ -110,7 +112,7 @@
     }
   },
   "about": {
-    "title": "About the Studio",
+    "title": "ABOUT THE STUDIO",
     "description": "A space to design and build small tools, explore frontends design, and share photography.",
     "servicesTitle": "Services",
     "services": [
