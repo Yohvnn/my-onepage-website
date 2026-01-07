@@ -64,21 +64,21 @@
                   <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <li>
                       <figure>
-                        <img src="/rag_tool_conversation.png" alt="RAG tool conversation preview"
-                          class="w-full rounded-md border border-border shadow-sm cursor-zoom-in" loading="lazy"
-                          role="button" tabindex="0"
-                          @click="openPreview('/rag_tool_conversation.png', 'RAG tool conversation preview')"
-                          @keydown.enter="openPreview('/rag_tool_conversation.png', 'RAG tool conversation preview')" />
-                        <figcaption class="text-xs text-muted mt-1">{{ t('toolbox.rag.figcaption1') }}</figcaption>
-                      </figure>
-                    </li>
-                    <li>
-                      <figure>
                         <img src="/rag_tool_document.png" alt="RAG tool document preview"
                           class="w-full rounded-md border border-border shadow-sm cursor-zoom-in" loading="lazy"
                           role="button" tabindex="0"
                           @click="openPreview('/rag_tool_document.png', 'RAG tool document preview')"
                           @keydown.enter="openPreview('/rag_tool_document.png', 'RAG tool document preview')" />
+                        <figcaption class="text-xs text-muted mt-1">{{ t('toolbox.rag.figcaption1') }}</figcaption>
+                      </figure>
+                    </li>
+                    <li>
+                      <figure>
+                        <img src="/rag_tool_conversation.png" alt="RAG tool conversation preview"
+                          class="w-full rounded-md border border-border shadow-sm cursor-zoom-in" loading="lazy"
+                          role="button" tabindex="0"
+                          @click="openPreview('/rag_tool_conversation.png', 'RAG tool conversation preview')"
+                          @keydown.enter="openPreview('/rag_tool_conversation.png', 'RAG tool conversation preview')" />
                         <figcaption class="text-xs text-muted mt-1">{{ t('toolbox.rag.figcaption2') }}</figcaption>
                       </figure>
                     </li>

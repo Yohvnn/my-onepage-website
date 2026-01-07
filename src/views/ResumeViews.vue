@@ -5,7 +5,7 @@
       <section class="flex items-start">
         <div class="max-w-5xl">
           <h2 class="lg:text-5xl text-3xl font-light mb-3">{{ $t('home.aboutTitle') }}</h2>
-          <p class="text-muted lg:text-2xl text-xl max-w-prose">{{ $t('home.aboutText') }}</p>
+          <p class="text-muted lg:text-2xl text-xl max-w-prose">{{ $t('home.aboutText') }}.</p>
 
           <!-- Social Links -->
           <div class="mt-4 text-muted">
