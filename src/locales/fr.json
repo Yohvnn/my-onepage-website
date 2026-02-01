@@ -37,32 +37,51 @@
     "title": "COLLECTION D'OUTILS",
     "subtitle": "Une collection d'utilitaires et d'applications soigneusement réalisées",
     "backToResume": "← Retour au CV",
+    "hawkMcp": {
+      "title": "HAWK MCP",
+      "desc": "Un puissant orchestrateur d'IA local utilisant MCP (Model Context Protocol) et Ollama. Fonctionne entièrement hors ligne sur ta machine, offrant un assistant en terminal capable de contrôler ton système, gérer des fichiers, lancer des applications, et plus encore.",
+      "github": "https://github.com/Yohvnn/hawk-mcp",
+      "figcaption": "Assistant IA en terminal avec contrôle système"
+    },
+    "hawkMobile": {
+      "title": "HAWK AI MOBILE",
+      "desc": "Une application mobile d'assistant personnel légère construite avec React Native et Expo, propulsée par Gemini AI de Google. Interface de chat moderne et épurée avec thèmes personnalisables et support multilingue.",
+      "github": "https://github.com/Yohvnn/hawkai-phone-app",
+      "figcaption1": "Interface de chat avec Gemini AI",
+      "figcaption2": "Thèmes et paramètres personnalisables"
+    },
+    "pixelWidgets": {
+      "title": "WIDGETS GOOGLE PIXEL",
+      "desc": "Une collection de widgets pour écran d'accueil Android inspirés de l'esthétique Pixel, construits avec Jetpack Glance.",
+      "github": "https://github.com/Yohvnn/ystudio-widgets",
+      "figcaption": "Widgets d'écran d'accueil style Pixel"
+    },
     "pdf": {
       "title": "OUTILS PDF",
       "desc": "Compresser, découper et extraire des pages PDF, simplement et rapidement.",
-      "tags": ["Vue 3", "Python"],
+      "tags": [
+        "Vue 3",
+        "Python"
+      ],
       "comingSoon": "BIENTÔT DISPONIBLE"
     },
     "tictactoe": {
       "title": "MORPION",
       "desc": "Un morpion minimal pour faire une pause, même en déplacement. Joue contre un ami ou l'ordinateur.",
-      "tags": ["Vue 3"],
+      "tags": [
+        "Vue 3"
+      ],
       "comingSoon": "BIENTÔT DISPONIBLE"
     },
     "flipcoin": {
       "title": "PILE OU FACE",
-      "desc": "Une pièce 3D pour t’aider à décider. Pile ou face ?",
-      "tags": ["Vue 3"],
+      "desc": "Une pièce 3D pour t'aider à décider. Pile ou face ?",
+      "tags": [
+        "Vue 3"
+      ],
       "comingSoon": "BIENTÔT DISPONIBLE"
     },
-    "rag": {
-      "title": "HAWKAI",
-      "desc": "Dépose tes documents et pose tes questions : la recherche vectorielle et un assistant IA s’occupent du reste.",
-      "tags": ["Next.js", "FastAPI"],
-      "comingSoon": "BIENTÔT DISPONIBLE",
-      "figcaption1": "Importer des documents (PDF, TXT, DOCX, etc.)",
-      "figcaption2": "Poser des questions et obtenir des réponses"
-    },
+    "seeMore": "VOIR PLUS",
     "comingSoonTitle": "BIENTÔT DISPONIBLE",
     "comingSoonText": "Tu as besoin d'autres outils ? Contacte-moi pour qu'on en discute ou reviens plus tard pour de nouvelles fonctionnalités."
   },
@@ -137,16 +156,40 @@
   },
   "education": {
     "items": [
-      { "date": "2026. 08", "title": "MSC APPLIQUÉ EN DATA SCIENCE & IA", "org": "DATA SCIENCETECH INSTITUTE - SCHOOL OF ENGINEERING" },
-      { "date": "2024. 08", "title": "LICENCE EN ÉCONOMIE ET GESTION (PARCOURS CMI DATA SCIENCE POUR LES SCIENCES SOCIALES)", "org": "UNIVERSITÉ PARIS X" },
-      { "date": "2021. 08", "title": "BACCALAURÉAT GÉNÉRAL EN MATHÉMATIQUES ET ÉCONOMIE", "org": "LYCÉE FRANÇAIS DE TAMATAVE" }
+      {
+        "date": "2026. 08",
+        "title": "MSC APPLIQUÉ EN DATA SCIENCE & IA",
+        "org": "DATA SCIENCETECH INSTITUTE - SCHOOL OF ENGINEERING"
+      },
+      {
+        "date": "2024. 08",
+        "title": "LICENCE EN ÉCONOMIE ET GESTION (PARCOURS CMI DATA SCIENCE POUR LES SCIENCES SOCIALES)",
+        "org": "UNIVERSITÉ PARIS X"
+      },
+      {
+        "date": "2021. 08",
+        "title": "BACCALAURÉAT GÉNÉRAL EN MATHÉMATIQUES ET ÉCONOMIE",
+        "org": "LYCÉE FRANÇAIS DE TAMATAVE"
+      }
     ]
   },
   "work": {
     "items": [
-      { "date": "2024 - 2026", "title": "APPRENTI INGÉNIEUR D'ÉTUDES POUR DES SOLUTIONS D'IA GÉNÉRATIVE", "org": "CRÉDIT AGRICOLE PERSONAL FINANCE & MOBILITY (CAPFM)" },
-      { "date": "2024. 07", "title": "RESPONSABLE BOUTIQUE AMAZON", "org": "BEAUTÉ INSOLENTE PARIS" },
-      { "date": "2024. 03", "title": "WEBMASTER", "org": "EXCELSIOR, BEEMADA" }
+      {
+        "date": "2024 - 2026",
+        "title": "APPRENTI INGÉNIEUR D'ÉTUDES POUR DES SOLUTIONS D'IA GÉNÉRATIVE",
+        "org": "CRÉDIT AGRICOLE PERSONAL FINANCE & MOBILITY (CAPFM)"
+      },
+      {
+        "date": "2024. 07",
+        "title": "RESPONSABLE BOUTIQUE AMAZON",
+        "org": "BEAUTÉ INSOLENTE PARIS"
+      },
+      {
+        "date": "2024. 03",
+        "title": "WEBMASTER",
+        "org": "EXCELSIOR, BEEMADA"
+      }
     ]
   },
   "skills": {
@@ -156,10 +199,45 @@
       "web": "DÉVELOPPEMENT WEB & SYSTÈMES",
       "media": "MÉDIA & DESIGN"
     },
-    "programming": ["C", "C++", "Python", "Java", "R", "TensorFlow", "PyTorch", "RDF", "SPARQL"],
-    "database": ["SQL", "PL/SQL", "MariaDB", "MySQL", "Neo4j", "SAS", "AWS", "Git", "Bash"],
-    "web": ["Vue.js", "Nest", "TypeScript", "Tailwind", "Lambda", "RAG", "Vectorisation"],
-    "media": ["Premiere Pro", "Lightroom", "Photoshop", "Figma", "Canva", "WordPress"]
+    "programming": [
+      "C",
+      "C++",
+      "Python",
+      "Java",
+      "R",
+      "TensorFlow",
+      "PyTorch",
+      "RDF",
+      "SPARQL"
+    ],
+    "database": [
+      "SQL",
+      "PL/SQL",
+      "MariaDB",
+      "MySQL",
+      "Neo4j",
+      "SAS",
+      "AWS",
+      "Git",
+      "Bash"
+    ],
+    "web": [
+      "Vue.js",
+      "Nest",
+      "TypeScript",
+      "Tailwind",
+      "Lambda",
+      "RAG",
+      "Vectorisation"
+    ],
+    "media": [
+      "Premiere Pro",
+      "Lightroom",
+      "Photoshop",
+      "Figma",
+      "Canva",
+      "WordPress"
+    ]
   },
   "app": {
     "darkMode": "dark-mode",
@@ -171,7 +249,8 @@
     "dark": "Sombre",
     "toggleDarkMode": "Basculer le mode sombre",
     "toggleLanguage": "Changer de langue",
-    "contactEmail": "Contacter par email"
+    "contactEmail": "Contacter par email",
+    "underConstruction": "🚧 En Construction — Ce site est en cours de développement."
   },
   "notFound": {
     "title": "Page Introuvable",

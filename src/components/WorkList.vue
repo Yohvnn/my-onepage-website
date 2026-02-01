@@ -20,5 +20,4 @@ const items = computed(() => (getLocaleMessage(locale.value)?.work?.items) || []
 </template>
 
 <style scoped>
-/* Let CSS animations handle the entry animations */
 </style>

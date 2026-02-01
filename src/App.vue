@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount, watch } from 'vue'
+import { onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useDarkMode } from './composables/useDarkMode'
 import { useLoader } from './composables/useLoader'
@@ -61,11 +61,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
   cleanupLazyLoading()
   cleanupScrollPerformance()
-})
-
-// Watch for changes in isDarkMode to ensure reactivity
-watch(isDarkMode, (newVal) => {
-  console.log('Dark mode changed:', newVal)
 })
 </script>
 

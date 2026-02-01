@@ -1,63 +1,74 @@
 [
-
-  {
-    "url": "/gallery/velib.jpg",
-    "title": "Vélib",
-    "location": "Paris, France"
-  },
-  {
-    "url": "/gallery/DSC01002.jpg",
-    "title": "Sun in Paris",
-    "location": "Paris, France"
-  },
-  {
-    "url": "/gallery/IMG_5195.jpg",
-    "title": "Indoor Architecture",
-    "location": "Paris, France"
-  },
-  {
-    "url": "/gallery/profile_pic.jpg",
-    "title": "Profile Pic",
-    "location": "Paris, France"
-  },
-  {
-    "url": "/gallery/R0007022.jpg",
-    "title": "Sète",
-    "location": "Sète, France"
-  },
-  {
-    "url": "/gallery/DSC02704.jpg",
-    "title": "Montparnasse Tower View",
-    "location": "Paris, France"
-  },
-  {
-    "url": "/gallery/DSCF2227%20(3).jpg",
-    "title": "Sunrise",
-    "location": "Île-de-France, France"
-  },
   {
     "url": "/gallery/DSCF2662.jpg",
     "title": "Marché de Noël",
-    "location": "Paris, France"
+    "location": "Paris, France",
+    "date": "2025-12-13"
   },
   {
     "url": "/gallery/DSCF2668%20(1).jpg",
     "title": "Christmas Lights",
-    "location": "Paris, France"
+    "location": "Paris, France",
+    "date": "2025-12-13"
   },
   {
-    "url": "/gallery/R0003935.jpg",
-    "title": "Gravel Path",
-    "location": "Île-de-France, France"
+    "url": "/gallery/DSCF2227%20(3).jpg",
+    "title": "Sunrise",
+    "location": "Île-de-France, France",
+    "date": "2025-11-12"
   },
   {
     "url": "/gallery/R0010624.jpg",
     "title": "Sunset",
-    "location": "Somewhere, secret"
+    "location": "Somewhere, secret",
+    "date": "2025-09-04"
+  },
+  {
+    "url": "/gallery/R0007022.jpg",
+    "title": "Sète",
+    "location": "Sète, France",
+    "date": "2025-06-08"
+  },
+  {
+    "url": "/gallery/R0003935.jpg",
+    "title": "Gravel Path",
+    "location": "Île-de-France, France",
+    "date": "2025-04-26"
+  },
+  {
+    "url": "/gallery/DSC02704.jpg",
+    "title": "Montparnasse Tower View",
+    "location": "Paris, France",
+    "date": "2025-01-07"
+  },
+  {
+    "url": "/gallery/DSC01002.jpg",
+    "title": "Sun in Paris",
+    "location": "Paris, France",
+    "date": "2024-10-26"
+  },
+  {
+    "url": "/gallery/velib.jpg",
+    "title": "Vélib",
+    "location": "Paris, France",
+    "date": "2024-09-28"
+  },
+  {
+    "url": "/gallery/IMG_5195.jpg",
+    "title": "Indoor Architecture",
+    "location": "Paris, France",
+    "date": "2024-09-21"
   },
   {
     "url": "/gallery/wall.jpg",
     "title": "Cygne",
-    "location": "Île-de-France, France"
+    "location": "Île-de-France, France",
+    "date": "2023-07-14"
+  },
+  {
+    "url": "/gallery/profile_pic.jpg",
+    "title": "Profile Pic",
+    "location": "Paris, France",
+    "date": "2023-05-06"
   }
 ]

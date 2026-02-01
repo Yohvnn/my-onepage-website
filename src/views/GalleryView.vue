@@ -13,12 +13,12 @@
         </div>
 
       </section>
-              <hr class="divider-bleed lg:hidden" />
+      <hr class="divider-bleed lg:hidden" />
 
       <!-- Gallery Grid -->
       <section class="" aria-label="Gallery overview">
 
-        <div class="flex flex-col gap-3 w-full">
+        <div class="flex flex-col w-full">
 
           <div v-if="isLoading">
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -33,7 +33,11 @@
             </div>
           </div>
           <div v-else-if="error" class="text-red-600 dark:text-red-400">{{ error }}</div>
-          <GalleryGrid v-else :items="images" @select="openExifModal" />
+
+          <div v-else>
+            <GalleryGrid :items="images" @select="openExifModal" />
+          </div>
+
         </div>
       </section>
     </div>
@@ -43,7 +47,7 @@
         <div class="flex items-center justify-between mb-4">
           <h3 class="text-lg font-medium">{{ selected?.title || $t('gallery.photoDetails') }}</h3>
           <button class="btn h-8 px-3 rounded-full bg-background border" @click="closeExifModal">{{ $t('gallery.close')
-            }}</button>
+          }}</button>
         </div>
         <div class="relative w-full min-h-0 flex items-center justify-center overflow-auto">
           <img :src="selected?.url" :alt="selected?.title || $t('gallery.photoDetails')"
@@ -53,7 +57,8 @@
         <div v-else-if="exifError" class="text-red-600 dark:text-red-400 mt-4">{{ $t('gallery.exifError') }}</div>
         <div v-else-if="exif" class="space-y-2 text-sm mt-4">
           <div v-if="exif.make || exif.model">
-            <span class="text-muted">{{ $t('gallery.camera') }}</span> {{ [exif.make, exif.model].filter(Boolean).join('') }}
+            <span class="text-muted">{{ $t('gallery.camera') }}</span> {{ [exif.make,
+            exif.model].filter(Boolean).join('') }}
           </div>
           <div v-if="exif.lens">
             <span class="text-muted">{{ $t('gallery.lens') }}</span> {{ exif.lens }}
@@ -84,7 +89,7 @@
         </div>
       </div>
     </Modal>
-    
+
 
   </div>
 </template>
@@ -178,7 +183,12 @@ onMounted(async () => {
     const res = await fetch('/gallery/index.json', { cache: 'no-cache' })
     if (!res.ok) throw new Error('Failed to load gallery index')
     const data = await res.json()
-    images.value = Array.isArray(data) ? data.map(mapGalleryItem) : []
+    const items = Array.isArray(data) ? data.map(mapGalleryItem) : []
+    images.value = items.sort((a, b) => {
+      const dA = new Date(a.date || 0)
+      const dB = new Date(b.date || 0)
+      return dB - dA
+    })
   } catch (e) {
     error.value = e.message
   } finally {

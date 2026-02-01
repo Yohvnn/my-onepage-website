@@ -34,5 +34,4 @@ const mediaSkills = computed(() => (getLocaleMessage(locale.value)?.skills?.medi
 </template>
 
 <style scoped>
-/* Minimal list presentation */
 </style>

@@ -4,13 +4,20 @@
 
 :root {
   /* Studio-inspired minimalist palette (light mode) */
-  --color-primary: #d9380f;     /* primary accent */
-  --color-secondary: #111111;   /* deep ink for subtle elements */
-  --color-background: #FAF7F2;  /* soft cream background */
-  --color-foreground: #111111;  /* near-black text */
-  --color-border: #D4CBBE;      /* warm light border */
-  --color-muted: #6E6A67;       /* neutral muted copy */
-  --color-accent: #111111;      /* ink accents for links/icons */
+  --color-primary: #d9380f;
+  /* primary accent */
+  --color-secondary: #111111;
+  /* deep ink for subtle elements */
+  --color-background: #FAF7F2;
+  /* soft cream background */
+  --color-foreground: #111111;
+  /* near-black text */
+  --color-border: #D4CBBE;
+  /* warm light border */
+  --color-muted: #6E6A67;
+  /* neutral muted copy */
+  --color-accent: #111111;
+  /* ink accents for links/icons */
   /* Defaults for global typewriter animation (faster) */
   --tw-typewriter-speed: 1s;
   --tw-typewriter-steps: 28;
@@ -19,13 +26,20 @@
 
 .dark,
 .dark:root {
-  --color-primary: #d9380f;     /* primary accent on dark */
-  --color-secondary: #FAF7F2;   /* cream for subtle accents */
-  --color-background: #111111;  /* deep ink background */
-  --color-foreground: #FAF7F2;  /* soft cream text */
-  --color-border: #2A2623;      /* warm dark border */
-  --color-muted: #A8A29E;       /* neutral muted on dark */
-  --color-accent: #FAF7F2;      /* cream accents */
+  --color-primary: #d9380f;
+  /* primary accent on dark */
+  --color-secondary: #FAF7F2;
+  /* cream for subtle accents */
+  --color-background: #111111;
+  /* deep ink background */
+  --color-foreground: #FAF7F2;
+  /* soft cream text */
+  --color-border: #2A2623;
+  /* warm dark border */
+  --color-muted: #A8A29E;
+  /* neutral muted on dark */
+  --color-accent: #FAF7F2;
+  /* cream accents */
 }
 
 @tailwind base;
@@ -54,15 +68,17 @@
 }
 
 @layer components {
+
   /* Nav link with bracket hover effect without layout shift */
   .button-link {
     color: var(--color-accent);
     text-decoration: none;
     position: relative;
     display: inline-block;
-    padding-left: 0; /* let left bracket hang outside */
-    padding-right: 0; /* reserve space for right bracket */
+    /* keep brackets inside the element so parent overflow:hidden won't crop them */
+    padding: 0 0.6ch;
     transition: opacity 0.2s ease-in-out;
+    overflow: visible;
   }
 
   .button-link::before,
@@ -77,12 +93,24 @@
     pointer-events: none;
   }
 
-  .button-link::before { content: '['; left: -0.6ch; }
-  .button-link::after { content: ']'; right: -0.6ch; }
+  .button-link::before {
+    content: '[';
+    left: 0;
+  }
 
-  .button-link:hover:not(.link-active) { opacity: 0.85; }
+  .button-link::after {
+    content: ']';
+    right: 0;
+  }
+
+  .button-link:hover:not(.link-active) {
+    opacity: 0.85;
+  }
+
   .button-link:hover:not(.link-active)::before,
-  .button-link:hover:not(.link-active)::after { opacity: 1; }
+  .button-link:hover:not(.link-active)::after {
+    opacity: 1;
+  }
 
   .button-link:focus-visible {
     outline: 2px solid var(--color-primary);
@@ -97,8 +125,11 @@
     font-weight: 600;
     text-decoration: none;
   }
+
   .button-link.link-active::before,
-  .button-link.link-active::after { opacity: 0; }
+  .button-link.link-active::after {
+    opacity: 0;
+  }
 }
 
 /* Full-bleed divider that spans the entire viewport width */
@@ -129,6 +160,7 @@
 }
 
 @layer components {
+
   /* Container for stacked column lists that use divider-bleed-column */
   .column-list {
     /* Default no inline padding compensation */
@@ -144,15 +176,17 @@
 }
 
 @layer components {
+
   /* Nav link with bracket hover effect without layout shift */
   .nav-link {
     color: var(--color-accent);
     text-decoration: none;
     position: relative;
     display: inline-block;
-    padding: 0 0.6ch; /* reserve space for brackets */
+    padding: 0 0.6ch;
+    /* reserve space for brackets */
     transition: opacity 0.2s ease-in-out;
-    font-weight:400;
+    font-weight: 400;
     font-size: small;
   }
 
@@ -168,12 +202,24 @@
     pointer-events: none;
   }
 
-  .nav-link::before { content: '['; left: 0; }
-  .nav-link::after { content: ']'; right: 0; }
+  .nav-link::before {
+    content: '[';
+    left: 0;
+  }
 
-  .nav-link:hover:not(.link-active) { opacity: 0.85; }
+  .nav-link::after {
+    content: ']';
+    right: 0;
+  }
+
+  .nav-link:hover:not(.link-active) {
+    opacity: 0.85;
+  }
+
   .nav-link:hover:not(.link-active)::before,
-  .nav-link:hover:not(.link-active)::after { opacity: 1; }
+  .nav-link:hover:not(.link-active)::after {
+    opacity: 1;
+  }
 
   .nav-link:focus-visible {
     outline: 2px solid var(--color-primary);
@@ -188,11 +234,15 @@
     font-weight: 600;
     text-decoration: none;
   }
+
   .nav-link.link-active::before,
-  .nav-link.link-active::after { opacity: 0; }
+  .nav-link.link-active::after {
+    opacity: 0;
+  }
 }
 
 @layer utilities {
+
   /* Map utility to brand primary color variable */
   .text-primary {
     color: var(--color-primary);
@@ -224,13 +274,27 @@
 
 /* Global reveal effect (headings only, preserves wrapping) */
 @layer base {
+
   /* Respect accessibility preferences */
   @media (prefers-reduced-motion: reduce) {
-    h1, h2, h3, h4, .typewriter, .typewriter-multiline { animation: none !important; border-right-color: transparent !important; clip-path: none !important; }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .typewriter,
+    .typewriter-multiline {
+      animation: none !important;
+      border-right-color: transparent !important;
+      clip-path: none !important;
+    }
   }
 
   /* Apply reveal animation for headings only; allow wrapping */
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     @apply overflow-hidden block break-words animate-reveal;
   }
 }
@@ -240,12 +304,18 @@
   .typewriter {
     @apply overflow-hidden whitespace-nowrap inline-block align-baseline border-r-2 border-current animate-typewriter-blink;
   }
+
   /* Multiline-friendly reveal (no caret) */
   .typewriter-multiline {
     @apply overflow-hidden block break-words animate-reveal;
   }
+
   /* Opt-out helper */
-  .no-typewriter { animation: none !important; border-right-color: transparent !important; clip-path: none !important; }
+  .no-typewriter {
+    animation: none !important;
+    border-right-color: transparent !important;
+    clip-path: none !important;
+  }
 }
 
 @layer components {
@@ -265,6 +335,71 @@
   .card-hover:hover {
     border: 1px solid var(--color-primary);
   }
+
+  /* Scale the whole card slightly on group hover for stronger affordance */
+  .group {
+    transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 180ms ease;
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  .group:hover {
+    transform: translateZ(0) scale(1.05);
+    z-index: 20;
+  }
+
+  /* Make title elements show bracket markers on card hover. */
+  .title-linkable {
+    position: relative;
+    display: inline-block;
+    padding: 0 0.6ch;
+    transition: color 160ms ease-in-out;
+  }
+
+  .title-linkable::before,
+  .title-linkable::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    opacity: 0;
+    color: var(--color-accent);
+    transition: opacity 0.15s ease-in-out;
+    pointer-events: none;
+  }
+
+  .title-linkable::before { content: '['; left: 0; }
+  .title-linkable::after { content: ']'; right: 0; }
+
+  /* When hovering the card, reveal the brackets on the title */
+  .group:hover .title-linkable::before,
+  .group:hover .title-linkable::after,
+  .group:hover .button-link::before,
+  .group:hover .button-link::after {
+    opacity: 1;
+  }
+
+  /* Make title text primary on card hover (and when focused within) */
+  .group:hover .title-linkable,
+  .group:focus-within .title-linkable {
+    color: var(--color-primary);
+  }
+
+  /* Do not change title color for coming-soon preview cards (e.g., RAG chatbot) */
+  .group.is-coming-soon:hover .title-linkable,
+  .group.is-coming-soon:focus-within .title-linkable {
+    color: inherit;
+  }
+
+/* Disable bracket pseudo-elements globally (remove [] on title hover) */
+.title-linkable::before,
+.title-linkable::after,
+.button-link::before,
+.button-link::after {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+}
 
   .btn {
     @apply rounded-lg font-medium focus:outline-none focus:ring-border;

@@ -19,17 +19,14 @@ export function useDarkMode() {
     window.location.reload();
   }
 
-  // Watch for changes in isDarkMode and update the DOM dynamically
   watch(isDarkMode, (newVal) => {
     if (newVal) {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
     }
-    // Force reflow to ensure Tailwind updates styles
-    document.documentElement.classList.toggle('dark', newVal);
-    document.documentElement.offsetHeight; // Trigger reflow
-    console.log('Dark mode toggled:', newVal, document.documentElement.classList);
+    document.documentElement.classList.toggle('dark', newVal)
+    document.documentElement.offsetHeight
   })
 
   // Ensure the initial state is applied on mount
