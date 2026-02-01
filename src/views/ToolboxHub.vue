@@ -32,7 +32,7 @@
                 <div :class="['grid gap-2', tool.images.length > 1 ? 'grid-cols-2' : 'grid-cols-1']">
                   <figure v-for="(img, imgIndex) in tool.images" :key="imgIndex"
                     class="relative overflow-hidden rounded-lg border border-border aspect-video group/image cursor-zoom-in bg-secondary/5"
-                    @click.stop="openPreview(img.src, img.alt)" @keydown.enter.stop="openPreview(img.src, img.alt)"
+                    @click.stop.prevent="openPreview(img.src, img.alt)" @keydown.enter.stop.prevent="openPreview(img.src, img.alt)"
                     tabindex="0" role="button">
                     <img :src="img.src" :alt="img.alt"
                       class="w-full h-full object-cover transition-transform duration-500 group-hover/image:scale-105"
@@ -71,7 +71,7 @@
                 <div :class="['grid gap-2', tool.images.length > 1 ? 'grid-cols-2' : 'grid-cols-1']">
                   <figure v-for="(img, imgIndex) in tool.images" :key="imgIndex"
                     class="relative overflow-hidden rounded-lg border border-border aspect-video group/image cursor-zoom-in bg-secondary/5"
-                    @click.stop="openPreview(img.src, img.alt)" @keydown.enter.stop="openPreview(img.src, img.alt)"
+                    @click.stop.prevent="openPreview(img.src, img.alt)" @keydown.enter.stop.prevent="openPreview(img.src, img.alt)"
                     tabindex="0" role="button">
                     <img :src="img.src" :alt="img.alt"
                       class="w-full h-full object-cover transition-transform duration-500 group-hover/image:scale-105"
