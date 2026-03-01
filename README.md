@@ -1,8 +1,7 @@
 # YohannStudio
 
-> 🚧 **Under Construction** — This project is actively being developed. Features may be incomplete or change without notice.
+> 🚧 **DEPRECATED** — This project is no longer receiving updates however feel free to try the template if you like it.
 
-[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://yohanncch.studio/)
 [![Vue 3](https://img.shields.io/badge/Vue-3.x-42b883)](https://vuejs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38bdf8)](https://tailwindcss.com/)
 
